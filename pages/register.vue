@@ -1,81 +1,70 @@
-<script setup lang="ts">
-
-import {registerWithEmail} from "~/composables/useAuth"
-import ModalVue from "../components/Modal.vue"
-
-const email = ref("")
-const username = ref("")
-const name = ref("")
-const password = ref("")
-const password2 = ref("")
-
-const error = ref("")
-
-
-async function postRegisterForm(){
-  await registerWithEmail(username.value,name.value,email.value,password.value)
-}
-
-
-
-</script>
-
-
 <template>
+    <section id="register">
 
-<ModalVue v-if="error !== ''">
-  {{ error }}
-</ModalVue>
-  <section class="bg-gray-50 dark:bg-gray-900">
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-          Flowbite    
-      </a>
-      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Create and account
-              </h1>
-              <form class="space-y-4 md:space-y-6" @submit.prevent="postRegisterForm">
+        <div class="h-dvh flex justify-center items-center">
+            <img class="ml-6" src="../assets/icons/logo/logo.png" alt="logo">
+        </div>
 
-                <div>
-                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
-                      <input type="name" name="name" id="name" v-model="name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required>
-                  </div>
-                  <div>
-                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username</label>
-                      <input type="username" name="username" id="username" v-model="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required>
-                  </div>
 
-                  <div>
-                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                      <input type="email" name="email" id="email" v-model="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required>
-                  </div>
-                  <div>
-                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                      <input type="password" name="password" id="password" v-model="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                  </div>
-                  <div>
-                      <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                      <input type="confirm-password" name="confirm-password" id="confirm-password" v-model="password2" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                  </div>
-                  <div class="flex items-start">
-                      <div class="flex items-center h-5">
-                        <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required>
-                      </div>
-                      <div class="ml-3 text-sm">
-                        <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
-                      </div>
-                  </div>
-                  <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
-                  <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                      Already have an account? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
-                  </p>
-              </form>
-          </div>
-      </div>
-  </div>
-</section>
+        <div class="flex justify-center self-center z-10">
+            <div class="p-12 bg-white mx-auto rounded-3xl w-96 ">
+                <div class="mb-7">
+                    <h3 class="font-semibold text-3xl text-gray-800 text-center">Registro</h3>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-lg font-semibold">Nickname</p>
+                        <input
+                            class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+                            type="text" placeholder="Introduce tu nickname">
+                    </div>
 
+                    <div>
+                        <p class="text-lg font-semibold">Correo</p>
+                        <input
+                            class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+                            type="email" placeholder="Introduce tu correo">
+                    </div>
+
+                    <div>
+                        <p class="text-lg font-semibold">Contraseña</p>
+                        <input
+                            class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+                            type="password" placeholder="Introduce tu contraseña">
+                    </div>
+
+                    <div>
+                        <p class="text-lg font-semibold">Confirmar contraseña</p>
+                        <input
+                            class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+                            type="password" placeholder="Confirma tu contraseña">
+                    </div>
+
+
+                    <div class="flex items-center justify-between">
+
+                        <div class="flex items-center mb-4">
+                            <input id="acceptTermsAndConditions" type="checkbox" value=""
+                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="acceptTermsAndConditions"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Acepto los términos y condiciones</label>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+                            Registrarse
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
+
+<style scoped>
+#register {
+    display: grid;
+    grid-template-columns: 5fr 3fr;
+}
+</style>
