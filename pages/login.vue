@@ -22,7 +22,7 @@
                         <p class="text-lg font-semibold">Nickname o correo</p>
                         <input
                             class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                            type="email" placeholder="Introduce tu nickname o correo">
+                            type="email" placeholder="Introduce tu nickname o correo" v-model="user">
                     </div>
 
 
@@ -30,13 +30,20 @@
                         <p class="text-lg font-semibold">Contraseña</p>
                         <input type="password"
                             class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                            placeholder="Introduce tu contraseña">
+                            placeholder="Introduce tu contraseña" v-model="password">
                     </div>
 
-                    ip {{ ip_api }}
+                    <!-- {{ user }}
+                    {{ password }}
+                    {{ showErrors }} -->
+
+                    <div v-if="showErrors">
+                        <p class="text-red-600">{{ errMsg }}</p>
+                    </div>
+
 
                     <div>
-                        <button type="submit"
+                        <button type="submit" @click="login()"
                             class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
                             Inicia sesión
                         </button>
@@ -58,9 +65,38 @@
 </template>
 
 <script setup>
+import axios from "axios"
+var user = ref("")
+var password = ref("")
+
+var showErrors = ref(false)
+var errMsg = ref("Inicio de sesión incorrecto, vuelve a probar")
+
+async function login() {
+    axios.post('http://172.30.5.61:3000/auth/login', {
+        login: user.value,
+        password: password.value
+    })
+    .then(response => {
+        if (response.data.success) {
+            showErrors.value = false;
+            localStorage.setItem('jwt', response.data.jwt);
+            // TODO router.push("/home")
+        }
+    })
+    .catch(error => {
+        if (error.response && error.response.data.success === false) {
+            console.error('Error al iniciar sesión:', error.message);
+            showErrors.value = true;
+            errMsg.value = error.response.data.err.msg;
+        } else {
+            showErrors.value = true;
+            console.error("Error inesperado");
+        }
+    });
+}
 
 </script>
-
 
 
 <style scoped>
@@ -68,4 +104,9 @@
     display: grid;
     grid-template-columns: 5fr 3fr;
 }
+
+@media only screen and (max-width: 600px) {
+
+}
+
 </style>
