@@ -1,3 +1,15 @@
 .color-primary {
     color: #43219B;
 }
+
+@font-face {
+    font-family: 'JetBrains';
+    src: url('~@/assets/fonts/JetBrainsMonoNL-Regular.ttf') format('truetype');
+  }
+  
+  /* Aplica la fuente JetBrains a los elementos que desees */
+  body {
+    font-family: 'JetBrains', sans-serif;
+  }
+
+  
