@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Navbar from "~/components/layout/navbar.vue"
 import "../assets/css/main.css"
 </script>
 
@@ -8,7 +7,7 @@ import "../assets/css/main.css"
 
 <template>
   <div id="fondo" class="h-screen">
-    <Navbar />
+ 
 
     <slot />
 
