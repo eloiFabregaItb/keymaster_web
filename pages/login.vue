@@ -70,7 +70,7 @@ var user = ref("")
 var password = ref("")
 
 var showErrors = ref(false)
-var errMsg = ref("Inicio de sesión incorrecto, vuelve a probar")
+var errMsg = ref("")
 
 async function login() {
     axios.post('http://172.30.5.61:3000/auth/login', {
