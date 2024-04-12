@@ -1,4 +1,3 @@
-
 <template>
     <section id="login">
 
@@ -77,23 +76,23 @@ async function login() {
         login: user.value,
         password: password.value
     })
-    .then(response => {
-        if (response.data.success) {
-            showErrors.value = false;
-            localStorage.setItem('jwt', response.data.jwt);
-            // TODO router.push("/home")
-        }
-    })
-    .catch(error => {
-        if (error.response && error.response.data.success === false) {
-            console.error('Error al iniciar sesión:', error.message);
-            showErrors.value = true;
-            errMsg.value = error.response.data.err.msg;
-        } else {
-            showErrors.value = true;
-            console.error("Error inesperado");
-        }
-    });
+        .then(response => {
+            if (response.data.success) {
+                showErrors.value = false;
+                localStorage.setItem('jwt', response.data.jwt);
+                // TODO router.push("/home")
+            }
+        })
+        .catch(error => {
+            if (error.response && error.response.data.success === false) {
+                console.error('Error al iniciar sesión:', error.message);
+                showErrors.value = true;
+                errMsg.value = error.response.data.err.msg;
+            } else {
+                showErrors.value = true;
+                console.error("Error inesperado");
+            }
+        });
 }
 
 </script>
@@ -105,8 +104,5 @@ async function login() {
     grid-template-columns: 5fr 3fr;
 }
 
-@media only screen and (max-width: 600px) {
-
-}
-
+@media only screen and (max-width: 600px) {}
 </style>

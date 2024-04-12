@@ -44,7 +44,11 @@
                             type="text" placeholder="Confirma tu contraseña">
                     </div>
                     <!-- {{ confirmPassword }} -->
-                    {{ errMsg }}
+
+
+                    <div v-if="showErrors">
+                        <p class="text-red-600">{{ errMsg }}</p>
+                    </div>
 
 
                     <div class="flex items-center justify-between">
@@ -53,7 +57,8 @@
                             <input id="acceptTermsAndConditions" type="checkbox" value=""
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="acceptTermsAndConditions"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Acepto los términos y condiciones</label>
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Acepto los términos y
+                                condiciones</label>
                         </div>
                     </div>
                     <div>
@@ -116,22 +121,22 @@ async function register() {
         email: email.value,
         password: password.value
     })
-    .then(response => {
-        if (response.data.success) {
-            showErrors.value = false;
-            // TODO router.push("/home")
-        }
-    })
-    .catch(error => {
-        if (error.response && error.response.data.success === false) {
-            console.error('Error al hacer el registro:', error.message);
-            showErrors.value = true;
-            errMsg.value = getErrorFromResponse(error);
-        } else {
-            showErrors.value = true;
-            console.error("Error inesperado");
-        }
-    });
+        .then(response => {
+            if (response.data.success) {
+                showErrors.value = false;
+                // TODO router.push("/home")
+            }
+        })
+        .catch(error => {
+            if (error.response && error.response.data.success === false) {
+                console.error('Error al hacer el registro:', error.message);
+                showErrors.value = true;
+                errMsg.value = getErrorFromResponse(error);
+            } else {
+                showErrors.value = true;
+                console.error("Error inesperado");
+            }
+        });
 }
 
 
@@ -139,50 +144,50 @@ async function register() {
 const SPECIAL_CHARACTERS = "!@#$%^&*()_-+={}[]|:;\"<>,.?/~\\`"
 const MIN_LENGTH = 6
 
-function isEmailValid(email){
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email)
+function isEmailValid(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email)
 }
 
-function validatePassword(password="") {
+function validatePassword(password = "") {
 
-const errors = {};
-const err_mandatory = []
+    const errors = {};
+    const err_mandatory = []
 
-const hasMinimumLength = password.length>=MIN_LENGTH
-const hasLowercase = /[a-z]/.test(password)
-const hasUppercase = /[A-Z]/.test(password)
-const hasNumber = /[0-9]/.test(password)
-const hasSpecialCharacter = password.split("").some(x => SPECIAL_CHARACTERS.includes(x))
+    const hasMinimumLength = password.length >= MIN_LENGTH
+    const hasLowercase = /[a-z]/.test(password)
+    const hasUppercase = /[A-Z]/.test(password)
+    const hasNumber = /[0-9]/.test(password)
+    const hasSpecialCharacter = password.split("").some(x => SPECIAL_CHARACTERS.includes(x))
 
 
-// Minimum 8 characters
-if (!hasMinimumLength) {
-  errors[`MIN_LENGTH`] = MIN_LENGTH
-}
+    // Minimum 8 characters
+    if (!hasMinimumLength) {
+        errors[`MIN_LENGTH`] = MIN_LENGTH
+    }
 
-// At least one lowercase letter
-if (!hasLowercase) {
-  err_mandatory.push("LOWERCASE")
-}
+    // At least one lowercase letter
+    if (!hasLowercase) {
+        err_mandatory.push("LOWERCASE")
+    }
 
-// At least one uppercase letter
-// or
-// At least one number
-// or
-// At least one symbol
-if (!hasUppercase && !hasNumber && !hasSpecialCharacter) {
-  err_mandatory.push(["Mayúscula", "Número", "Símbolo"])
-}
+    // At least one uppercase letter
+    // or
+    // At least one number
+    // or
+    // At least one symbol
+    if (!hasUppercase && !hasNumber && !hasSpecialCharacter) {
+        err_mandatory.push(["Mayúscula", "Número", "Símbolo"])
+    }
 
-if(err_mandatory.length>0){
-  errors.MANDATORY = err_mandatory
-}
+    if (err_mandatory.length > 0) {
+        errors.MANDATORY = err_mandatory
+    }
 
-return {
-  valid: Object.keys(errors).length === 0,
-  errors,
-}
+    return {
+        valid: Object.keys(errors).length === 0,
+        errors,
+    }
 }
 
 

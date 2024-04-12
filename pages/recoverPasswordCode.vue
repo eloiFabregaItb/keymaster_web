@@ -37,9 +37,23 @@
     </section>
 </template>
 
+<script setup>
+
+</script>
+
 <style scoped>
 #login {
     display: grid;
     grid-template-columns: 1fr;
 }
 </style>
+
+<!-- 
+
+    /auth/forgotten login: usuario o correo
+    /auth/checkforgotten  login y campo code
+    /auth/changepassword    login code y password
+
+
+
+ -->
