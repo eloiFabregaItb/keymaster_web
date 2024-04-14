@@ -12,7 +12,7 @@
    </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import Navbar from "~/components/layout/navbar.vue";
 import Keyword from "~/components/layout/keyword.vue";
 import Footer from "~/components/layout/footer.vue";

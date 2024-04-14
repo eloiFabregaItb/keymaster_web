@@ -1,8 +1,10 @@
 <template>
     <section id="register">
-
-        <div class="h-dvh flex justify-center items-center">
-            <img class="ml-6" src="../assets/icons/logo/logo.png" alt="logo">
+        <div class="h-dvh flex flex-col justify-center items-center text-style mt-5 mb-5 text-white">
+            <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
+            <p class="welcome"> <strong>¡Bienvenido futuro Master!</strong> Si has llegado hasta aquí es que
+                quieres mejorar tus skills en mecanografía. <strong>¡Vamos a ello!</strong>
+            </p>
         </div>
 
 
@@ -47,7 +49,8 @@
                             <input id="acceptTermsAndConditions" type="checkbox" value=""
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="acceptTermsAndConditions"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Acepto los términos y condiciones</label>
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Acepto los términos y
+                                condiciones</label>
                         </div>
                     </div>
                     <div>
@@ -66,5 +69,14 @@
 #register {
     display: grid;
     grid-template-columns: 5fr 3fr;
+}
+
+.welcome {
+    font-family: 'JetBrains Mono';
+    src: url('~/assets/fonts/JetBrainsMonoNL-Thin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.5rem;
+    margin-left: 23rem;
 }
 </style>
