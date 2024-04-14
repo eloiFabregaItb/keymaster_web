@@ -1,31 +1,40 @@
 <template>
-   <div class="content">
+   <div class="flex flex-col min-h-screen">
       <Navbar />
-      <div class="container">
-         <div class="centered">
-            <Keyword />
+      <div class="content flex-grow">
+         <div class="container">
+            <div class="centered">
+               <Keyword />
+            </div>
          </div>
       </div>
+      <Footer />
    </div>
 </template>
- 
+
 <script setup lang="ts">
 import Navbar from "~/components/layout/navbar.vue";
 import Keyword from "~/components/layout/keyword.vue";
+import Footer from "~/components/layout/footer.vue";
 import "../assets/css/main.css";
 </script>
- 
+
 <style>
+.content {
+   flex: 1;
+}
+
 .container {
    display: flex;
    align-items: center;
    justify-content: center;
-   height: 100vh;
+   height: calc(100% - 4rem);
 }
 
 .centered {
+   display: flex;
+   align-items: center;
+   justify-content: center;
    display: inline-block;
-   /* Allows centering using text-align */
 }
 </style>
- 

@@ -24,48 +24,14 @@ export default {
             d="M1 1h15M1 7h15M1 13h15" />
         </svg>
       </button>
-      <ul
-          class="font-medium flex flex-col rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-transparent md:dark:bg-transparent dark:border-gray-700">
-          <li>
-            <nuxt-link to="/register"
-              class="block text-white hover:font-semibold">
-              <div class="relative group flex items-center" @mouseenter="showText = true" @mouseleave="showText = false">
-                <span
-                  class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-transparent group-hover:text-white transition-opacity duration-0 font-semibold"
-                  :class="{ 'opacity-100': showText }">Info</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-7 h-7 mr-2 transition-transform duration-300 transform translate-x-0 group-hover:translate-x-[-20px]">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
-                </svg>
-              </div>
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/login"
-              class="block py-2 px-3 text-white rounded md:p-0 dark:text-white md:dark:text-blue-500 hover:font-semibold">
-              <div class="relative group flex items-center" @mouseenter="showText = true" @mouseleave="showText = false">
-                <span
-                  class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-transparent group-hover:text-white transition-opacity duration-300 font-semibold"
-                  :class="{ 'opacity-100': showText }">Ranking</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-7 h-7 mr-2 transition-transform duration-300 transform translate-x-0 group-hover:translate-x-[-20px]">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-                </svg>
-              </div>
-            </nuxt-link>
-          </li>
-          </ul>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <div class="hidden w-full md:block md:w-auto ml-auto pr-5" id="navbar-default">
         <ul
-          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-transparent md:dark:bg-transparent dark:border-gray-700">
+          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-transparent md:dark:bg-transparent dark:border-gray-700">
           <li>
             <nuxt-link to="/register"
               class="block py-2 px-3 text-white rounded md:p-0 dark:text-white md:dark:text-blue-500 hover:font-semibold">
-              <div class="relative group flex items-center" @mouseenter="showText = true" @mouseleave="showText = false">
+              <div class="relative group flex items-center" @mouseenter="showText = true"
+                @mouseleave="showText = false">
                 <span
                   class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-transparent group-hover:text-white transition-opacity duration-300 font-semibold"
                   :class="{ 'opacity-100': showText }">Register</span>
@@ -81,7 +47,8 @@ export default {
           <li>
             <nuxt-link to="/login"
               class="block py-2 px-3 text-white rounded md:p-0 dark:text-white md:dark:text-blue-500 hover:font-semibold">
-              <div class="relative group flex items-center" @mouseenter="showText = true" @mouseleave="showText = false">
+              <div class="relative group flex items-center" @mouseenter="showText = true"
+                @mouseleave="showText = false">
                 <span
                   class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-transparent group-hover:text-white transition-opacity duration-300 font-semibold"
                   :class="{ 'opacity-100': showText }">Login</span>
@@ -167,4 +134,5 @@ li {
 .relative:hover {
   width: auto;
   /* Al hacer hover, el contenedor se ajustará al tamaño del contenido */
-}</style>
+}
+</style>
