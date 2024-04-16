@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       activeKey: null,
+      shiftKeyPressed: false,
       keyboardLayout: [
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
         ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '*'],
@@ -56,13 +57,29 @@ export default {
       if (event.key === " ") {
         this.activeKey = "Space";
         this.handleKeyClick("Space");
+      } else if (event.key === "Shift") {
+        this.shiftKeyPressed = true;
       } else {
-        this.activeKey = event.key.toUpperCase();
-        this.handleKeyClick(event.key.toUpperCase());
+        const key = event.key.toUpperCase();
+        if (this.shiftKeyPressed) {
+          this.activeKey = key;
+          this.handleKeyClick(key);
+        } else {
+          if (key >= 'A' && key <= 'Z') {
+            const charCode = key.charCodeAt(0) + 32;
+            this.activeKey = String.fromCharCode(charCode);
+            this.handleKeyClick(this.activeKey);
+          } else {
+            this.activeKey = key;
+            this.handleKeyClick(key);
+          }
+        }
       }
     },
-    handleKeyUp() {
-      this.activeKey = null;
+    handleKeyUp(event) {
+      if (event.key === "Shift") {
+        this.shiftKeyPressed = false;
+      }
     }
   },
   mounted() {
