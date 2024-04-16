@@ -14,30 +14,40 @@
                 <div class="space-y-6">
                     <div>
                         <p class="text-lg font-semibold">Nickname</p>
-                        <input
+                        <input v-model="username"
                             class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
                             type="text" placeholder="Introduce tu nickname">
                     </div>
+                    <!-- {{ username }} -->
+
 
                     <div>
                         <p class="text-lg font-semibold">Correo</p>
-                        <input
+                        <input v-model="email"
                             class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
                             type="email" placeholder="Introduce tu correo">
                     </div>
+                    <!-- {{ email }} -->
 
                     <div>
                         <p class="text-lg font-semibold">Contraseña</p>
-                        <input
+                        <input v-model="password"
                             class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                            type="password" placeholder="Introduce tu contraseña">
+                            type="text" placeholder="Introduce tu contraseña">
                     </div>
+                    <!-- {{ password }} -->
 
                     <div>
                         <p class="text-lg font-semibold">Confirmar contraseña</p>
-                        <input
+                        <input v-model="confirmPassword"
                             class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                            type="password" placeholder="Confirma tu contraseña">
+                            type="text" placeholder="Confirma tu contraseña">
+                    </div>
+                    <!-- {{ confirmPassword }} -->
+
+
+                    <div v-if="showErrors">
+                        <p class="text-red-600">{{ errMsg }}</p>
                     </div>
 
 
@@ -47,11 +57,12 @@
                             <input id="acceptTermsAndConditions" type="checkbox" value=""
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="acceptTermsAndConditions"
-                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Acepto los términos y condiciones</label>
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Acepto los términos y
+                                condiciones</label>
                         </div>
                     </div>
                     <div>
-                        <button type="submit"
+                        <button type="submit" @click="register()"
                             class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
                             Registrarse
                         </button>
@@ -61,6 +72,129 @@
         </div>
     </section>
 </template>
+
+<script setup>
+import { getErrorFromResponse } from "../utils/errors"
+import axios from "axios"
+var username = ref("")
+var email = ref("")
+var password = ref("")
+var confirmPassword = ref("")
+
+var showErrors = ref(false)
+var errMsg = ref("")
+
+async function register() {
+    if (password.value !== confirmPassword.value) {
+        showErrors.value = true;
+        errMsg.value = "Las contraseñas no coinciden";
+        return;
+    }
+
+    if (!isEmailValid(email.value)) {
+        showErrors.value = true;
+        errMsg.value = "Correo electrónico inválido";
+        return;
+    }
+
+    const passwordValidation = validatePassword(password.value);
+    if (!passwordValidation.valid) {
+        showErrors.value = true;
+        errMsg.value = "Contraseña inválida: ";
+        if (passwordValidation.errors.MIN_LENGTH) {
+            errMsg.value += `Debe tener al menos ${MIN_LENGTH} caracteres. `;
+        }
+        if (passwordValidation.errors.MANDATORY) {
+            errMsg.value += `Debe incluir al menos una de las siguientes: ${passwordValidation.errors.MANDATORY.join(', ')}. `;
+        }
+        return;
+    }
+
+    if (!document.getElementById('acceptTermsAndConditions').checked) {
+        showErrors.value = true;
+        errMsg.value = "Debes aceptar los términos y condiciones";
+        return;
+    }
+
+    axios.post('http://172.30.5.61:3000/auth/register', {
+        username: username.value,
+        email: email.value,
+        password: password.value
+    })
+        .then(response => {
+            if (response.data.success) {
+                showErrors.value = false;
+                // TODO router.push("/home")
+            }
+        })
+        .catch(error => {
+            if (error.response && error.response.data.success === false) {
+                console.error('Error al hacer el registro:', error.message);
+                showErrors.value = true;
+                errMsg.value = getErrorFromResponse(error);
+            } else {
+                showErrors.value = true;
+                console.error("Error inesperado");
+            }
+        });
+}
+
+
+
+const SPECIAL_CHARACTERS = "!@#$%^&*()_-+={}[]|:;\"<>,.?/~\\`"
+const MIN_LENGTH = 6
+
+function isEmailValid(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email)
+}
+
+function validatePassword(password = "") {
+
+    const errors = {};
+    const err_mandatory = []
+
+    const hasMinimumLength = password.length >= MIN_LENGTH
+    const hasLowercase = /[a-z]/.test(password)
+    const hasUppercase = /[A-Z]/.test(password)
+    const hasNumber = /[0-9]/.test(password)
+    const hasSpecialCharacter = password.split("").some(x => SPECIAL_CHARACTERS.includes(x))
+
+
+    // Minimum 8 characters
+    if (!hasMinimumLength) {
+        errors[`MIN_LENGTH`] = MIN_LENGTH
+    }
+
+    // At least one lowercase letter
+    if (!hasLowercase) {
+        err_mandatory.push("LOWERCASE")
+    }
+
+    // At least one uppercase letter
+    // or
+    // At least one number
+    // or
+    // At least one symbol
+    if (!hasUppercase && !hasNumber && !hasSpecialCharacter) {
+        err_mandatory.push(["Mayúscula", "Número", "Símbolo"])
+    }
+
+    if (err_mandatory.length > 0) {
+        errors.MANDATORY = err_mandatory
+    }
+
+    return {
+        valid: Object.keys(errors).length === 0,
+        errors,
+    }
+}
+
+
+
+
+</script>
+
 
 <style scoped>
 #register {
