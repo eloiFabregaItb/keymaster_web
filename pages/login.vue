@@ -142,7 +142,6 @@ async function login() {
     grid-template-columns: 5fr 3fr;
 }
 
-<<<<<<< HEAD
 .welcome {
     font-family: 'JetBrains Mono';
     src: url('~/assets/fonts/JetBrainsMonoNL-Thin.ttf') format('truetype');
@@ -151,7 +150,4 @@ async function login() {
     font-size: 1.5rem;
     margin-left: 23rem;
 }
-=======
-@media only screen and (max-width: 600px) {}
->>>>>>> 22b21e69fcc0360d642488339051f6efb73a781b
 </style>

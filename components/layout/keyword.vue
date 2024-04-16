@@ -22,11 +22,8 @@
     <!-- Div lateral vertical -->
     <div class="sidebar text-white">
       <h2 class="text-lg font-semibold mb-2">Usuarios</h2>
-      <div class="flex justify-start items-center">
-        <svg class="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path fill="#6ddb23" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/>
-        </svg>
-        <p class="text-sm">Online:</p>
+      <div class="flex justify-between items-center">
+        <p class="text-sm"><svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#6ddb23" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/></svg>Online:</p>
         <p class="text-sm font-semibold">{{ usersOnline }}</p>
       </div>
     </div>
@@ -94,7 +91,7 @@ body {
 
 .kw-container {
   display: grid;
-  grid-template-columns: 5fr 1fr auto; /* Una columna para el teclado y una para el sidebar */
+  grid-template-columns: 5fr 0.5fr auto; /* Una columna para el teclado y una para el sidebar */
 }
 
 .kw {
@@ -117,8 +114,6 @@ body {
 
 .content-wrapper {
   width: 100%;
-  padding-top: 15px;
-  border-top: solid 1px #ccc;
 }
 
 .text-style, .keyboard {
@@ -130,7 +125,6 @@ body {
   font-size: 40px;
   font-family: 'JetBrains Mono', monospace;
   align-self: flex-start;
-
 }
 
 .keyboard {
@@ -162,4 +156,12 @@ body {
   /* Hace que la tecla "Space" ocupe 3 veces el espacio horizontal */
 }
 
+h2 {
+  border-bottom: 1px solid #ccc;
+}
+
+.active {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
 </style>
