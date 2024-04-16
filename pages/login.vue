@@ -87,6 +87,9 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import axios from "axios"
+import { userStore } from '../storages/userStore.js'
+
+const store = userStore()
 
 var show = ref(true)
 
@@ -105,7 +108,15 @@ async function login() {
             if (response.data.success) {
                 showErrors.value = false;
                 localStorage.setItem('jwt', response.data.jwt);
-                // TODO router.push("/home")
+                navigateTo('/profile')
+                store.updateUser({
+                    email: response.data.email,
+                    username: response.data.username,
+                    profileImg: response.data.profileImg,
+                    //profileImg: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
+                    emailVerified: response.data.emailVerified,
+                    jwt: response.data.jwt
+                })
             }
         })
         .catch(error => {
