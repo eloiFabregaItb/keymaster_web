@@ -10,9 +10,10 @@
           <div class="keyboard text-keyword flex-col">
             <div class="row" v-for="(row, rowIndex) in keyboardLayout" :key="rowIndex">
               <div v-for="(key, keyIndex) in row" :key="keyIndex"
-                :class="['key', { 'active': key === activeKey }, { 'space-key': key === 'Space' }]"
+                :class="['key', { 'active': key === activeKey }, { 'space-key': key === 'Space' }, { 'del-key': key === 'DEL' }]"
+                :style="{ flex: key === 'Space' ? '3' : '1' }"
                 @click="handleKeyClick(key)">
-                {{ key }}
+                {{ key === 'Space' ? 'Space' : key }}
               </div>
             </div>
           </div>
@@ -35,16 +36,16 @@ export default {
   data() {
     return {
       activeKey: null,
-      shiftKeyPressed: false,
       keyboardLayout: [
-        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'DEL'],
         ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '*'],
         ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ', 'Ç'],
         ['!', '"', '·', '$', '%', '&', '/', '(', ')', '=', '?', '¿', '¡'],
         ['Shift', 'Z', 'X', 'C', 'Space', 'V', 'B', 'N', 'M'],
         []
       ],
-      usersOnline: 50
+      usersOnline: 50,
+      shiftPressed: false
     };
   },
   methods: {
@@ -54,31 +55,32 @@ export default {
     handleKeyDown(event) {
       event.preventDefault();
       event.stopPropagation();
-      if (event.key === " ") {
-        this.activeKey = "Space";
-        this.handleKeyClick("Space");
-      } else if (event.key === "Shift") {
-        this.shiftKeyPressed = true;
+      if (event.key === "Shift") {
+        this.shiftPressed = true;
       } else {
-        const key = event.key.toUpperCase();
-        if (this.shiftKeyPressed) {
-          this.activeKey = key;
-          this.handleKeyClick(key);
+        if (this.shiftPressed) {
+          this.activeKey = event.key.toUpperCase();
         } else {
-          if (key >= 'A' && key <= 'Z') {
-            const charCode = key.charCodeAt(0) + 32;
-            this.activeKey = String.fromCharCode(charCode);
-            this.handleKeyClick(this.activeKey);
-          } else {
-            this.activeKey = key;
-            this.handleKeyClick(key);
-          }
+          this.activeKey = event.key.toLowerCase();
         }
+        this.handleKeyClick(this.activeKey); // Llamamos a handleKeyClick una vez aquí
+      }
+      
+      // Manejo específico para la tecla "DEL"
+      if (event.key === "Delete") {
+        this.activeKey = "DEL";
+        this.handleKeyClick("DEL");
       }
     },
     handleKeyUp(event) {
       if (event.key === "Shift") {
-        this.shiftKeyPressed = false;
+        this.shiftPressed = false;
+      }
+      this.activeKey = null; // Desiluminamos la tecla al soltarla
+      
+      // Desiluminar la tecla "DEL" cuando se suelta
+      if (event.key === "Delete") {
+        this.activeKey = null;
       }
     }
   },
@@ -168,9 +170,10 @@ body {
   cursor: pointer;
 }
 
-.space-key {
-  flex-grow: 3;
-  /* Hace que la tecla "Space" ocupe 3 veces el espacio horizontal */
+.space-key, .del-key {
+  flex-grow: 6;
+  /* Hace que la tecla "Space" y "DEL" ocupe 3 veces el espacio horizontal */
+  font-size: 18px; /* Ajustamos el tamaño del texto */
 }
 
 h2 {
