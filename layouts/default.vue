@@ -10,7 +10,7 @@ import "../assets/css/main.css"
 
 <style scoped>
 #fondo {
-  height: 100% !important;
+  /* height: 100% !important; */
   background: linear-gradient(#000000, #43219B);
   overflow: hidden;
 }
