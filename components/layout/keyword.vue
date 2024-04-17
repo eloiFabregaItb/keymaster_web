@@ -1,6 +1,35 @@
 <template>
-  <div class=" flex justify-center items-center">
-    <div class="container flex flex-col justify-center mb-5 items-center" style="border-top: 1.5px solid lightgrey;">
+  <div class="flex items-center justify-end pt-16">
+
+  </div>
+  <section class="mx-24 mt-16" id="profile">
+    <div>
+      <button class="px-5">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>      </button>
+
+      <button class="px-5">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>      </button>
+
+      <button class="px-5">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>      </button>
+      
+      <hr style="width: 95%;">
+
+    </div>
+    <div class="bg-green-400">
+
+    </div>
+
+    <div class="container flex flex-col justify-center mb-5 items-start"> <!-- Cambio en items-center a items-start -->
       <div class="text-style mt-5 mb-5 text-white">
         <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
         </p>
@@ -15,8 +44,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
+
 
 <script>
 export default {
@@ -24,7 +54,7 @@ export default {
     return {
       activeKey: null,
       keyboardLayout: [
-        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Backspace'],
+        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Del'],
         ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '*'],
         ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ', 'Ç'],
         ['!', '"', '·', '$', '%', '&', '/', '(', ')', '=', '?', '¿', '¡'],
@@ -70,27 +100,28 @@ export default {
   font-weight: normal;
   font-style: normal;
 }
+
 body {
   overflow-y: hidden;
   /* Oculta el scroll vertical */
 }
-.container {
-  margin-top: 14rem;
-  width: 65%;
-}
+
 .text-style {
   color: white;
   font-size: 40px;
   font-family: 'JetBrains Mono', monospace;
 }
+
 .keyboard {
   display: flex;
   flex-direction: column;
 }
+
 .row {
   display: flex;
   margin-bottom: 5px;
 }
+
 .key {
   width: 60px;
   height: 60px;
@@ -103,10 +134,12 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .space-key {
   flex-grow: 3;
   /* Hace que la tecla "Space" ocupe 3 veces el espacio horizontal */
 }
+
 .active {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
