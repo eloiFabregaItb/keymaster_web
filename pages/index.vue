@@ -2,8 +2,8 @@
    <div class="flex flex-col min-h-screen">
       <Navbar />
       <div class="content flex-grow">
-         <div class="container">
-            <div class="centered">
+         <div class="">
+            <div class="">
                <Keyword />
             </div>
          </div>
