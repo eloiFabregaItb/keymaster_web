@@ -1,6 +1,78 @@
 <template>
-    <Modal v-if="isModalOpen" @close="closeModal()">
-        <h1>modal</h1>
+    <Modal class="text-black" v-if="isModalOpen" @close="isModalOpen=false" :title="`Seguidores: ${store.$state.followers.length}`">
+        <h1>Seguidores</h1>
+        <div class="user-modal-info" v-for="follower in store.$state.followers">
+            
+            <img class="modal-img" :src="follower.profileImg" alt="">
+            <div class="flex items-center">
+                <p class="ml-3">{{ follower.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <span v-else>Siguiendo</span>
+            </div>
+        </div>
+        <div class="user-modal-info" v-for="follower in store.$state.followers">
+            <img class="modal-img" :src="follower.profileImg" alt="">
+            <div class="flex items-center">
+                <p class="ml-3">{{ follower.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <span v-else>Siguiendo</span>
+            </div>
+        </div>
+        <div class="user-modal-info" v-for="follower in store.$state.followers">
+            <img class="modal-img" :src="follower.profileImg" alt="">
+            <div class="flex items-center">
+                <p class="ml-3">{{ follower.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <span v-else>Siguiendo</span>
+            </div>
+        </div>
+        <div class="user-modal-info" v-for="follower in store.$state.followers">
+            <img class="modal-img" :src="follower.profileImg" alt="">
+            <div class="flex items-center">
+                <p class="ml-3">{{ follower.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <span v-else>Siguiendo</span>
+            </div>
+        </div>
+        <div class="user-modal-info" v-for="follower in store.$state.followers">
+            <img class="modal-img" :src="follower.profileImg" alt="">
+            <div class="flex items-center">
+                <p class="ml-3">{{ follower.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <span v-else>Siguiendo</span>
+            </div>
+        </div>
+        <div class="user-modal-info" v-for="follower in store.$state.followers">
+            <img class="modal-img" :src="follower.profileImg" alt="">
+            <div class="flex items-center">
+                <p class="ml-3">{{ follower.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <span v-else>Siguiendo</span>
+            </div>
+        </div>
+        <div class="user-modal-info" v-for="follower in store.$state.followers">
+            <img class="modal-img" :src="follower.profileImg" alt="">
+            <div class="flex items-center">
+                <p class="ml-3">{{ follower.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <span v-else>Siguiendo</span>
+            </div>
+        </div>
+
     </Modal>
     <Navbar></Navbar>
 
@@ -86,14 +158,10 @@ import Swal from 'sweetalert2'
 import Navbar from "~/components/layout/navbar2.vue";
 import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
-import Modal from "../components/Modal.vue"; 
+import Modal from "../components/Modal.vue";
 
 var isModalOpen = ref(false)
 
-function closeModal(){
-    console.log('close modal')
-    isModalOpen.value=false
-}
 
 const store = userStore()
 var jwt = store.$state.jwt
@@ -206,14 +274,21 @@ function deleteProfile() {
     // /user/confirmdelete
     // code login
 }
+
+
+function followUser(username){
+    alert(username)
+}
+/*
+                /user/follow
+                follow: username
+                token
+*/
 </script>
 
 <style scoped>
-* {
-    color: white;
-}
-
 #profile {
+    color: white;
     display: grid;
     grid-template-columns: 10fr 2fr;
 }
@@ -255,5 +330,24 @@ function deleteProfile() {
 .followers img {
     width: 50px;
     height: 50px;
+}
+
+.modal-img {
+    height: 50px;
+    width:  50px;
+}
+
+.user-modal-info {
+    display: grid;
+    grid-template-columns: 1fr 5fr 3fr;
+    margin: 10px 0 10px 0;
+    overflow: scroll;
+}
+
+.follow-button {
+    background-color: #43219B;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
 }
 </style>
