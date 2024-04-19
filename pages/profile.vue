@@ -36,7 +36,7 @@
                 <div class="flex gap-20">
                     <div class="w-2/12">
                         <label for="file-input" class="file-input-label">
-                            <img style="cursor: pointer;" class="user-img" :src="store.$state.profileImg" alt="">
+                            <ProfilePic :src="store.$state.profileImg" big="true" />
                         </label>
                         <input id="file-input" type="file" style="display: none;" @change="upadteProfileImg">
                     </div>

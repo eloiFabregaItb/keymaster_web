@@ -8,8 +8,9 @@
 
 <script setup>
 
-const { src, isOnline, isOffline, big } = defineProps(['src', 'isOnline', 'isOffline', 'big'])
-console.log("BIG", big)
+const { src: src_, isOnline, isOffline, big } = defineProps(['src', 'isOnline', 'isOffline', 'big'])
+const src = src_ || "/user.jpeg"
+console.log(src)
 
 </script>
 
