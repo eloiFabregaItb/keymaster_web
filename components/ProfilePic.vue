@@ -8,8 +8,7 @@
 
 <script setup>
 
-const { src, isOnline, isOffline } = defineProps(['src', 'isOnline', 'isOffline'])
-
+const { src, isOnline, isOffline, big } = defineProps(['src', 'isOnline', 'isOffline', 'big'])
 
 
 </script>
@@ -17,7 +16,11 @@ const { src, isOnline, isOffline } = defineProps(['src', 'isOnline', 'isOffline'
 <style scoped>
 .ProfilePic {
 
-  --size: 500px;
+  --size: 70px;
+  --size-small: calc(var(--size)/6);
+  --alpha: 315deg;
+
+  --rad: calc(var(--size)/2);
 
   width: var(--size);
   height: var(--size);
@@ -26,7 +29,7 @@ const { src, isOnline, isOffline } = defineProps(['src', 'isOnline', 'isOffline'
   background-size: cover !important;
 
   border-radius: 50%;
-  border: 3px solid black;
+  /* border: 3px solid black; */
 
   position: relative;
 
@@ -37,13 +40,15 @@ const { src, isOnline, isOffline } = defineProps(['src', 'isOnline', 'isOffline'
 .ProfilePic .isOnline {
   position: absolute;
   /* border: 3px solid black; */
-  bottom: calc(var(--size) / (2 * sqrt(2)));
-  right: calc(var(--size) / (2 * sqrt(2)));
+  left: calc(50% + var(--rad) * cos(var(--alpha)));
+  top: calc(50% - var(--rad) * sin(var(--alpha)));
 
-  height: 10px;
-  width: 10px;
+  height: var(--size-small);
+  width: var(--size-small);
 
   border-radius: 50%;
+
+  transform: translate(-50%, -50%);
 }
 
 .ProfilePic .isOnline {
