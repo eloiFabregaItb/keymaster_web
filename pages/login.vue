@@ -28,7 +28,7 @@
 
 
                     <p class="text-lg font-semibold">Contraseña</p>
-                    <PasswordInput />
+                    <PasswordInput v-model="password" />
 
 
                     <!-- {{ user }}
@@ -64,13 +64,10 @@
 
 <script setup>
 import PasswordInput from "../components/PasswordInput.vue"
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import axios from "axios"
 import { userStore } from '../storages/userStore.js'
 
 const store = userStore()
-
-var show = ref(true)
 
 var user = ref("")
 var password = ref("")
