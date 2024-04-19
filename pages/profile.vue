@@ -1,8 +1,8 @@
 <template>
-
-
+    <Modal v-if="isModalOpen" @close="closeModal()">
+        <h1>modal</h1>
+    </Modal>
     <Navbar></Navbar>
-
 
     <div class="flex items-center justify-end pt-16">
         <!-- <img width="20" class="text-white" src="../assets/icons/svg/circle-user-regular.svg" alt="">
@@ -10,19 +10,18 @@
     </div>
     <section class="mx-24 mt-16" id="profile">
         <div>
-            <button class="px-5" @click="page = 0">
+            <button :class="{ 'img-opacity': page !== 0 }" class="px-5" @click="page = 0">
                 <img class="icon-button" src="../assets/icons/svg/user-solid.svg" alt="">
             </button>
 
-            <button class="px-5" @click="page = 1">
+            <button :class="{ 'img-opacity': page !== 1 }" class="px-5" @click="page = 1">
                 <img class="icon-button" src="../assets/icons/svg/keyboard-solid.svg" alt="">
             </button>
 
-            <button class="px-5" @click="page = 2">
+            <button :class="{ 'img-opacity': page !== 2 }" class="px-5" @click="page = 2">
                 <img class="icon-button" src="../assets/icons/svg/gamepad-solid.svg" alt="">
             </button>
-        <hr style="width: 95%;">
-
+            <hr style="width: 95%;">
         </div>
         <div class="bg-green-400">
 
@@ -31,29 +30,43 @@
             <!-- <p class="text-white">{{ page }}</p> -->
 
             <div v-if="page == 0">
-                <div class="flex">
+                <div class="flex gap-20">
                     <div class="w-2/12">
                         <label for="file-input" class="file-input-label">
-                            <img style="cursor: pointer;" class="user-img" :src="userData.profileImg" alt=""
-                                @click="handleImageUpload">
+                            <img style="cursor: pointer;" class="user-img" :src="store.$state.profileImg" alt=""
+                                >
                         </label>
-                        <input id="file-input" type="file" style="display: none;" @change="handleFileUpload">
+                        <input id="file-input" type="file" style="display: none;" @change="upadteProfileImg">
                     </div>
-                    <div style="flex: 1;" class="ml-10 flex flex-col justify-center">
-                        <div class="w-100 text-3xl flex items-center">
+                    <div class="ml-10 flex flex-col justify-center">
+                        <div class="w-100 text-2xl flex items-center">
                             <img width="30" src="../assets/icons/svg/hashtag-solid.svg" alt="">
                             <span class="ml-2">Nickname: {{ userData.username }}</span>
                         </div>
-                        <div class="w-100 text-3xl flex items-center">
+                        <div class="w-100 text-2xl flex items-center">
                             <img width="30" src="../assets/icons/svg/at-solid.svg" alt="">
                             <span class="ml-2">Email: {{ userData.email }}</span>
                         </div>
-                        <div class="w-100 text-3xl flex items-center">
+                        <div class="w-100 text-2xl flex items-center">
                             <img width="30" src="../assets/icons/svg/earth-europe-solid.svg" alt="">
                             <span class="ml-2">Rank: 1230</span>
                         </div>
                     </div>
+                    <button @click="isModalOpen=true" class="followers">
+                        <div class="info">
+                            <p>Seguidores</p>
+                            <p class="text-center">{{ store.followers.length }}</p>
+                        </div>
+                    </button>
+                    <div class="followers">
+                        <div class="info">
+                            <p>Seguidos</p>
+                            <p class="text-center">{{ store.friends.length }}</p>
+                        </div>
+                    </div>
+
                 </div>
+                <button @click="confirmDeleteProfile" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar perfil</button>
             </div>
 
             <div v-if="page == 1">
@@ -65,23 +78,134 @@
             </div>
         </div>
     </section>
-
-
-
-
-
 </template>
 
 <script setup>
+import axios from "axios"
+import Swal from 'sweetalert2'
 import Navbar from "~/components/layout/navbar2.vue";
 import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
+import Modal from "../components/Modal.vue"; 
+
+var isModalOpen = ref(false)
+
+function closeModal(){
+    console.log('close modal')
+    isModalOpen.value=false
+}
 
 const store = userStore()
+var jwt = store.$state.jwt
+console.log(jwt)
 
 var userData = store.userInfo
 
 var page = ref(0)
+
+function upadteProfileImg(event){
+    const form = new FormData()
+    form.append('image', event.target.files[0])
+
+    axios.post('http://172.30.5.61:3000/user/editimg', form, {
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    })
+    .then(response => {
+        console.log(response)
+        store.$state.profileImg = response.data.data.url
+    })
+}
+
+function confirmDeleteProfile() {
+    Swal.fire({
+        title: 'Quieres que te enviemos un código para eliminar tu cuenta?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            sendDeteleEmail()
+            Swal.fire({
+                title: 'Por favor, ingresa el código que recibiste en tu correo',
+                input: 'text',
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+                showLoaderOnConfirm: true,
+                preConfirm: (code) => {
+                    return axios.post('http://172.30.5.61:3000/user/confirmdelete', { 
+                        code: code,
+                        login: store.$state.username 
+                    })
+                        .then(response => {
+                            if (!response.data.success) {
+                                throw new Error(response.data.message || 'Algo salió mal');
+                            }
+                            return response.data;
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `Error: código incorrecto`
+                            );
+                        });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    localStorage.removeItem('jwt')
+                    store.clearUser()
+                    navigateTo("/")
+                    Swal.fire(
+                        '¡Eliminado!',
+                        'Tu perfil ha sido eliminado.',
+                        'success'
+                    )
+                }
+            });
+        }
+    });
+}
+
+function sendDeteleEmail(){
+    axios.post('http://172.30.5.61:3000/user/delete', undefined, {
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    })
+    .then(response => {
+        console.log(response)
+    })
+}
+
+
+function deleteProfile() {
+    axios.post('http://172.30.5.61:3000/user/delete', {
+        token: jwt.value,
+    })
+    .then(response => {
+        console.log(response)
+    })
+
+
+
+    localStorage.removeItem('jwt')
+    store.clearUser()
+    //navigateTo('/')
+
+    // /user/delete
+    // token
+
+    // /user/confirmdelete
+    // code login
+}
 </script>
 
 <style scoped>
@@ -97,12 +221,39 @@ var page = ref(0)
 .user-img {
     width: 200px;
     height: 200px;
+    min-width: 200px;
+    height: 200px;
     border-radius: 50%;
     border: 1px solid white;
 }
 
 .icon-button {
-  height: 25px;
-  vertical-align: middle;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.img-opacity {
+    opacity: 50%;
+}
+
+.followers {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.followers .info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.followers .info p {
+    margin: 0px;
+}
+
+.followers img {
+    width: 50px;
+    height: 50px;
 }
 </style>
