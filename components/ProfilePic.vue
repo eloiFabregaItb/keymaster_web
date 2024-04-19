@@ -1,6 +1,6 @@
 <template>
 
-  <div class="ProfilePic" :style="`background: url(${src})`">
+  <div class="ProfilePic" :class="{ 'big': Boolean(big) }" :style="`background: url(${src})`">
     <span v-if="isOnline" class="isOnline"></span>
     <span v-else-if="isOffline" class="isOffline"></span>
   </div>
@@ -9,19 +9,27 @@
 <script setup>
 
 const { src, isOnline, isOffline, big } = defineProps(['src', 'isOnline', 'isOffline', 'big'])
-
+console.log("BIG", big)
 
 </script>
 
 <style scoped>
 .ProfilePic {
-
   --size: 70px;
   --size-small: calc(var(--size)/6);
   --alpha: 315deg;
-
   --rad: calc(var(--size)/2);
+}
 
+
+.ProfilePic.big {
+  --size: 200px;
+  --size-small: calc(var(--size)/6);
+  --alpha: 315deg;
+  --rad: calc(var(--size)/2);
+}
+
+.ProfilePic {
   width: var(--size);
   height: var(--size);
 
