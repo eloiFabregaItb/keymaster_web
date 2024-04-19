@@ -1,9 +1,8 @@
 <template>
     <Modal class="text-black" v-if="isModalOpen" @close="isModalOpen=false" :title="`Seguidores: ${store.$state.followers.length}`">
-        <h1>Seguidores</h1>
         <div class="user-modal-info" v-for="follower in store.$state.followers">
-            
-            <img class="modal-img" :src="follower.profileImg" alt="">
+            <ProfilePic :src="follower.profileImg"
+             />
             <div class="flex items-center">
                 <p class="ml-3">{{ follower.username }}</p>
             </div>
@@ -13,7 +12,8 @@
             </div>
         </div>
         <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <img class="modal-img" :src="follower.profileImg" alt="">
+            <ProfilePic :src="follower.profileImg"
+             />
             <div class="flex items-center">
                 <p class="ml-3">{{ follower.username }}</p>
             </div>
@@ -23,7 +23,8 @@
             </div>
         </div>
         <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <img class="modal-img" :src="follower.profileImg" alt="">
+            <ProfilePic :src="follower.profileImg"
+             />
             <div class="flex items-center">
                 <p class="ml-3">{{ follower.username }}</p>
             </div>
@@ -33,7 +34,8 @@
             </div>
         </div>
         <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <img class="modal-img" :src="follower.profileImg" alt="">
+            <ProfilePic :src="follower.profileImg"
+             />
             <div class="flex items-center">
                 <p class="ml-3">{{ follower.username }}</p>
             </div>
@@ -43,35 +45,17 @@
             </div>
         </div>
         <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <img class="modal-img" :src="follower.profileImg" alt="">
+            <ProfilePic :src="follower.profileImg"
+             />
             <div class="flex items-center">
                 <p class="ml-3">{{ follower.username }}</p>
             </div>
             <div class="flex items-center justify-end">
-                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <button v-if="follower.followedBy == true" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
                 <span v-else>Siguiendo</span>
             </div>
         </div>
-        <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <img class="modal-img" :src="follower.profileImg" alt="">
-            <div class="flex items-center">
-                <p class="ml-3">{{ follower.username }}</p>
-            </div>
-            <div class="flex items-center justify-end">
-                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
-                <span v-else>Siguiendo</span>
-            </div>
-        </div>
-        <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <img class="modal-img" :src="follower.profileImg" alt="">
-            <div class="flex items-center">
-                <p class="ml-3">{{ follower.username }}</p>
-            </div>
-            <div class="flex items-center justify-end">
-                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
-                <span v-else>Siguiendo</span>
-            </div>
-        </div>
+
 
     </Modal>
     <Navbar></Navbar>
@@ -105,8 +89,7 @@
                 <div class="flex gap-20">
                     <div class="w-2/12">
                         <label for="file-input" class="file-input-label">
-                            <img style="cursor: pointer;" class="user-img" :src="store.$state.profileImg" alt=""
-                                >
+                            <ProfilePic :src="userData.profileImg" big="true" />
                         </label>
                         <input id="file-input" type="file" style="display: none;" @change="upadteProfileImg">
                     </div>
@@ -124,7 +107,7 @@
                             <span class="ml-2">Rank: 1230</span>
                         </div>
                     </div>
-                    <button @click="isModalOpen=true" class="followers">
+                    <button @click="isModalOpen = true" class="followers">
                         <div class="info">
                             <p>Seguidores</p>
                             <p class="text-center">{{ store.followers.length }}</p>
@@ -138,7 +121,9 @@
                     </div>
 
                 </div>
-                <button @click="confirmDeleteProfile" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar perfil</button>
+                <button @click="confirmDeleteProfile" type="button"
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
+                    perfil</button>
             </div>
 
             <div v-if="page == 1">
@@ -156,6 +141,7 @@
 import axios from "axios"
 import Swal from 'sweetalert2'
 import Navbar from "~/components/layout/navbar2.vue";
+import ProfilePic from "~/components/ProfilePic.vue";
 import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
 import Modal from "../components/Modal.vue";
@@ -171,7 +157,7 @@ var userData = store.userInfo
 
 var page = ref(0)
 
-function upadteProfileImg(event){
+function upadteProfileImg(event) {
     const form = new FormData()
     form.append('image', event.target.files[0])
 
@@ -180,10 +166,10 @@ function upadteProfileImg(event){
             Authorization: `Bearer ${jwt}`
         }
     })
-    .then(response => {
-        console.log(response)
-        store.$state.profileImg = response.data.data.url
-    })
+        .then(response => {
+            console.log(response)
+            store.$state.profileImg = response.data.data.url
+        })
 }
 
 function confirmDeleteProfile() {
@@ -208,9 +194,9 @@ function confirmDeleteProfile() {
                 confirmButtonText: 'Confirmar',
                 showLoaderOnConfirm: true,
                 preConfirm: (code) => {
-                    return axios.post('http://172.30.5.61:3000/user/confirmdelete', { 
+                    return axios.post('http://172.30.5.61:3000/user/confirmdelete', {
                         code: code,
-                        login: store.$state.username 
+                        login: store.$state.username
                     })
                         .then(response => {
                             if (!response.data.success) {
@@ -242,15 +228,15 @@ function confirmDeleteProfile() {
     });
 }
 
-function sendDeteleEmail(){
+function sendDeteleEmail() {
     axios.post('http://172.30.5.61:3000/user/delete', undefined, {
         headers: {
             Authorization: `Bearer ${jwt}`
         }
     })
-    .then(response => {
-        console.log(response)
-    })
+        .then(response => {
+            console.log(response)
+        })
 }
 
 
@@ -258,9 +244,9 @@ function deleteProfile() {
     axios.post('http://172.30.5.61:3000/user/delete', {
         token: jwt.value,
     })
-    .then(response => {
-        console.log(response)
-    })
+        .then(response => {
+            console.log(response)
+        })
 
 
 
