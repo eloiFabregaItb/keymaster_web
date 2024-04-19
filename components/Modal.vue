@@ -1,24 +1,37 @@
 <template>
-  <div class="modal-background">
-    <div class="modal">
+  <div class="modal-background" @click="handleClickOutside">
+    <div class="modal" @click="handleClickInside">
       <header>
-        <h1></h1>
-        <button @click="buttonClose" class="close">&times;</button>
+        <h1>{{ title }}</h1>
+        <button @click="buttonClose" class="close"><span>&times;</span></button>
       </header>
       <main>
         <slot></slot>
       </main>
-      <footer>
-
-      </footer>
+      <!-- <footer>
+        <button>Aceptar</button>
+        <button>Cancelar</button>
+      </footer> -->
     </div>
   </div>
 </template>
 
 <script setup>
+
+const { title } = defineProps(['title'])
+
 const emit = defineEmits(['close'])
 
-function buttonClose(){
+function buttonClose() {
+  emit('close')
+}
+
+function handleClickInside(e) {
+  e.preventDefault()
+  e.stopPropagation()
+}
+
+function handleClickOutside() {
   emit('close')
 }
 </script>
@@ -27,6 +40,7 @@ function buttonClose(){
 .modal {
   color: black;
 }
+
 .modal {
   z-index: 999;
   color: black;
@@ -55,16 +69,22 @@ function buttonClose(){
 
 .modal header {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
+
+  align-items: center;
 }
 
 .close {
   font-size: 33px;
+  height: 33px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
 
-.close:hover{
+.close:hover {
   color: red;
 }
 </style>
