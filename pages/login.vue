@@ -110,14 +110,18 @@ async function login() {
             if (response.data.success) {
                 showErrors.value = false;
                 localStorage.setItem('jwt', response.data.jwt);
-                navigateTo('/profile')
+                navigateTo('/')
                 store.updateUser({
                     email: response.data.email,
                     username: response.data.username,
                     profileImg: response.data.profileImg,
                     //profileImg: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
                     emailVerified: response.data.emailVerified,
-                    jwt: response.data.jwt
+                    jwt: response.data.jwt,
+                    isLogged: true,
+                    friends: response.data.friends,
+                    followers: response.data.followers,
+                    notifications: response.data.notifications
                 })
             }
         })
