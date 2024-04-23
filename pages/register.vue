@@ -3,7 +3,7 @@
         <div class="h-dvh flex flex-col justify-center items-center text-style mt-5 mb-5 text-white">
             <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
             <p class="welcome"> <strong>¡Bienvenido futuro Master!</strong> Si has llegado hasta aquí es que
-                quieres mejorar tus skills en mecanografía. <strong>¡Vamos a ello!</strong>
+                quieres mejorar tus skills. <strong>¡Así que vamos a ello!</strong>
             </p>
         </div>
 
@@ -210,6 +210,14 @@ function validatePassword(password = "") {
     font-weight: normal;
     font-style: normal;
     font-size: 1.5rem;
-    margin-left: 23rem;
 }
+
+.h-dvh {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 14rem;
+}
+
 </style>

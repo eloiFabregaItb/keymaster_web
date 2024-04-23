@@ -3,8 +3,8 @@
         <div class="h-dvh flex flex-col justify-center items-center text-style mt-5 mb-5 text-white">
             <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
             <p class="welcome"> <strong>¡Vaya!</strong> Estás aprendiendo a ser un Master pero me parece que debes
-                mejorar tu memoria. No te preocupes que para eso estamos nosotros.
-                <strong>¡Vamos a ello!</strong>
+                mejorar tu memoria. No te preocupes, nosotros te ayudamos ésta vez.
+                <strong>¡Continuemos con ello!</strong>
             </p>
         </div>
 
@@ -248,7 +248,7 @@ function validatePassword(password = "") {
 <style scoped>
 #login {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 5fr 3fr;
 }
 
 .welcome {
@@ -257,7 +257,14 @@ function validatePassword(password = "") {
     font-weight: normal;
     font-style: normal;
     font-size: 1.5rem;
-    margin-left: 23rem;
+}
+
+.h-dvh {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 14rem;
 }
 </style>
 
