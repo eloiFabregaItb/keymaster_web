@@ -1,62 +1,28 @@
 <template>
-    <Modal class="text-black" v-if="isModalOpen" @close="isModalOpen=false" :title="`Seguidores: ${store.$state.followers.length}`">
+    <Modal class="text-black" v-if="isModalOpen" @close="isModalOpen = false"
+        :title="`Seguidores: ${store.$state.followers.length}`">
         <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <ProfilePic :src="follower.profileImg"
-             />
+            <ProfilePic :src="follower.profileImg" />
             <div class="flex items-center">
                 <p class="ml-3">{{ follower.username }}</p>
             </div>
             <div class="flex items-center justify-end">
-                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <button v-if="follower.followedBy == false" class="follow-button"
+                    @click="followUser(follower.username)">SEGUIR</button>
                 <span v-else>Siguiendo</span>
             </div>
         </div>
         <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <ProfilePic :src="follower.profileImg"
-             />
+            <ProfilePic :src="follower.profileImg" />
             <div class="flex items-center">
                 <p class="ml-3">{{ follower.username }}</p>
             </div>
             <div class="flex items-center justify-end">
-                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
+                <button v-if="follower.followedBy == true" class="follow-button"
+                    @click="followUser(follower.username)">SEGUIR</button>
                 <span v-else>Siguiendo</span>
             </div>
         </div>
-        <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <ProfilePic :src="follower.profileImg"
-             />
-            <div class="flex items-center">
-                <p class="ml-3">{{ follower.username }}</p>
-            </div>
-            <div class="flex items-center justify-end">
-                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
-                <span v-else>Siguiendo</span>
-            </div>
-        </div>
-        <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <ProfilePic :src="follower.profileImg"
-             />
-            <div class="flex items-center">
-                <p class="ml-3">{{ follower.username }}</p>
-            </div>
-            <div class="flex items-center justify-end">
-                <button v-if="follower.followedBy == false" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
-                <span v-else>Siguiendo</span>
-            </div>
-        </div>
-        <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <ProfilePic :src="follower.profileImg"
-             />
-            <div class="flex items-center">
-                <p class="ml-3">{{ follower.username }}</p>
-            </div>
-            <div class="flex items-center justify-end">
-                <button v-if="follower.followedBy == true" class="follow-button" @click="followUser(follower.username)">SEGUIR</button>
-                <span v-else>Siguiendo</span>
-            </div>
-        </div>
-
-
     </Modal>
     <Navbar></Navbar>
 
@@ -145,6 +111,39 @@ import ProfilePic from "~/components/ProfilePic.vue";
 import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
 import Modal from "../components/Modal.vue";
+
+
+
+
+
+
+import { socket } from "../utils/socket"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var isModalOpen = ref(false)
 
@@ -262,8 +261,14 @@ function deleteProfile() {
 }
 
 
-function followUser(username){
-    alert(username)
+function followUser(username) {
+    axios.post('http://172.30.5.61:3000/user/follow', {
+        follow: username,
+        token: jwt.value,
+    })
+    .then(response => {
+        console.log(response)
+    })
 }
 /*
                 /user/follow
@@ -320,7 +325,7 @@ function followUser(username){
 
 .modal-img {
     height: 50px;
-    width:  50px;
+    width: 50px;
 }
 
 .user-modal-info {
