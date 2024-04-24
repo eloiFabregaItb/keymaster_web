@@ -8,7 +8,7 @@ export const state = reactive({
   barEvents: []
 });
 
-var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3JfaWQiOjQyLCJpYXQiOjE3MTM4ODMxNzksImV4cCI6MTcxNDkxOTk3OX0.JUbVQjWn-qQSruE7lxpzvJR3UDnTYP1VYTj4Y40wuKc"
+var token = ""//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3JfaWQiOjQyLCJpYXQiOjE3MTM4ODMxNzksImV4cCI6MTcxNDkxOTk3OX0.JUbVQjWn-qQSruE7lxpzvJR3UDnTYP1VYTj4Y40wuKc"
 
 export const socket = io(api_ip,{
     transports: ['websocket'],
@@ -16,6 +16,8 @@ export const socket = io(api_ip,{
         token: token,
     }
 });
+
+socket.emit("test", {msg: "hello"})
 
 socket.on("connect", () => {
   state.connected = true;
@@ -32,4 +34,16 @@ socket.on("foo", (...args) => {
 
 socket.on("bar", (...args) => {
   state.barEvents.push(args);
+});
+
+socket.on("login notification", (data) => {
+  console.log("ha iniciado sesion",data)
+});
+
+socket.on("logout notification", (data) => {
+  console.log("cierra sesion",data)
+});
+
+socket.on("test", (data) => {
+  console.log("mensaje",data)
 });

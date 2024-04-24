@@ -84,6 +84,7 @@ async function login() {
             if (response.data.success) {
                 showErrors.value = false;
                 localStorage.setItem('jwt', response.data.jwt);
+                console.log('REDIRIGE A /')
                 navigateTo('/')
                 store.updateUser({
                     email: response.data.email,

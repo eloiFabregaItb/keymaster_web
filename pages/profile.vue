@@ -1,5 +1,5 @@
 <template>
-    <Modal class="text-black" v-if="isModalOpen" @close="isModalOpen = false"
+    <Modal class="text-black" v-if="isFollowersModalOpen" @close="isFollowersModalOpen = false"
         :title="`Seguidores: ${store.$state.followers.length}`">
         <div class="user-modal-info" v-for="follower in store.$state.followers">
             <ProfilePic :src="follower.profileImg" />
@@ -12,15 +12,18 @@
                 <span v-else>Siguiendo</span>
             </div>
         </div>
-        <div class="user-modal-info" v-for="follower in store.$state.followers">
-            <ProfilePic :src="follower.profileImg" />
+    </Modal>
+    <Modal class="text-black" v-if="isFriendsModalOpen" @close="isFriendsModalOpen = false"
+        :title="`Seguidos: ${store.$state.friends.length}`">
+        <div class="user-modal-info" v-for="friend in store.$state.friends">
+            <ProfilePic :src="friend.profileImg" />
             <div class="flex items-center">
-                <p class="ml-3">{{ follower.username }}</p>
+                <p class="ml-3">{{ friend.username }}</p>
             </div>
             <div class="flex items-center justify-end">
-                <button v-if="follower.followedBy == true" class="follow-button"
-                    @click="followUser(follower.username)">SEGUIR</button>
-                <span v-else>Siguiendo</span>
+                <button class="follow-button"
+                    @click="unfollowUser(friend.username)">DEJAR DE SEGUIR</button>
+                <!-- <span v-else>No te sigue</span> -->
             </div>
         </div>
     </Modal>
@@ -73,19 +76,18 @@
                             <span class="ml-2">Rank: 1230</span>
                         </div>
                     </div>
-                    <button @click="isModalOpen = true" class="followers">
+                    <button @click="isFollowersModalOpen = true" class="followers">
                         <div class="info">
                             <p>Seguidores</p>
                             <p class="text-center">{{ store.followers.length }}</p>
                         </div>
                     </button>
-                    <div class="followers">
+                    <button @click="isFriendsModalOpen = true" class="followers">
                         <div class="info">
                             <p>Seguidos</p>
                             <p class="text-center">{{ store.friends.length }}</p>
                         </div>
-                    </div>
-
+                    </button>
                 </div>
                 <button @click="confirmDeleteProfile" type="button"
                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
@@ -111,41 +113,11 @@ import ProfilePic from "~/components/ProfilePic.vue";
 import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
 import Modal from "../components/Modal.vue";
-
-
-
-
-
-
 import { socket } from "../utils/socket"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var isModalOpen = ref(false)
+var isFollowersModalOpen = ref(false)
+var isFriendsModalOpen = ref(false)
 
 
 const store = userStore()
@@ -182,7 +154,7 @@ function confirmDeleteProfile() {
         confirmButtonText: 'Sí'
     }).then((result) => {
         if (result.isConfirmed) {
-            sendDeteleEmail()
+            sendDeleteEmail()
             Swal.fire({
                 title: 'Por favor, ingresa el código que recibiste en tu correo',
                 input: 'text',
@@ -227,7 +199,7 @@ function confirmDeleteProfile() {
     });
 }
 
-function sendDeteleEmail() {
+function sendDeleteEmail() {
     axios.post('http://172.30.5.61:3000/user/delete', undefined, {
         headers: {
             Authorization: `Bearer ${jwt}`
@@ -251,24 +223,41 @@ function deleteProfile() {
 
     localStorage.removeItem('jwt')
     store.clearUser()
-    //navigateTo('/')
-
-    // /user/delete
-    // token
-
-    // /user/confirmdelete
-    // code login
 }
 
 
 function followUser(username) {
     axios.post('http://172.30.5.61:3000/user/follow', {
-        follow: username,
-        token: jwt.value,
+        follow: username
+    }, {
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
     })
     .then(response => {
-        console.log(response)
+        store.$state.followers = response.data.data.followers
+        store.$state.friends = response.data.data.friends
     })
+    .catch(error => {
+        console.error(error);
+    });
+}
+
+function unfollowUser(username) {
+    axios.post('http://172.30.5.61:3000/user/unfollow', {
+        unfollow: username
+    }, {
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    })
+    .then(response => {
+        store.$state.friends = response.data.data.friends
+        store.$state.followers = response.data.data.followers
+    })
+    .catch(error => {
+        console.error(error);
+    });
 }
 /*
                 /user/follow
