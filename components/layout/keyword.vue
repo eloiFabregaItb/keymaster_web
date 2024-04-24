@@ -14,29 +14,22 @@
         <path stroke-linecap="round" stroke-linejoin="round"
           d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
       </svg>
-      <p style="color: white;" class="pr-2 pl-2">{{ new Date().getTime() - startTimestamp }} ms</p>
-
+      <p style="color: white;" class="pr-2 pl-2">
+        {{ wpm !== Infinity ? (wpm.toFixed(2) + ' wpm') : 'Calculando...' }}
+      </p>
 
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
         class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
       </svg>
-      <p style="color: white;" class="pr-2 pl-2">30s</p>
-
-      <button>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
-          class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-        </svg>
-      </button>
+      <p style="color: white;" class="pr-2 pl-2">{{ calcularTiempoTranscurrido() }}s</p>
+      <button class="start-button" @click="startGame" @keydown="handleKeyPress">{{ gameInProgress ? 'Restart' : 'Start' }}</button>
     </div>
     <hr style="width: 95%;">
 
     <div class="bg-green-400">
 
     </div>
-
     <div class="items-start">
       <div class="text-style mt-5 mb-5 text-white">
         <div class="text-container">
@@ -53,7 +46,6 @@
           </div>
         </div>
       </div>
-      <button @keydown="handleKeyPress">Start</button>
     </div>
     <div class="keyboard text-keyword flex-col">
       <div class="row" v-for="(row, rowIndex) in keyboardLayout" :key="rowIndex">
@@ -65,121 +57,147 @@
       </div>
     </div>
     <div class="keyboard">
-    <div class="row">
-      <div class="key">Q</div>
-      <div class="key">W</div>
-      <div class="key">E</div>
-      <div class="key">R</div>
-      <div class="key">T</div>
-      <div class="key">Y</div>
-      <div class="key">U</div>
-      <div class="key">I</div>
-      <div class="key">O</div>
-      <div class="key">P</div>
+      <div class="row">
+        <div class="key">Q</div>
+        <div class="key">W</div>
+        <div class="key">E</div>
+        <div class="key">R</div>
+        <div class="key">T</div>
+        <div class="key">Y</div>
+        <div class="key">U</div>
+        <div class="key">I</div>
+        <div class="key">O</div>
+        <div class="key">P</div>
+      </div>
+      <div class="row">
+        <div class="key">A</div>
+        <div class="key">S</div>
+        <div class="key">D</div>
+        <div class="key">F</div>
+        <div class="key">G</div>
+        <div class="key">H</div>
+        <div class="key">J</div>
+        <div class="key">K</div>
+        <div class="key">L</div>
+      </div>
+      <div class="row">
+        <div class="key">Z</div>
+        <div class="key">X</div>
+        <div class="key">C</div>
+        <div class="key">V</div>
+        <div class="key">B</div>
+        <div class="key">N</div>
+        <div class="key">M</div>
+      </div>
     </div>
-    <div class="row">
-      <div class="key">A</div>
-      <div class="key">S</div>
-      <div class="key">D</div>
-      <div class="key">F</div>
-      <div class="key">G</div>
-      <div class="key">H</div>
-      <div class="key">J</div>
-      <div class="key">K</div>
-      <div class="key">L</div>
-    </div>
-    <div class="row">
-      <div class="key">Z</div>
-      <div class="key">X</div>
-      <div class="key">C</div>
-      <div class="key">V</div>
-      <div class="key">B</div>
-      <div class="key">N</div>
-      <div class="key">M</div>
-    </div>
-  </div>
   </section>
 </template>
-
-
 
 <script setup>
 import { ref } from 'vue'
 
-const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam suscipit cursus erat, convallis rutrum elit ullamcorper convallis."
-
+const text = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam suscipit cursus erat, convallis rutrum elit ullamcorper convallis.');
 const textArr = ref(splitText(text))
 const wordCount = ref(0)
 const charInWordCount = ref(0)
-const startTimestamp = ref(0)
+const startTimestamp = ref(Date.now());
 const started = ref(false)
 const errors = ref(0)
+const wpm = ref(0)
+const gameInProgress = ref(false);
 
+function startGame() {
+  if (!gameInProgress.value) {
+    startTimestamp.value = Date.now();
+    gameInProgress.value = true;
+    wordCount.value = 0;
+    charInWordCount.value = 0;
+    errors.value = 0;
+    wpm.value = 0;
+    textArr.value = splitText(text.value); // Reset the text
+  }
+}
+
+function handleRestart() {
+  gameInProgress.value = false; // Set the game as not in progress
+  // Reset all necessary variables to start the game again
+  wordCount.value = 0;
+  charInWordCount.value = 0;
+  errors.value = 0;
+  wpm.value = 0;
+  textArr.value = splitText(text.value); // Reset the text
+  startGame(); // Start the game again
+}
+
+// Función para calcular el tiempo transcurrido en segundos
+function calcularTiempoTranscurrido() {
+  return Math.floor((Date.now() - startTimestamp.value) / 1000);
+}
 
 //siguiente caracter
 function increment() {
-
+  if (!gameInProgress.value) return; // Si el juego no está en curso, salir de la función
   //ch es la posicion del siguiente caracter
-  const ch = charInWordCount.value + 1
+  const ch = charInWordCount.value + 1;
 
   if (ch > textArr.value[wordCount.value].length - 1) {
-    //si el siguiente caracter esta en la siguiente palabra
+    //si el siguiente caracter está en la siguiente palabra
 
     //inicializa el contador dentro de la palabra
-    charInWordCount.value = 0
+    charInWordCount.value = 0;
 
     // si no hay más palabras se ha acabado
     if (wordCount.value >= textArr.value.length - 1) {
-      wordCount.value = 0
-      started.value = false
-      console.log("FINISH", new Date().getTime() - startTimestamp.value);
+      started.value = false;
+      const tiempoTranscurrido = calcularTiempoTranscurrido(); // Tiempo transcurrido en segundos
+      console.log("Tiempo transcurrido:", tiempoTranscurrido, "segundos");
+      calcularWPM(); // Calcular WPM
+      return;
     } else {
       //siguiente palabra
       wordCount.value++;
     }
-
   } else {
-
     //siguiente caracter dentro de la palabra
-    charInWordCount.value = ch
+    charInWordCount.value = ch;
   }
 }
 
 // presionar tecla
 function handleKeyPress(event) {
-
-  //inicializar
+  if (!gameInProgress.value) return; // Si el juego no está en curso, salir de la función
+  // Inicializar
   if (!started.value) {
-    started.value = true
-    startTimestamp.value = new Date().getTime()
-    console.log("START")
-
-    textArr.value = splitText(text) //reiniciar los errores
+    started.value = true;
+    startTimestamp.value = Date.now();
+    console.log("START");
+    textArr.value = splitText(text.value); // Reiniciar los errores
   }
 
-  //texla
-  const key = event.key
-  const ignoreKeys = ["Shift"]
+  // Tecla
+  const key = event.key;
+  const ignoreKeys = ["Shift"];
 
   if (key === textArr.value[wordCount.value][charInWordCount.value].char) {
-    //si la texla coincide
-    increment()
-
+    // Si la tecla coincide
+    increment();
   } else if (!ignoreKeys.includes(key)) {
-    //si la tecla no coincide
-
-    //suma 1 al error
-    textArr.value[wordCount.value][charInWordCount.value].err++
-    errors.value++
+    // Si la tecla no coincide
+    textArr.value[wordCount.value][charInWordCount.value].err++;
+    errors.value++;
   }
+
+  // Calcular WPM después de un tiempo suficiente
+  setTimeout(calcularWPM, 5000); // Llamar a calcularWPM después de 5 segundos
 }
+
 
 //separa el texto en un array tipo
 //[["h","o","l","a"],[" "],["m","u","n","d","o"]]
-function splitText(text) {
+function splitText() {
   const textArr = []
 
-  const words = text.split(" ")
+  const words = text.value.split(" ")
 
   for (let i = 0; i < words.length; i++) {
     textArr.push(words[i].split("").map(x => ({ char: x, err: 0 })))
@@ -191,15 +209,19 @@ function splitText(text) {
   return textArr
 }
 
-function calcularWPM(texto, tiempo) {
-  // Contar las palabras en el texto
-  const palabras = texto.trim().split(/\s+/).length;
+// Función para calcular los WPM
+function calcularWPM() {
+  const palabras = text.value.trim().split(/\s+/).length;
+  const tiempo = Date.now() - startTimestamp.value;
 
-  // Calcular palabras por minuto
-  const minutos = tiempo / 60000; // Convertir milisegundos a minutos
-  const wpm = palabras / minutos;
-
-  return wpm.toFixed(2); // Redondear a 2 decimales
+  // Verificar si ha pasado un tiempo mínimo (por ejemplo, 5 segundos)
+  if (tiempo >= 1000) {
+    const minutos = tiempo / 60000;
+    wpm.value = palabras / minutos;
+  } else {
+    // Si no ha pasado suficiente tiempo, mostrar un mensaje o establecer un valor predeterminado
+    wpm.value = 0; // O cualquier otro valor que desees mostrar en este caso
+  }
 }
 
 </script>
@@ -278,6 +300,7 @@ body {
 
 .selected-word {
   background-color: #929292;
+
 }
 
 .selected-char {
@@ -304,6 +327,26 @@ body {
 
 
 .word span.error {
-  background-color: #ff0000;
+  background-color: #b33434;
+}
+
+.start-button {
+  color: rgb(255, 255, 255);
+  background-color: #6036d6;
+  border: none;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+}
+
+.start-button:hover {
+  background-color: white;
+  color: #6036d6;
 }
 </style>
