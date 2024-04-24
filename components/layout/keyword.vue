@@ -23,7 +23,9 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
       </svg>
       <p style="color: white;" class="pr-2 pl-2">{{ calcularTiempoTranscurrido() }}s</p>
-      <button class="start-button" @click="startGame" @keydown="handleKeyPress">{{ gameInProgress ? 'Restart' : 'Start' }}</button>
+      <button class="start-button" @keydown="handleKeyPress" @click="gameInProgress ? handleRestart() : startGame()">
+        {{ gameInProgress ? 'Restart' : 'Start' }}
+      </button>
     </div>
     <hr style="width: 95%;">
 
