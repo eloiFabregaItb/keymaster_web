@@ -16,7 +16,7 @@
               class="block py-2 px-3 text-white rounded md:p-0 dark:text-white md:dark:text-blue-500 hover:font-semibold">
               <div class="relative group flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 192 512" stroke="currentColor"
-                  stroke-width="1" class="w-5 h-5 mr-0.5 slide slide-register">
+                  stroke-width="1" class="w-5 h-5 mr-0.5 mb-0.5 slide slide-register">
                   <path stroke-linecap="round" stroke-linejoin="round"
                     d="M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32H96c17.7 0 32 14.3 32 32V448h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H64V256H32c-17.7 0-32-14.3-32-32z" />
                 </svg>
@@ -25,7 +25,7 @@
             </nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/login"
+            <nuxt-link to="/ranking"
               class="block py-2 px-3 text-white rounded md:p-0 dark:text-white md:dark:text-blue-500 hover:font-semibold">
               <div class="relative group flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 576 512" stroke="currentColor"
@@ -34,6 +34,19 @@
                     d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z" />
                 </svg>
                 <span class="text inline-block hidden group-hover:inline-block">Ranking</span>
+              </div>
+            </nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/login"
+              class="block py-2 px-3 text-white rounded md:p-0 dark:text-white md:dark:text-blue-500 hover:font-semibold">
+              <div class="relative group flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6"
+                  stroke="currentColor" class="w-7 h-7 mr-0.5 slide">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                </svg>
+                <span class="text inline-block hidden group-hover:inline-block">Guide</span>
               </div>
             </nuxt-link>
           </li>
