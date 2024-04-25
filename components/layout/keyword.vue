@@ -14,18 +14,14 @@
         <path stroke-linecap="round" stroke-linejoin="round"
           d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
       </svg>
-      <p style="color: white;" class="pr-2 pl-2">
-        {{ wpm !== Infinity ? (wpm.toFixed(2) + ' wpm') : 'Calculando...' }}
-      </p>
+      <p style="color: white;" class="pr-2 pl-2">{{ wpm.value }} wpm</p>
 
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
         class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
       </svg>
       <p style="color: white;" class="pr-2 pl-2">{{ calcularTiempoTranscurrido() }}s</p>
-      <button class="start-button" @keydown="handleKeyPress" @click="gameInProgress ? handleRestart() : startGame()">
-        {{ gameInProgress ? 'Restart' : 'Start' }}
-      </button>
+      <button class="start-button" @keydown="handleKeyPress" @click="startGame">Start</button>
     </div>
     <hr style="width: 95%;">
 
@@ -59,140 +55,125 @@
       </div>
     </div>
     <div class="keyboard">
-      <div class="row">
-        <div class="key">Q</div>
-        <div class="key">W</div>
-        <div class="key">E</div>
-        <div class="key">R</div>
-        <div class="key">T</div>
-        <div class="key">Y</div>
-        <div class="key">U</div>
-        <div class="key">I</div>
-        <div class="key">O</div>
-        <div class="key">P</div>
-      </div>
-      <div class="row">
-        <div class="key">A</div>
-        <div class="key">S</div>
-        <div class="key">D</div>
-        <div class="key">F</div>
-        <div class="key">G</div>
-        <div class="key">H</div>
-        <div class="key">J</div>
-        <div class="key">K</div>
-        <div class="key">L</div>
-      </div>
-      <div class="row">
-        <div class="key">Z</div>
-        <div class="key">X</div>
-        <div class="key">C</div>
-        <div class="key">V</div>
-        <div class="key">B</div>
-        <div class="key">N</div>
-        <div class="key">M</div>
-      </div>
+      <Keyboard />
     </div>
   </section>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import Keyboard from '~/components/layout/keyboard.vue';
 
 const text = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam suscipit cursus erat, convallis rutrum elit ullamcorper convallis.');
+
 const textArr = ref(splitText(text))
 const wordCount = ref(0)
 const charInWordCount = ref(0)
-const startTimestamp = ref(Date.now());
+const startTimestamp = ref(null);
 const started = ref(false)
 const errors = ref(0)
-const wpm = ref(0)
-const gameInProgress = ref(false);
+const wpm = ref(0);
+textArr.value = splitText(text.value);
 
+// Función para iniciar el juego
 function startGame() {
-  if (!gameInProgress.value) {
+  // Restablecer los valores y el texto
+  if (!started.value) {
     startTimestamp.value = Date.now();
-    gameInProgress.value = true;
     wordCount.value = 0;
     charInWordCount.value = 0;
     errors.value = 0;
     wpm.value = 0;
-    textArr.value = splitText(text.value); // Reset the text
+    textArr.value = splitText(text.value); // Resetear el texto
+    started.value = true; // Establecer el estado de inicio a verdadero
   }
+  calcularWPM(); // Calcular WPM después de iniciar el juego
 }
 
-function handleRestart() {
-  gameInProgress.value = false; // Set the game as not in progress
-  // Reset all necessary variables to start the game again
-  wordCount.value = 0;
-  charInWordCount.value = 0;
-  errors.value = 0;
-  wpm.value = 0;
-  textArr.value = splitText(text.value); // Reset the text
-  startGame(); // Start the game again
-}
-
-// Función para calcular el tiempo transcurrido en segundos
 function calcularTiempoTranscurrido() {
+  if (startTimestamp.value === null) {
+    return 0;
+  }
   return Math.floor((Date.now() - startTimestamp.value) / 1000);
 }
 
+// Función para calcular las palabras por minuto (WPM)
+function calcularWPM() {
+  const tiempo = calcularTiempoTranscurrido();
+
+  // Verificar si ha pasado un tiempo mínimo (por ejemplo, 1 minuto)
+  if (tiempo >= 60) {
+    const minutos = tiempo / 60;
+    wpm.value = Math.round(wordCount.value / minutos);
+  } else {
+    // Si no ha pasado suficiente tiempo, establecer WPM a 0
+    wpm.value = 0;
+  }
+}
+
+// Llamada a la función calcularWPM
+calcularWPM();
+console.log(wpm.value); // Imprime las WPM en la consola
+
 //siguiente caracter
 function increment() {
-  if (!gameInProgress.value) return; // Si el juego no está en curso, salir de la función
+
   //ch es la posicion del siguiente caracter
-  const ch = charInWordCount.value + 1;
+  const ch = charInWordCount.value + 1
 
   if (ch > textArr.value[wordCount.value].length - 1) {
-    //si el siguiente caracter está en la siguiente palabra
+    //si el siguiente caracter esta en la siguiente palabra
 
     //inicializa el contador dentro de la palabra
-    charInWordCount.value = 0;
+    charInWordCount.value = 0
 
     // si no hay más palabras se ha acabado
     if (wordCount.value >= textArr.value.length - 1) {
-      started.value = false;
-      const tiempoTranscurrido = calcularTiempoTranscurrido(); // Tiempo transcurrido en segundos
-      console.log("Tiempo transcurrido:", tiempoTranscurrido, "segundos");
-      calcularWPM(); // Calcular WPM
-      return;
+      wordCount.value = 0
+      started.value = false
+      console.log("FINISH", new Date().getTime() - startTimestamp.value);
     } else {
+
       //siguiente palabra
       wordCount.value++;
     }
+
   } else {
+
     //siguiente caracter dentro de la palabra
-    charInWordCount.value = ch;
+    charInWordCount.value = ch
   }
 }
-
 // presionar tecla
 function handleKeyPress(event) {
-  if (!gameInProgress.value) return; // Si el juego no está en curso, salir de la función
-  // Inicializar
+  //inicializar
   if (!started.value) {
-    started.value = true;
-    startTimestamp.value = Date.now();
-    console.log("START");
-    textArr.value = splitText(text.value); // Reiniciar los errores
+    started.value = true
+    startTimestamp.value = new Date().getTime()
+    console.log("START")
+
+    textArr.value = splitText(); // Corregir llamada a la función splitText()
+    // Iniciar el juego si no ha comenzado
+    startGame();
   }
 
-  // Tecla
-  const key = event.key;
-  const ignoreKeys = ["Shift"];
+  //texto
+  const key = event.key
+  const ignoreKeys = ["Shift"]
 
   if (key === textArr.value[wordCount.value][charInWordCount.value].char) {
-    // Si la tecla coincide
-    increment();
+    //si la tecla coincide
+    increment()
+
   } else if (!ignoreKeys.includes(key)) {
-    // Si la tecla no coincide
-    textArr.value[wordCount.value][charInWordCount.value].err++;
-    errors.value++;
+    //si la tecla no coincide
+
+    //suma 1 al error
+    textArr.value[wordCount.value][charInWordCount.value].err++
+    errors.value++
   }
-
-  // Calcular WPM después de un tiempo suficiente
-  setTimeout(calcularWPM, 5000); // Llamar a calcularWPM después de 5 segundos
+  calcularWPM(); // Calcular WPM después de cada pulsación de tecla
 }
-
 
 //separa el texto en un array tipo
 //[["h","o","l","a"],[" "],["m","u","n","d","o"]]
@@ -210,24 +191,7 @@ function splitText() {
 
   return textArr
 }
-
-// Función para calcular los WPM
-function calcularWPM() {
-  const palabras = text.value.trim().split(/\s+/).length;
-  const tiempo = Date.now() - startTimestamp.value;
-
-  // Verificar si ha pasado un tiempo mínimo (por ejemplo, 5 segundos)
-  if (tiempo >= 1000) {
-    const minutos = tiempo / 60000;
-    wpm.value = palabras / minutos;
-  } else {
-    // Si no ha pasado suficiente tiempo, mostrar un mensaje o establecer un valor predeterminado
-    wpm.value = 0; // O cualquier otro valor que desees mostrar en este caso
-  }
-}
-
 </script>
-
 
 <style scoped>
 @font-face {
