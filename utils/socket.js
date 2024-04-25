@@ -1,49 +1,54 @@
-import { reactive } from "vue";
-import { io } from "socket.io-client";
-import { api_ip } from "~/constants";
+// import { reactive } from "vue";
+// import { io } from "socket.io-client";
+// import { api_ip } from "~/constants";
+// import { userStore } from '../storages/userStore.js'
 
-export const state = reactive({
-  connected: false,
-  fooEvents: [],
-  barEvents: []
-});
+// // const store = userStore()
+// // var jwt = store.$state.jwt
 
-var token = ""//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3JfaWQiOjQyLCJpYXQiOjE3MTM4ODMxNzksImV4cCI6MTcxNDkxOTk3OX0.JUbVQjWn-qQSruE7lxpzvJR3UDnTYP1VYTj4Y40wuKc"
+// export const state = reactive({
+//   connected: false,
+//   fooEvents: [],
+//   barEvents: []
+// });
 
-export const socket = io(api_ip,{
-    transports: ['websocket'],
-    auth: {
-        token: token,
-    }
-});
+// var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3JfaWQiOjQyLCJpYXQiOjE3MTM4ODMxNzksImV4cCI6MTcxNDkxOTk3OX0.JUbVQjWn-qQSruE7lxpzvJR3UDnTYP1VYTj4Y40wuKc"
+// // var token = jwt
 
-socket.emit("test", {msg: "hello"})
+// export const socket = io(api_ip,{
+//     transports: ['websocket'],
+//     auth: {
+//         token: token,
+//     }
+// });
 
-socket.on("connect", () => {
-  state.connected = true;
-});
+// socket.emit("test", {msg: "hello"})
 
-socket.on("disconnect", () => {
-  state.connected = false;
-});
+// socket.on("connect", () => {
+//   state.connected = true;
+// });
 
-socket.on("foo", (...args) => {
-  console.log(args)
-  state.fooEvents.push(args);
-});
+// socket.on("disconnect", () => {
+//   state.connected = false;
+// });
 
-socket.on("bar", (...args) => {
-  state.barEvents.push(args);
-});
+// socket.on("foo", (...args) => {
+//   console.log(args)
+//   state.fooEvents.push(args);
+// });
 
-socket.on("login notification", (data) => {
-  console.log("ha iniciado sesion",data)
-});
+// socket.on("bar", (...args) => {
+//   state.barEvents.push(args);
+// });
 
-socket.on("logout notification", (data) => {
-  console.log("cierra sesion",data)
-});
+// socket.on("login notification", (data) => {
+//   console.log("ha iniciado sesion",data)
+// });
 
-socket.on("test", (data) => {
-  console.log("mensaje",data)
-});
+// socket.on("logout notification", (data) => {
+//   console.log("cierra sesion",data)
+// });
+
+// socket.on("test", (data) => {
+//   console.log("mensaje",data)
+// });
