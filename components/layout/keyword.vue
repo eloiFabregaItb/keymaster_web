@@ -237,35 +237,8 @@ body {
   margin-bottom: 5px;
 }
 
-.key {
-  width: 70px;
-  height: 70px;
-  background-color: #ccc;
-  border: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.1s ease;
-}
-
-.space-key {
-  flex-grow: 3;
-}
-
-.backspace-key {
-  flex-grow: 0.25;
-}
-
-.key-active {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-}
-
 .selected-word {
-  background-color: #929292;
+  background-color: #97979783;
 
 }
 
