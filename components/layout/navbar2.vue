@@ -1,5 +1,5 @@
 <script setup>
-
+import { api_ip } from '~/constants';
 import moment from 'moment';
 import { userStore } from '../storages/userStore.js'
 import axios from "axios"
@@ -42,7 +42,7 @@ function showHideNotifications() {
   mostrarModalNotificaciones.value = !mostrarModalNotificaciones.value
   if(mostrarModalNotificaciones.value){
     const ids = store.$state.notifications.map(x=>x.id)
-    axios.post('http://172.30.5.61:3000/notifications/seen', {
+    axios.post(`http://${api_ip}/notifications/seen`, {
         ids: ids
     }, {
         headers: {
@@ -91,7 +91,7 @@ function executeAction(requireToken, url) {
         <ul
           class="info-ranking font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-transparent md:dark:bg-transparent dark:border-gray-700">
           <li>
-            <nuxt-link to="/register"
+            <nuxt-link to="/info"
               class="block py-2 px-3 text-white rounded md:p-0 dark:text-white md:dark:text-blue-500 hover:font-semibold">
               <div class="relative group flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 192 512" stroke="currentColor"

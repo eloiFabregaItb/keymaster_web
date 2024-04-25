@@ -82,6 +82,7 @@
 
 <script setup>
 import axios from "axios"
+import { api_ip } from "~/constants";
 var page = ref(1)
 var usernameOrEmail = ref("")
 var hiddenEmail = ref("")
@@ -97,7 +98,7 @@ async function sendMail() {
     } else {
         showErrors.value = false
         errMsg.value = ""
-        axios.post('http://172.30.5.61:3000/auth/forgotten', {
+        axios.post(`http://${api_ip}/auth/forgotten`, {
             login: usernameOrEmail.value,
         })
             .then(response => {
@@ -114,7 +115,7 @@ async function sendMail() {
     }
 }
 async function sendCode() {
-    axios.post('http://172.30.5.61:3000/auth/checkforgotten', {
+    axios.post(`http://${api_ip}/auth/checkforgotten`, {
         login: usernameOrEmail.value,
         code: mailCode.value
     })
@@ -150,15 +151,14 @@ async function sendNewPassword() {
     }
     showErrors.value = false
     errMsg.value = ""
-    axios.post('http://172.30.5.61:3000/auth/changepassword', {
+    axios.post(`http://${api_ip}/auth/changepassword`, {
         login: usernameOrEmail.value,
         code: mailCode.value,
         password: password.value
     })
         .then(response => {
             if (response.data.success) {
-                console.log('CONTRASEÑA CAMBIADA CORRECTAMENTE')
-                // todo redirigir al login
+                navigateTo('/login')
             }
         })
 }

@@ -40,6 +40,11 @@ export const userStore = defineStore({
       this.followers = followers,
       this.notifications = notifications
     },
+    updateOnlineFriends(id, isOnline) {
+      console.log("entra funcion actualizar")
+      const friend = this.friends.find(x => x.id == id)
+      friend.online = isOnline
+    },
     clearUser() {
       this.email = '';
       this.username = '';

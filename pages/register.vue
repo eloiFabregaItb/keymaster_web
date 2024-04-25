@@ -76,6 +76,7 @@
 </template>
 
 <script setup>
+import { api_ip } from "~/constants";
 import { getErrorFromResponse } from "../utils/errors"
 import axios from "axios"
 var username = ref("")
@@ -118,7 +119,7 @@ async function register() {
         return;
     }
 
-    axios.post('http://172.30.5.61:3000/auth/register', {
+    axios.post(`http://${api_ip}/auth/register`, {
         username: username.value,
         email: email.value,
         password: password.value

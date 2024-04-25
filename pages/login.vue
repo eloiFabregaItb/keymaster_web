@@ -7,7 +7,6 @@
             </p>
         </div>
 
-
         <div class="flex justify-center self-center z-10">
             <div class="p-12 bg-white mx-auto rounded-3xl w-96 flex-column gap-5">
                 <div class="mb-7 text-center">
@@ -26,19 +25,12 @@
                             type="email" placeholder="Introduce tu nickname o correo" v-model="user">
                     </div>
 
-
                     <p class="text-lg font-semibold">Contraseña</p>
                     <PasswordInput v-model="password" />
-
-
-                    <!-- {{ user }}
-                    {{ password }}
-                    {{ showErrors }} -->
 
                     <div v-if="showErrors">
                         <p class="text-red-600">{{ errMsg }}</p>
                     </div>
-
 
                     <div>
                         <button type="submit" @click="login()"
@@ -63,9 +55,13 @@
 </template>
 
 <script setup>
+import { api_ip } from "~/constants";
 import PasswordInput from "../components/PasswordInput.vue"
 import axios from "axios"
 import { userStore } from '../storages/userStore.js'
+//import { handleLoginSocket } from "~/composables/useSocket";
+
+const emit = defineEmits(["login"])
 
 const store = userStore()
 
@@ -76,21 +72,21 @@ var showErrors = ref(false)
 var errMsg = ref("")
 
 async function login() {
-    axios.post('http://172.30.5.61:3000/auth/login', {
+    axios.post(`http://${api_ip}/auth/login`, {
         login: user.value,
         password: password.value
     })
         .then(response => {
+            console.log(response)
             if (response.data.success) {
                 showErrors.value = false;
                 localStorage.setItem('jwt', response.data.jwt);
-                console.log('REDIRIGE A /')
+                //handleLoginSocket(response.data.jwt)
                 navigateTo('/')
                 store.updateUser({
                     email: response.data.email,
                     username: response.data.username,
                     profileImg: response.data.profileImg,
-                    //profileImg: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
                     emailVerified: response.data.emailVerified,
                     jwt: response.data.jwt,
                     isLogged: true,
@@ -111,9 +107,7 @@ async function login() {
             }
         });
 }
-
 </script>
-
 
 <style scoped>
 #login {
