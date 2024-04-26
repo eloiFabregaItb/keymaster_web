@@ -1,7 +1,9 @@
 <template>
     <section id="login">
         <div class="h-dvh flex flex-col justify-center items-center text-style mt-5 mb-5 text-white">
-            <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
+            <nuxt-link to="/">
+                <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
+            </nuxt-link>
             <p class="welcome"> <strong>¡Bienvenido, Master!</strong> ¿Has notado una mejora en tus habilidades? Seguro
                 que sí. <strong>¡Así que sigamos con ello!</strong>
             </p>
@@ -53,7 +55,7 @@
 
                         </div>
                     </div>
-                    
+
 
                     <!-- {{ user }}
                     {{ password }}
@@ -157,5 +159,4 @@ async function login() {
     text-align: left;
     padding-left: 14rem;
 }
-
 </style>
