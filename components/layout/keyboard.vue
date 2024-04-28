@@ -472,9 +472,5 @@ rect {
 
 .key-pressed {
   background-color: rgb(231, 231, 231);
-  font-family: 'JetBrains Mono';
-  src: url('~/assets/fonts/JetBrainsMonoNL-SemiBold.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
 }
 </style>
