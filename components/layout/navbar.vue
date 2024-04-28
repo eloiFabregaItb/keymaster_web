@@ -11,7 +11,7 @@
         <ul
           class="info-ranking font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-transparent md:dark:bg-transparent dark:border-gray-700">
           <li>
-            <nuxt-link to="/register"
+            <nuxt-link to="/info"
               class="block py-2 px-3 text-white rounded md:p-0 dark:text-white md:dark:text-blue-500 hover:font-semibold">
               <div class="relative group flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 192 512" stroke="currentColor"
@@ -37,7 +37,7 @@
             </nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/login"
+            <nuxt-link to="/guide"
               class="block py-2 px-3 text-white rounded md:p-0 dark:text-white md:dark:text-blue-500 hover:font-semibold">
               <div class="relative group flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6"
