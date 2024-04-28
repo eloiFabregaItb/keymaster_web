@@ -78,15 +78,15 @@
             text-anchor="middle" dominant-baseline="middle" direction="ltr">=</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Question' }" data-key="Question">
-        <svg class="key-size" x="440" y="0" width="38" height="38" data-key="Question">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Minus' }" data-key="Minus">
+        <svg class="key-size" x="440" y="0" width="38" height="38" data-key="Minus">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">'</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">?</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'React' }" data-key="React">
-        <svg class="key-size" x="480" y="0" width="38" height="38" data-key="React">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Equal' }" data-key="Equal">
+        <svg class="key-size" x="480" y="0" width="38" height="38" data-key="Equal">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">¡</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">¿</text>
@@ -244,8 +244,8 @@
             text-anchor="middle" dominant-baseline="middle" direction="ltr">L</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyÑ' }" data-key="KeyÑ">
-        <svg class="key-size" x="430" y="80" width="38" height="38" data-key="KeyÑ">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Semicolon' }" data-key="Semicolon">
+        <svg class="key-size" x="430" y="80" width="38" height="38" data-key="Semicolon">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">Ñ</text>
         </svg>
@@ -258,8 +258,8 @@
           <text x="24" y="27" text-anchor="middle" dominant-baseline="middle" direction="ltr">{</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyÇ' }" data-key="KeyÇ">
-        <svg class="key-size" x="470" y="80" width="38" height="38" data-key="KeyÇ">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Backslash' }" data-key="Backslash">
+        <svg class="key-size" x="470" y="80" width="38" height="38" data-key="Backslash">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">Ç</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">}</text>
@@ -280,8 +280,8 @@
             text-anchor="start" dominant-baseline="middle" direction="ltr">Shift</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Antilambda' }" data-key="Antilambda">
-        <svg class="key-size" x="370" y="120" width="38" height="38" data-key="Antilambda">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'IntlBackslash' }" data-key="IntlBackslash">
+        <svg class="key-size" x="370" y="120" width="38" height="38" data-key="IntlBackslash">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">
             < </text><text x="10" y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr"> > </text>
@@ -317,7 +317,7 @@
             text-anchor="middle" dominant-baseline="middle" direction="ltr">B</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyÑ' }" data-key="KeyN">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyN' }" data-key="KeyN">
         <svg class="key-size" x="290" y="120" width="38" height="38" data-key="KeyN">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">N</text>
@@ -336,15 +336,15 @@
             text-anchor="middle" dominant-baseline="middle" direction="ltr">;</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Point' }" data-key="Point">
-        <svg class="key-size" x="410" y="120" width="38" height="38" data-key="Point">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Period' }" data-key="Period">
+        <svg class="key-size" x="410" y="120" width="38" height="38" data-key="Period">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">.</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">:</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Dash' }" data-key="Dash">
-        <svg class="key-size" x="450" y="120" width="38" height="38" data-key="Dash">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Slash' }" data-key="Slash">
+        <svg class="key-size" x="450" y="120" width="38" height="38" data-key="Slash">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">-</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">_</text>
@@ -471,10 +471,10 @@ rect {
 }
 
 .key-pressed {
-  background-color: white;
-}
-
-.shift-pressed {
-  background-color: yellow;
+  background-color: rgb(231, 231, 231);
+  font-family: 'JetBrains Mono';
+  src: url('~/assets/fonts/JetBrainsMonoNL-SemiBold.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
 }
 </style>
