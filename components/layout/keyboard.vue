@@ -29,79 +29,78 @@
           <text x="10" y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr">#</text>
         </svg>
       </div>
-      <div class="key" data-key="Digit4">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit4' }" data-key="Digit4">
         <svg class="key-size" x="160" y="0" width="38" height="38" data-key="Digit4">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">4</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">$</text>
         </svg>
       </div>
-      <div class="key" data-key="Digit5">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit5' }" data-key="Digit5">
         <svg class="key-size" x="200" y="0" width="38" height="38" data-key="Digit5">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">5</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">%</text>
         </svg>
       </div>
-      <div class="key" data-key="Digit6">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit6' }" data-key="Digit6">
         <svg class="key-size" x="240" y="0" width="38" height="38" data-key="Digit6">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">6</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">%</text>
         </svg>
       </div>
-      <div class="key" data-key="Digit7">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit7' }" data-key="Digit7">
         <svg class="key-size" x="280" y="0" width="38" height="38" data-key="Digit7">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">7</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">/</text>
         </svg>
       </div>
-      <div class="key" data-key="Digit8">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit8' }" data-key="Digit8">
         <svg class="key-size" x="320" y="0" width="38" height="38" data-key="Digit8">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">8</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">(</text>
         </svg>
       </div>
-      <div class="key" data-key="Digit9">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit9' }" data-key="Digit9">
         <svg class="key-size" x="360" y="0" width="38" height="38" data-key="Digit9">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">9</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">)</text>
         </svg>
       </div>
-      <div class="key" data-key="Digit0">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit0' }" data-key="Digit0">
         <svg class="key-size" x="400" y="0" width="38" height="38" data-key="Digit0">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">0</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">=</text>
         </svg>
       </div>
-      <div class="key" data-key="Question">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Question' }" data-key="Question">
         <svg class="key-size" x="440" y="0" width="38" height="38" data-key="Question">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">'</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">?</text>
         </svg>
       </div>
-      <div class="key" data-key="React">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'React' }" data-key="React">
         <svg class="key-size" x="480" y="0" width="38" height="38" data-key="React">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">¡</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">¿</text>
         </svg>
       </div>
-      <div class="key" data-key="Backspace">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Backspace' }" data-key="Backspace">
         <svg class="key-size" x="520" y="0" width="78" height="38" data-key="Backspace">
           <rect class="key-size" fill="none" x="0" y="0" width="78" height="38"></rect><text x="10" y="20"
             text-anchor="start" dominant-baseline="middle" direction="ltr">Del</text>
         </svg>
       </div>
     </div>
-
     <div class="row">
-      <div class="key" data-key="Tab">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Tab' }" data-key="Tab">
         <svg class="key-size" x="0" y="40" width="58" height="38" data-key="Tab">
           <rect class="key-size" fill="none" x="0" y="0" width="58" height="38"></rect><text x="10" y="20"
             text-anchor="start" dominant-baseline="middle" direction="ltr">Tab</text>
@@ -174,7 +173,7 @@
             text-anchor="middle" dominant-baseline="middle" direction="ltr">^</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="BracketRight">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'BracketRight' }" data-key="BracketRight">
         <svg class="key-size" x="500" y="40" width="38" height="38" data-key="BracketRight">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">+</text><text x="10" y="12"
@@ -185,7 +184,7 @@
     </div>
 
     <div class="row">
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="CapsLock">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'CapsLock' }" data-key="CapsLock">
         <svg class="key-size" x="0" y="80" width="68" height="38" data-key="CapsLock">
           <rect class="key-size" fill="none" x="0" y="0" width="68" height="38"></rect><text x="10" y="20"
             text-anchor="start" dominant-baseline="middle" direction="ltr">Mayus</text>
@@ -211,9 +210,8 @@
       </div>
       <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyF' }" data-key="KeyF">
         <svg class="key-size" x="190" y="80" width="38" height="38" data-key="KeyF">
-          <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect>
-          <circle class="jRTd41lToD" cx="19" cy="33" r="3"></circle><text x="10" y="12" text-anchor="middle"
-            dominant-baseline="middle" direction="ltr">F</text>
+          <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
+            text-anchor="middle" dominant-baseline="middle" direction="ltr">F</text>
         </svg>
       </div>
       <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyG' }" data-key="KeyG">
@@ -230,9 +228,8 @@
       </div>
       <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyJ' }" data-key="KeyJ">
         <svg class="key-size" x="310" y="80" width="38" height="38" data-key="KeyJ">
-          <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect>
-          <circle class="jRTd41lToD" cx="19" cy="33" r="3"></circle><text x="10" y="12" text-anchor="middle"
-            dominant-baseline="middle" direction="ltr">J</text>
+          <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
+            text-anchor="middle" dominant-baseline="middle" direction="ltr">J</text>
         </svg>
       </div>
       <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyK' }" data-key="KeyK">
@@ -339,21 +336,21 @@
             text-anchor="middle" dominant-baseline="middle" direction="ltr">;</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="Point">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Point' }" data-key="Point">
         <svg class="key-size" x="410" y="120" width="38" height="38" data-key="Point">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">.</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">:</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="Dash">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'Dash' }" data-key="Dash">
         <svg class="key-size" x="450" y="120" width="38" height="38" data-key="Dash">
           <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">-</text><text x="10" y="12"
             text-anchor="middle" dominant-baseline="middle" direction="ltr">_</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="ShiftRight">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'ShiftRight' }" data-key="ShiftRight">
         <svg class="key-size" x="490" y="120" width="108" height="38" data-key="ShiftRight">
           <rect class="key-size" fill="none" x="0" y="0" width="108" height="38"></rect><text x="10" y="20"
             text-anchor="start" dominant-baseline="middle" direction="ltr">Shift</text>
@@ -362,30 +359,30 @@
     </div>
 
     <div class="row">
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="ControlLeft">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'ControlLeft' }" data-key="ControlLeft">
         <svg class="key-size" x="0" y="160" width="58" height="38" data-key="ControlLeft">
           <rect class="key-size" fill="none" x="0" y="0" width="58" height="38"></rect><text x="10" y="20"
             text-anchor="start" dominant-baseline="middle" direction="ltr">Ctrl</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="AltLeft">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'AltLeft' }" data-key="AltLeft">
         <svg x="60" y="160" width="58" height="38" data-key="AltLeft">
           <rect class="key-size" fill="none" x="0" y="0" width="58" height="38"></rect><text x="10" y="20"
             text-anchor="start" dominant-baseline="middle" direction="ltr">Alt</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Space' }" data-key="Space">
+      <div class="key-space" :class="{ 'key-pressed': pressedKey === 'Space' }" data-key="Space">
         <svg class="key-size" x="120" y="160" width="358" height="38" data-key="Space">
           <rect class="key-size" fill="none" x="0" y="0" width="358" height="38"></rect>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="AltRight">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'AltRight' }" data-key="AltRight">
         <svg class="key-size" x="480" y="160" width="58" height="38" data-key="AltRight">
           <rect class="key-size" fill="none" x="0" y="0" width="58" height="38"></rect><text x="10" y="20"
             text-anchor="start" dominant-baseline="middle" direction="ltr">AltG</text>
         </svg>
       </div>
-      <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="ControlRight">
+      <div class="key" :class="{ 'key-pressed': pressedKey === 'ControlRight' }" data-key="ControlRight">
         <svg class="key-size" x="540" y="160" width="58" height="38" data-key="ControlRight">
           <rect class="key-size" fill="none" x="0" y="0" width="58" height="38"></rect><text x="10" y="20"
             text-anchor="start" dominant-baseline="middle" direction="ltr">Ctrl</text>
@@ -395,29 +392,35 @@
   </div>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue';
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
 
-export default {
-  setup() {
-    const pressedKey = ref(null);
-    const keyboardRef = ref(null);
+const pressedKey = ref(null);
+const shiftPressed = ref(false);
 
-    const handleKeyDown = (event) => {
-      pressedKey.value = event.code;
-    };
-
-    const handleKeyUp = () => {
-      pressedKey.value = null;
-    };
-
-    onMounted(() => {
-      keyboardRef.value.focus();
-    });
-
-    return { pressedKey, handleKeyDown, handleKeyUp, keyboardRef };
-  },
+const handleKeyDown = (event) => {
+  pressedKey.value = event.code;
+  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    shiftPressed.value = true;
+  }
 };
+
+const handleKeyUp = (event) => {
+  pressedKey.value = null;
+  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    shiftPressed.value = false;
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown);
+  window.addEventListener('keyup', handleKeyUp);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDown);
+  window.removeEventListener('keyup', handleKeyUp);
+});
 </script>
 
 <style>
@@ -436,8 +439,24 @@ export default {
   height: 65px;
   color: black;
   border: 1px solid #000000;
-  background-color: #ccc;
-  border: 1px solid #ccc;
+  background-color: #919191;
+  border: 1px solid #919191;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.key-space {
+  width: 358px;
+  height: 65px;
+  color: black;
+  border: 1px solid #000000;
+  background-color: #919191;
+  border: 1px solid #919191;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -452,6 +471,10 @@ rect {
 }
 
 .key-pressed {
-  background-color: #999;
+  background-color: white;
+}
+
+.shift-pressed {
+  background-color: yellow;
 }
 </style>

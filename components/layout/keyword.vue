@@ -34,10 +34,10 @@
           <div v-for="(word, index) in textArr" :key="index" class="word"
             :class="{ 'selected-word': index === wordCount }">
             <span v-for="(char, charIndex) in word" :key="charIndex" :class="{
-              'selected-char': index === wordCount && charIndex === charInWordCount,
-              'error': char.err,
-              'space-dot': char.show === '·'
-            }">
+        'selected-char': index === wordCount && charIndex === charInWordCount,
+        'error': char.err,
+        'space-dot': char.show === '·'
+      }">
               {{ char.show || char.char }}
             </span>
 
