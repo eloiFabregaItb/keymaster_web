@@ -299,6 +299,7 @@ onUnmounted(() => {
     justify-content: center;
     align-items: center;
     max-height: 100vh;
+    color: white;
 }
 
 .container {
@@ -326,6 +327,9 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid white;
 }
 
 .q-svg {
@@ -337,6 +341,11 @@ onUnmounted(() => {
 h1 {
     font-size: 2rem;
     text-align: center;
+    color: white;
+    font-family: 'JetBrains Mono';
+  src: url('~/assets/fonts/JetBrainsMonoNL-Semibold.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
 }
 
 .lista {
