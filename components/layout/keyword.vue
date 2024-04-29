@@ -1,7 +1,5 @@
 <template>
-  <div class="flex items-center justify-end pt-16">
-  </div>
-  <section class="game mx-24 mt-16">
+  <section class="game mx-24">
     <div class="flex items-center justify-end pr-20 pb-2">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
         class="w-6 h-6">
@@ -263,7 +261,6 @@ body {
   display: block;
   padding: 0 2px;
 }
-
 
 .word span.error {
   background-color: #b33434;

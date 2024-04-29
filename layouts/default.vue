@@ -3,7 +3,7 @@ import "../assets/css/main.css"
 </script>
 
 <template>
-  <div id="fondo" class="h-screen">
+  <div id="fondo">
     <slot />
   </div>
 </template>
@@ -12,6 +12,5 @@ import "../assets/css/main.css"
 #fondo {
   /* height: 100% !important; */
   background: linear-gradient(#000000, #43219B);
-  overflow: hidden;
 }
 </style>

@@ -201,6 +201,12 @@ function validatePassword(password = "") {
 
 
 <style scoped>
+section {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* Añadido overflow-y: hidden; */
+}
+
 #register {
     display: grid;
     grid-template-columns: 5fr 3fr;
