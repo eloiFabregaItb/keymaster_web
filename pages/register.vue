@@ -1,6 +1,6 @@
 <template>
     <section id="register">
-        <div class="h-dvh flex flex-col justify-center items-center text-style mt-5 mb-5 text-white">
+        <div class="h-dvh flex flex-col justify-center items-center text-style text-white">
             <nuxt-link to="/">
                 <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
             </nuxt-link>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="space-y-6">
                     <div>
-                        <p class="text-lg font-semibold">Nickname</p>
+                        <p class="text-lg font-semibold text-black">Nickname</p>
                         <input v-model="username"
                             class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
                             type="text" placeholder="Introduce tu nickname">
@@ -26,7 +26,7 @@
 
 
                     <div>
-                        <p class="text-lg font-semibold">Correo</p>
+                        <p class="text-lg font-semibold text-black">Correo</p>
                         <input v-model="email"
                             class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
                             type="email" placeholder="Introduce tu correo">
@@ -34,7 +34,7 @@
                     <!-- {{ email }} -->
 
                     <div>
-                        <p class="text-lg font-semibold">Contraseña</p>
+                        <p class="text-lg font-semibold text-black">Contraseña</p>
                         <input v-model="password"
                             class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
                             type="text" placeholder="Introduce tu contraseña">
@@ -42,7 +42,7 @@
                     <!-- {{ password }} -->
 
                     <div>
-                        <p class="text-lg font-semibold">Confirmar contraseña</p>
+                        <p class="text-lg font-semibold text-black">Confirmar contraseña</p>
                         <input v-model="confirmPassword"
                             class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
                             type="text" placeholder="Confirma tu contraseña">

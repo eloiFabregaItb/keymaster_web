@@ -294,10 +294,6 @@ onUnmounted(() => {
 </script>
 
 <style>
-body {
-    color: white;
-}
-
 .page-container {
     display: flex;
     justify-content: center;

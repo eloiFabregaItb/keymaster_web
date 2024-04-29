@@ -1,6 +1,6 @@
 <template>
     <section id="login">
-        <div class="h-dvh flex flex-col justify-center items-center text-style mt-5 mb-5 text-white">
+        <div class="h-dvh flex flex-col justify-center items-center text-style text-white">
             <nuxt-link to="/">
                 <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
             </nuxt-link>
