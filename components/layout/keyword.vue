@@ -1,4 +1,6 @@
 <template>
+  <div class="flex items-center justify-end pt-16">
+    </div>
   <section class="game mx-24">
     <div class="flex items-center justify-end pr-20 pb-2">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
@@ -40,15 +42,6 @@
             </span>
 
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="keyboard text-keyword flex-col">
-      <div class="row" v-for="(row, rowIndex) in keyboardLayout" :key="rowIndex">
-        <div v-for="(key, keyIndex) in row" :key="keyIndex"
-          :class="['key', { 'key-active': activeKey === key.toLowerCase() || activeKey === key.toUpperCase(), 'key-pressed': pressedKeys[key.toLowerCase()] }, { 'space-key': key === 'Space' }, { 'backspace-key': key === 'Backspace' }]"
-          @click="handleKeyClick(key)">
-          {{ key }}
         </div>
       </div>
     </div>
@@ -237,7 +230,6 @@ body {
 
 .selected-word {
   background-color: #97979783;
-
 }
 
 .selected-char {

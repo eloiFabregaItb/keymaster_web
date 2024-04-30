@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <nav class="border-gray-200 dark:bg-gray-900">
+  <nav class="bg border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen flex flex-wrap items-center justify-between mx-auto p-5">
       <nuxt-link to="/" class="flex items-center space-x-3 rtl:space-x-reverse pl-5">
         <img width="250" src="../../assets/icons/logo/logo.png" alt="Key Master">
@@ -110,6 +110,7 @@ nav {
 li {
   list-style: none;
 }
+
 
 .info-ranking {
   margin-left: 2.5rem;
