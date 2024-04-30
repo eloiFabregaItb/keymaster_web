@@ -1,149 +1,195 @@
 <template>
-  <div class="flex items-center justify-end pt-16">
-  </div>
-  <section class="mx-24 mt-16" id="profile">
+  <section class="game mx-24">
     <div class="flex items-center justify-end pr-20 pb-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+      </svg>
+      <p style="color: white;" class="pr-2 pl-2"> {{ errors }} errors </p>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
         class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round"
           d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
       </svg>
-      <p style="color: white;" class="pr-2 pl-2">126wpm</p>
+      <p style="color: white;" class="pr-2 pl-2">{{ wpm.value }} wpm</p>
 
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
         class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
       </svg>
-      <p style="color: white;" class="pr-2 pl-2">30s</p>
-
-      <button>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
-          class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-        </svg>
-      </button>
+      <p style="color: white;" class="pr-2 pl-2">{{ calcularTiempoTranscurrido() }}s</p>
+      <button class="start-button" @keydown="handleKeyPress" @click="startGame">Start</button>
     </div>
     <hr style="width: 95%;">
-
 
     <div class="bg-green-400">
 
     </div>
-
-    <div class="container flex flex-col justify-center mb- items-start">
+    <div class="items-start">
       <div class="text-style mt-5 mb-5 text-white">
-        <p>{{ textoObjetivo.join('') }}</p>
-      </div>
+        <div class="text-container">
+          <div v-for="(word, index) in textArr" :key="index" class="word"
+            :class="{ 'selected-word': index === wordCount }">
+            <span v-for="(char, charIndex) in word" :key="charIndex" :class="{
+        'selected-char': index === wordCount && charIndex === charInWordCount,
+        'error': char.err,
+        'space-dot': char.show === '·'
+      }">
+              {{ char.show || char.char }}
+            </span>
 
-      <div class="keyboard text-keyword flex-col">
-        <div class="row" v-for="(row, rowIndex) in keyboardLayout" :key="rowIndex">
-          <div v-for="(key, keyIndex) in row" :key="keyIndex"
-            :class="['key', { 'key-active': activeKey === key.toLowerCase() || activeKey === key.toUpperCase(), 'key-pressed': pressedKeys[key.toLowerCase()] }, { 'space-key': key === 'Space' }, { 'backspace-key': key === 'Backspace' }]"
-            @click="handleKeyClick(key)">
-            {{ key }}
           </div>
         </div>
       </div>
     </div>
+    <div class="keyboard text-keyword flex-col">
+      <div class="row" v-for="(row, rowIndex) in keyboardLayout" :key="rowIndex">
+        <div v-for="(key, keyIndex) in row" :key="keyIndex"
+          :class="['key', { 'key-active': activeKey === key.toLowerCase() || activeKey === key.toUpperCase(), 'key-pressed': pressedKeys[key.toLowerCase()] }, { 'space-key': key === 'Space' }, { 'backspace-key': key === 'Backspace' }]"
+          @click="handleKeyClick(key)">
+          {{ key }}
+        </div>
+      </div>
+    </div>
+    <div class="keyboard">
+      <Keyboard />
+    </div>
   </section>
 </template>
 
+<script setup>
+import { ref } from 'vue'
+import Keyboard from '~/components/layout/keyboard.vue';
 
-<script>
-export default {
-  data() {
-    return {
-      textoObjetivo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum condimentum erat, eu dapibus nibh tincidunt eu.".split(''),
-      userInput: '', // Mantener el estado del texto ingresado por el usuario
-      activeKey: null,
-      keyboardLayout: [
-        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Backspace'],
-        ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '*'],
-        ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ', 'Ç'],
-        ['!', '"', '·', '$', '%', '&', '/', '(', ')', '=', '?', '¿', '¡'],
-        ['Shift', 'Z', 'X', 'C', 'Space', 'V', 'B', 'N', 'M'],
-        []
-      ],
-      pressedKeys: {} // Objeto para almacenar el estado de las teclas presionadas
-    };
-  },
-  methods: {
-    handleKeyDown(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      let key = event.key;
+const text = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam suscipit cursus erat, convallis rutrum elit ullamcorper convallis.');
 
-      // Verificar si se ha alcanzado el final del texto objetivo
-      if (this.userInput.length < this.textoObjetivo.length) {
-        // Obtener el carácter objetivo actual
-        const charObjetivo = this.textoObjetivo[this.userInput.length];
+const textArr = ref(splitText(text))
+const wordCount = ref(0)
+const charInWordCount = ref(0)
+const startTimestamp = ref(null);
+const started = ref(false)
+const errors = ref(0)
+const wpm = ref(0);
+textArr.value = splitText(text.value);
 
-        // Comparar el carácter presionado con el carácter objetivo actual
-        if (key === charObjetivo) {
-          // El carácter presionado es correcto, actualizar la entrada del usuario
-          this.userInput += key;
-        }
-      }
+// Función para iniciar el juego
+function startGame() {
+  // Restablecer los valores y el texto
+  if (!started.value) {
+    startTimestamp.value = Date.now();
+    wordCount.value = 0;
+    charInWordCount.value = 0;
+    errors.value = 0;
+    wpm.value = 0;
+    textArr.value = splitText(text.value); // Resetear el texto
+    started.value = true; // Establecer el estado de inicio a verdadero
+  }
+  calcularWPM(); // Calcular WPM después de iniciar el juego
+}
 
-      if (key === " ") {
-        console.log("Tecla presionada: Space");
-        this.activeKey = "Space";
-      } else {
-        console.log("Tecla presionada:", key);
-        if (event.shiftKey) {
-          key = key.toUpperCase();
-        } else {
-          key = key.toLowerCase();
-        }
-        this.activeKey = key;
-      }
-      this.pressedKeys[key] = true;
-    },
+function calcularTiempoTranscurrido() {
+  if (startTimestamp.value === null) {
+    return 0;
+  }
+  return Math.floor((Date.now() - startTimestamp.value) / 1000);
+}
 
-    handleKeyUp(event) {
-      let key = event.key.toLowerCase();
-      if (Object.prototype.hasOwnProperty.call(this.pressedKeys, key)) {
-        delete this.pressedKeys[key];
-      }
-      this.activeKey = null;
-    },
-    handleKeyClick(key) {
-  // Verificar si se ha alcanzado el final del texto objetivo
-  if (this.userInput.length < this.textoObjetivo.length) {
-    // Obtener el carácter objetivo actual
-    const charObjetivo = this.textoObjetivo[this.userInput.length];
+// Función para calcular las palabras por minuto (WPM)
+function calcularWPM() {
+  const tiempo = calcularTiempoTranscurrido();
 
-    // Comparar el carácter presionado con el carácter objetivo actual
-    if (key === charObjetivo) {
-      // El carácter presionado es correcto, actualizar la entrada del usuario
-      this.userInput += key;
-      // Cambiar el estilo del carácter objetivo a negrita
-      this.$set(this.textoObjetivo, this.userInput.length - 1, {char: charObjetivo, correct: true});
+  // Verificar si ha pasado un tiempo mínimo (por ejemplo, 1 minuto)
+  if (tiempo >= 60) {
+    const minutos = tiempo / 60;
+    wpm.value = Math.round(wordCount.value / minutos);
+  } else {
+    // Si no ha pasado suficiente tiempo, establecer WPM a 0
+    wpm.value = 0;
+  }
+}
+
+// Llamada a la función calcularWPM
+calcularWPM();
+console.log(wpm.value); // Imprime las WPM en la consola
+
+//siguiente caracter
+function increment() {
+
+  //ch es la posicion del siguiente caracter
+  const ch = charInWordCount.value + 1
+
+  if (ch > textArr.value[wordCount.value].length - 1) {
+    //si el siguiente caracter esta en la siguiente palabra
+
+    //inicializa el contador dentro de la palabra
+    charInWordCount.value = 0
+
+    // si no hay más palabras se ha acabado
+    if (wordCount.value >= textArr.value.length - 1) {
+      wordCount.value = 0
+      started.value = false
+      console.log("FINISH", new Date().getTime() - startTimestamp.value);
     } else {
-      // El carácter presionado es incorrecto, mantener el estilo original
-      this.$set(this.textoObjetivo, this.userInput.length, {char: charObjetivo, correct: false});
+
+      //siguiente palabra
+      wordCount.value++;
+    }
+
+  } else {
+
+    //siguiente caracter dentro de la palabra
+    charInWordCount.value = ch
+  }
+}
+// presionar tecla
+function handleKeyPress(event) {
+  //inicializar
+  if (!started.value) {
+    started.value = true
+    startTimestamp.value = new Date().getTime()
+    console.log("START")
+
+    textArr.value = splitText(); // Corregir llamada a la función splitText()
+    // Iniciar el juego si no ha comenzado
+    startGame();
+  }
+
+  //texto
+  const key = event.key
+  const ignoreKeys = ["Shift"]
+
+  if (key === textArr.value[wordCount.value][charInWordCount.value].char) {
+    //si la tecla coincide
+    increment()
+
+  } else if (!ignoreKeys.includes(key)) {
+    //si la tecla no coincide
+
+    //suma 1 al error
+    textArr.value[wordCount.value][charInWordCount.value].err++
+    errors.value++
+  }
+  calcularWPM(); // Calcular WPM después de cada pulsación de tecla
+}
+
+//separa el texto en un array tipo
+//[["h","o","l","a"],[" "],["m","u","n","d","o"]]
+function splitText() {
+  const textArr = []
+
+  const words = text.value.split(" ")
+
+  for (let i = 0; i < words.length; i++) {
+    textArr.push(words[i].split("").map(x => ({ char: x, err: 0 })))
+    if (i < words.length - 1) {
+      textArr.push([{ char: " ", show: "·", err: 0 }])
     }
   }
-    // Actualizar la tecla activa
-  if (key === " ") {
-    this.activeKey = "Space";
-  } else {
-    this.activeKey = key;
-  }
-},
-  },
-  mounted() {
-    document.addEventListener("keydown", this.handleKeyDown);
-    document.addEventListener("keyup", this.handleKeyUp);
-  },
-  beforeDestroy() {
-    document.removeEventListener("keydown", this.handleKeyDown);
-    document.removeEventListener("keyup", this.handleKeyUp);
-  }
-};
-</script>
 
+  return textArr
+}
+</script>
 
 <style scoped>
 @font-face {
@@ -158,9 +204,23 @@ body {
   /* Oculta el scroll vertical */
 }
 
+.game {
+  margin-right: 22rem;
+}
+
+
+.text-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.space-dot {
+  color: rgb(95, 95, 95);
+}
+
 .text-style {
   color: white;
-  font-size: 40px;
+  font-size: 35px;
   font-family: 'JetBrains Mono', monospace;
   width: 95%;
 }
@@ -175,30 +235,54 @@ body {
   margin-bottom: 5px;
 }
 
-.key {
-  width: 70px;
-  height: 70px;
-  background-color: #ccc;
-  border: 1px solid #ccc;
+.selected-word {
+  background-color: #97979783;
+
+}
+
+.selected-char {
+  border-bottom: 4px solid rgb(21, 255, 0);
+}
+
+.container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 5px;
-  border-radius: 5px;
+  flex-wrap: wrap;
+  width: 500px;
+  background-color: #333;
+  gap: 3px;
+}
+
+.word {
+  display: flex;
+}
+
+.word span {
+  text-align: center;
+  display: block;
+  padding: 0 2px;
+}
+
+.word span.error {
+  background-color: #b33434;
+}
+
+.start-button {
+  color: rgb(255, 255, 255);
+  background-color: #6036d6;
+  border: none;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
   cursor: pointer;
-  transition: background-color 0.1s ease;
+  border-radius: 12px;
+  transition-duration: 0.4s;
 }
 
-.space-key {
-  flex-grow: 3;
-}
-
-.backspace-key {
-  flex-grow: 0.25;
-}
-
-.key-active {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
+.start-button:hover {
+  background-color: white;
+  color: #6036d6;
 }
 </style>

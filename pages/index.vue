@@ -3,8 +3,8 @@
       <Navbar2 v-if="loggedin==true"/>
       <Navbar v-else/>
       <div class="content flex-grow">
-         <div class="container">
-            <div class="centered">
+         <div class="">
+            <div class="">
                <Keyword />
             </div>
          </div>

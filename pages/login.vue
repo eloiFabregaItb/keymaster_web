@@ -1,9 +1,11 @@
 <template>
     <section id="login">
-        <div class="h-dvh flex flex-col justify-center items-center text-style mt-5 mb-5 text-white">
-            <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
-            <p class="welcome"> <strong>¡Bienvenido futuro Master!</strong> ¿Has notado una mejora en tus skills? Seguro
-                que si, así pues <strong>¡Vamos a ello!</strong>
+        <div class="h-dvh flex flex-col justify-center items-center text-style text-white">
+            <nuxt-link to="/">
+                <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
+            </nuxt-link>
+            <p class="welcome"> <strong>¡Bienvenido, Master!</strong> ¿Has notado una mejora en tus habilidades? Seguro
+                que sí. <strong>¡Así que sigamos con ello!</strong>
             </p>
         </div>
 
@@ -121,6 +123,13 @@ async function login() {
     font-weight: normal;
     font-style: normal;
     font-size: 1.5rem;
-    margin-left: 23rem;
+}
+
+.h-dvh {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 14rem;
 }
 </style>

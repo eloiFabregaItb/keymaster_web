@@ -32,4 +32,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+a:hover svg {
+    fill: #7854d3;
+}
+</style>

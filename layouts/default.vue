@@ -10,7 +10,7 @@ const store = userStore()
 </script>
 
 <template>
-  <div id="fondo" class="h-screen">
+  <div id="fondo">
     <slot />
   </div>
 </template>
@@ -19,6 +19,5 @@ const store = userStore()
 #fondo {
   /* height: 100% !important; */
   background: linear-gradient(#000000, #43219B);
-  overflow: hidden;
 }
 </style>
