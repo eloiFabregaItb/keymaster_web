@@ -40,22 +40,22 @@ var mostrarModalNotificaciones = ref(false)
 
 function showHideNotifications() {
   mostrarModalNotificaciones.value = !mostrarModalNotificaciones.value
-  if(mostrarModalNotificaciones.value){
-    const ids = store.$state.notifications.map(x=>x.id)
+  if (mostrarModalNotificaciones.value) {
+    const ids = store.$state.notifications.map(x => x.id)
     axios.post(`http://${api_ip}/notifications/seen`, {
-        ids: ids
+      ids: ids
     }, {
-        headers: {
-            Authorization: `Bearer ${jwt}`
-        }
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
     })
-    .then(response => {
-      console.log(response)
-      console.log('ids enviados')
-    })
-    .catch(error => {
+      .then(response => {
+        console.log(response)
+        console.log('ids enviados')
+      })
+      .catch(error => {
         console.error(error);
-    });
+      });
   }
 }
 
@@ -145,7 +145,7 @@ function executeAction(requireToken, url) {
           <li>
             <button @click="showHideNotifications" class="campanita" id="openNotifications">
               <div v-if="mostrarModalNotificaciones" class="desplegable-notificaciones">
-                <div class="notification" v-for="notification in store.notifications">
+                <div v-if="store.notifications.length>0" class="notification" v-for="notification in store.notifications">
                   <div v-if="notification.type == 'FOLLOW'" class="flex justify-between">
                     <ProfilePic :src="notification.target.profileImg" small="true" />
                     <div>
@@ -153,7 +153,7 @@ function executeAction(requireToken, url) {
                         {{ notification.msg }}
                       </p>
                       <p class="text-gray-300">
-                        {{mostrarFechaAbsolutaORealtiva(notification.date)}}
+                        {{ mostrarFechaAbsolutaORealtiva(notification.date) }}
                       </p>
                     </div>
                     <div v-for="action in notification.actions">
@@ -164,8 +164,12 @@ function executeAction(requireToken, url) {
                     </div>
                   </div>
                 </div>
+                <div v-else>
+                  <p>No hay notificaciones por leer</p>
+                </div>
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 mr-0.5 slide rotate">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 mr-0.5 slide rotate"
+                :class="{ 'campanita-movimiento': store.notifications.length > 0 }">
                 <path fill="#ffffff"
                   d="M4 19v-2h2v-7q0-2.075 1.25-3.687T10.5 4.2v-.7q0-.625.438-1.062T12 2q.625 0 1.063.438T13.5 3.5v.7q2 .5 3.25 2.113T18 10v7h2v2zm8 3q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22" />
               </svg>
@@ -269,5 +273,31 @@ li {
 
 .notification {
   margin-top: 10px;
+}
+
+.campanita-movimiento {
+  animation: wiggle-infinite 1s infinite;
+}
+
+@keyframes wiggle-infinite {
+  0% {
+    transform: rotate(10deg);
+  }
+
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 </style>
