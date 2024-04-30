@@ -1,4 +1,4 @@
-export const api_ip = "172.30.5.61:3000"
+export const api_ip = "http://172.30.5.61:3000"
 
 export const ERROR={
     MISSING_DATA:{

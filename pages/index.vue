@@ -1,7 +1,7 @@
 <template>
    <div class="flex flex-col min-h-screen">
-      <Navbar2 v-if="loggedin==true"/>
-      <Navbar v-else/>
+      <Navbar2 v-if="loggedin == true" />
+      <Navbar v-else />
       <div class="content flex-grow">
          <div class="">
             <div class="">
@@ -16,7 +16,7 @@
 <script setup>
 import Navbar from "~/components/layout/navbar.vue";
 import Navbar2 from "~/components/layout/navbar2.vue";
-import Keyword from "~/components/layout/keyword.vue";
+import Keyword from "~/components/game/keyword.vue";
 import Footer from "~/components/layout/footer.vue";
 import "../assets/css/main.css";
 
