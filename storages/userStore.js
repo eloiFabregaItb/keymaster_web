@@ -7,7 +7,11 @@ export const userStore = defineStore({
     username: '',
     profileImg: '',
     emailVerified: false,
-    jwt: ''
+    jwt: '',
+    isLogged: false,
+    friends: [],
+    followers: [],
+    notifications: []
   }),
   getters: {
     userInfo(state) {
@@ -16,26 +20,42 @@ export const userStore = defineStore({
         username: state.username,
         profileImg: state.profileImg,
         emailVerified: state.emailVerified,
-        jwt: state.jwt
+        jwt: state.jwt,
+        isLogged: state.isLogged,
+        friends: state.friends,
+        followers: state.followers,
+        notifications: state.notifications
       };
     }
   },
   actions: {
-    // Acción para actualizar la información del usuario
-    updateUser({ email, username, profileImg, emailVerified, jwt }) {
+    updateUser({ email, username, profileImg, emailVerified, jwt, isLogged, friends, followers, notifications }) {
       this.email = email;
       this.username = username;
       this.profileImg = profileImg;
       this.emailVerified = emailVerified;
-      this.jwt = jwt
+      this.jwt = jwt;
+      this.isLogged = isLogged,
+      this.friends = friends,
+      this.followers = followers,
+      this.notifications = notifications
     },
-    // Acción para limpiar la información del usuario
+    updateOnlineFriends(id, isOnline) {
+      console.log("entra funcion actualizar")
+      const friend = this.friends.find(x => x.id == id)
+      friend.online = isOnline
+
+    },
     clearUser() {
       this.email = '';
       this.username = '';
       this.profileImg = '';
       this.emailVerified = false;
-      this.jwt = ''
+      this.jwt = '';
+      this.isLogged = false;
+      this.friends = [];
+      this.followers = [];
+      this.notifications = []
     }
   }
 });
