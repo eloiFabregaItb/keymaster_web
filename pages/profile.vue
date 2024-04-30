@@ -124,8 +124,10 @@
                 </div>
             </div>
         </div>
-
         <div>
+            <OnlineFriends/>
+        </div>
+        <!-- <div>
             <div class="flex justify-between">
                 <button class="friend-icon">
                     <img class="icon-button" src="../assets/icons/svg/FaSolidUserFriends.svg" alt="">
@@ -146,11 +148,7 @@
                     <img class="play-icon mr-2.5" src="../assets/icons/svg/PlayIcon.svg" alt="">
                 </div>
             </div>
-            
-
-
-
-        </div>
+        </div> -->
 
     </section>
 </template>
@@ -164,6 +162,7 @@ import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
 import Modal from "../components/Modal.vue";
 import { api_ip } from "~/constants";
+import OnlineFriends from "~/components/OnlineFriends.vue";
 
 
 var isFollowersModalOpen = ref(false)
@@ -322,7 +321,7 @@ function searchUser(){
         }
     })
         .then(response => {
-            //console.log(response)
+            console.log(response)
             userSearchResult.value = response.data.data.users
         })
         .catch(error => {
