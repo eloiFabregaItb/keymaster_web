@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import "../assets/css/main.css"
+
+import { userStore } from '../../storages/userStore.js'
+
+const store = userStore()
+
+//console.log(store)
+
 </script>
 
 <template>

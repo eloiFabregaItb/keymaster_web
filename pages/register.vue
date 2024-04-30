@@ -128,7 +128,7 @@ async function register() {
         .then(response => {
             if (response.data.success) {
                 showErrors.value = false;
-                // TODO router.push("/home")
+                navigateTo('/login')
             }
         })
         .catch(error => {
