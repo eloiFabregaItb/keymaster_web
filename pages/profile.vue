@@ -31,7 +31,20 @@
     <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false"
         :title="'Buscador de usuarios'">
         <input v-model="userSearchInput" @change="searchUser" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Busca un usuario..."/>
-        {{ userSearchInput }}
+        <div v-if="userSearchResult.length>0" class="user-modal-info" v-for="user in userSearchResult">
+            <ProfilePic :src="user.profileImg" />
+            <div class="flex items-center">
+                <p class="ml-3">{{ user.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">DEJAR DE SEGUIR</button>
+                <button v-else class="follow-button" @click="followUser(user.username)">SEGUIR</button>
+                <!-- <span v-else>No te sigue</span> -->
+            </div>
+        </div>
+        <div v-else>
+            <p>No se han encontrado resultados</p>
+        </div>
     </Modal>
 
 
@@ -158,6 +171,7 @@ var isFriendsModalOpen = ref(false)
 var isAddUserOpen = ref(false)
 
 var userSearchInput = ref("")
+var userSearchResult = ref([])
 
 const store = userStore()
 var jwt = store.$state.jwt
@@ -300,7 +314,20 @@ function unfollowUser(username) {
 }
 
 function searchUser(){
-    alert("buscar usuario")
+    axios.post(`http://${api_ip}/user/search`, {
+        search: userSearchInput.value
+    }, {
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    })
+        .then(response => {
+            //console.log(response)
+            userSearchResult.value = response.data.data.users
+        })
+        .catch(error => {
+            console.error(error);
+        });
 }
 
 </script>
