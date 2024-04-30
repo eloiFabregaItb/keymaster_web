@@ -19,6 +19,10 @@ const store = userStore()
 #fondo {
   /* height: 100% !important; */
   background: linear-gradient(#000000, #43219B);
-  height: 100vh;
+  height: 100dvh;
+  overflow-y: hidden;
+
+  display: flex;
+  flex-direction: column;
 }
 </style>

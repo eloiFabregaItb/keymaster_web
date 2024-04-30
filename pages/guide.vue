@@ -1,257 +1,131 @@
 <template>
     <Navbar />
-    <div class="page-container">
-        <div class="container flex items-center justify-end pt-36 pl-36 pr-36">
-            <div class="content flex-grow d-flex flex-column align-items-center justify-content-center">
-                <div class="flex-container">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6"
-                        stroke="currentColor" class="q-svg w-7 h-7 mr-0.5 slide">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-                    </svg>
-                    <h1>Guide</h1>
-                </div>
-                <p>Touch typing is all about the idea that each finger has its own area on the keyboard. Thanks to that
-                    fact
-                    you can type without looking at the keys. Practice regularly and your fingers will learn their
-                    location
-                    on the keyboard through muscle memory.</p>
-                <h2>1. Sitting posture for typing</h2>
-                <div class="lista d-flex flex-column align-items-center">
+    <div class="container-guide pt-12 pl-36 pr-36">
+        <div class="flex-container">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6"
+                stroke="currentColor" class="q-svg w-7 h-7 mr-0.5 slide">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+            </svg>
+            <h1 class="title">Guía</h1>
+        </div>
+        <div class="content-guide">
+            <p class="init-m">La mecanografía táctil se basa en la idea de que cada dedo tiene su propia área en el
+                teclado.
+                Gracias a eso
+                puedes escribir sin mirar las teclas. Practica regularmente y tus dedos aprenderán su
+                ubicación
+                en el teclado a través de la memoria muscular.</p>
+
+            <h2>1. Postura correcta para escribir</h2>
+
+            <img class="posture pb-8" src="@/assets/icons/img/posture.png" alt="good posture" width="30%" />
+
+            <div class="lista d-flex flex-column align-items-center">
+                <ul>
+                    <li>Siéntate derecho y recuerda mantener la espalda recta.</li>
+                    <li>Mantén los codos doblados en el ángulo correcto.</li>
+                    <li>Enfrenta la pantalla con la cabeza ligeramente inclinada hacia adelante.</li>
+                    <li>Mantén al menos 45 - 70 cm de distancia entre tus ojos y la pantalla.</li>
+                    <li>Expone los músculos del hombro, brazo y muñeca a la menor tensión posible. Las muñecas
+                        pueden
+                        tocar
+                        la mesa frente al teclado. Nunca desplaces el peso de tu cuerpo a las muñecas apoyándote
+                        en
+                        ellas.</li>
+                </ul>
+            </div>
+
+            <h2>2. Posición de las manos</h2>
+
+            <div>
+                <p>Antes de aprender a escribir, eche un vistazo a la configuración del teclado. El número de teclas
+                    varía entre 50 y 54. La fila de teclas que comienza con el carácter "A" se denomina "home row
+                    position" o "fila de
+                    inicio". Esta fila es muy importante para aprender a mecanografiar, ya que actúa como base
+                    al escribir las teclas.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 pr-10">
+                    <p>Dedos de la mano izquierda:</p>
                     <ul>
-                        <li>Sit straight and remember to keep your back straight.</li>
-                        <li>Keep your elbows bent at the right angle.</li>
-                        <li>Face the screen with your head slightly tilted forward.</li>
-                        <li>Keep at least 45 - 70 cm of distance between your eyes and the screen.</li>
-                        <li>Expose the shoulder, arm, and wrist muscles to the least possible strain. The wrists can
-                            touch
-                            the tabletop in front of the keyboard. Never shift your body weight to the wrists by resting
-                            on
-                            them.</li>
+                        <li>1. El meñique en 'A'</li>
+                        <li>2. El anular en 'S'</li>
+                        <li>3. El dedo medio en 'D'</li>
+                        <li>4. El índice en 'F'</li>
                     </ul>
                 </div>
-
-                <h2>2. Posición de las manos</h2>
-                <!--<img src="https://www.readandspell.com/sites/default/files//WhyLearnTypingSkills.jpeg" alt=""
-                height="25%" />-->
-                <div>
-                    <p>Antes de aprender a escribir, eche un vistazo a la configuración del teclado. El número de teclas
-                        varía entre 50 y 54. La fila de teclas que comienza con el carácter "A" se denomina Home row
-                        position o "fila de
-                        inicio". Esta fila es muy importante para aprender a mecanografiar, ya que actúa como base
-                        al escribir las teclas.</p>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 pr-10">
-                        <p>Keep the left hand four fingers as mentioned below:</p>
-                        <ul>
-                            <li>1. The little finger on 'A'</li>
-                            <li>2. The ring finger on 'S'</li>
-                            <li>3. The middle finger on 'D'</li>
-                            <li>4. The index finger on 'F</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Keep the right hand four fingers as mentioned below:</p>
-                        <ul>
-                            <li>1. The little finger on 'Ñ'</li>
-                            <li>2. The ring finger on 'L'</li>
-                            <li>3. The middle finger on 'K'</li>
-                            <li>4. The index finger on 'J</li>
-                        </ul>
-                    </div>
-                </div>
-                <h3>Practica un poco con las 8 letras principales para tener soltura</h3>
-                <div>
-                    <div class="row">
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyA' }" data-key="KeyA">
-                            <svg class="key-size" x="70" y="80" width="38" height="38" data-key="KeyA">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">A</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyS' }" data-key="KeyS">
-                            <svg class="key-size" x="110" y="80" width="38" height="38" data-key="KeyS">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">S</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyD' }" data-key="KeyD">
-                            <svg class="key-size" x="150" y="80" width="38" height="38" data-key="KeyD">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">D</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyF' }" data-key="KeyF">
-                            <svg class="key-size" x="190" y="80" width="38" height="38" data-key="KeyF">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">F</text>
-                            </svg>
-                        </div>
-                        <div class="key-hidden">
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyJ' }" data-key="KeyJ">
-                            <svg class="key-size" x="310" y="80" width="38" height="38" data-key="KeyJ">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">J</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyK' }" data-key="KeyK">
-                            <svg class="key-size" x="350" y="80" width="38" height="38" data-key="KeyK">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">K</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyL' }" data-key="KeyL">
-                            <svg class="key-size" x="390" y="80" width="38" height="38" data-key="KeyL">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">L</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'Semicolon' }" data-key="Semicolon">
-                            <svg class="key-size" x="430" y="80" width="38" height="38" data-key="Semicolon">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">Ñ</text>
-                            </svg>
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                    <p>Dedos de la mano derecha:</p>
+                    <ul>
+                        <li>1. El meñique en 'Ñ'</li>
+                        <li>2. El anular en 'L'</li>
+                        <li>3. El dedo medio en 'K'</li>
+                        <li>4. El índice en 'J'</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- PRUEBA -->
-    <div class="page-container">
-        <div class="container flex items-center justify-end pt-36 pl-36 pr-36">
-            <div class="content flex-grow d-flex flex-column align-items-center justify-content-center">
-                <div class="flex-container">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6"
-                        stroke="currentColor" class="q-svg w-7 h-7 mr-0.5 slide">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-                    </svg>
-                    <h1>Guide</h1>
-                </div>
-                <p>Touch typing is all about the idea that each finger has its own area on the keyboard. Thanks to that
-                    fact
-                    you can type without looking at the keys. Practice regularly and your fingers will learn their
-                    location
-                    on the keyboard through muscle memory.</p>
-                <h2>1. Sitting posture for typing</h2>
-                <div class="lista d-flex flex-column align-items-center">
-                    <ul>
-                        <li>Sit straight and remember to keep your back straight.</li>
-                        <li>Keep your elbows bent at the right angle.</li>
-                        <li>Face the screen with your head slightly tilted forward.</li>
-                        <li>Keep at least 45 - 70 cm of distance between your eyes and the screen.</li>
-                        <li>Expose the shoulder, arm, and wrist muscles to the least possible strain. The wrists can
-                            touch
-                            the tabletop in front of the keyboard. Never shift your body weight to the wrists by resting
-                            on
-                            them.</li>
-                    </ul>
-                </div>
+            <h3>Practica un poco con las 8 letras principales para tener soltura</h3>
 
-                <h2>2. Posición de las manos</h2>
-                <!--<img src="https://www.readandspell.com/sites/default/files//WhyLearnTypingSkills.jpeg" alt=""
-                height="25%" />-->
-                <div>
-                    <p>Antes de aprender a escribir, eche un vistazo a la configuración del teclado. El número de teclas
-                        varía entre 50 y 54. La fila de teclas que comienza con el carácter "A" se denomina Home row
-                        position o "fila de
-                        inicio". Esta fila es muy importante para aprender a mecanografiar, ya que actúa como base
-                        al escribir las teclas.</p>
+            <div class="keyb-keys">
+                <div class="row pb-8">
+                    <div class="keyA" :class="{ 'key-pressed': pressedKey === 'KeyA' }" data-key="KeyA">
+                        <svg class="key-size" x="70" y="80" width="38" height="38" data-key="KeyA">
+                            <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10"
+                                y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr">A</text>
+                        </svg>
+                    </div>
+                    <div class="keyS" :class="{ 'key-pressed': pressedKey === 'KeyS' }" data-key="KeyS">
+                        <svg class="key-size" x="110" y="80" width="38" height="38" data-key="KeyS">
+                            <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10"
+                                y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr">S</text>
+                        </svg>
+                    </div>
+                    <div class="keyD" :class="{ 'key-pressed': pressedKey === 'KeyD' }" data-key="KeyD">
+                        <svg class="key-size" x="150" y="80" width="38" height="38" data-key="KeyD">
+                            <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10"
+                                y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr">D</text>
+                        </svg>
+                    </div>
+                    <div class="keyF" :class="{ 'key-pressed': pressedKey === 'KeyF' }" data-key="KeyF">
+                        <svg class="key-size" x="190" y="80" width="38" height="38" data-key="KeyF">
+                            <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10"
+                                y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr">F</text>
+                        </svg>
+                    </div>
+                    <div class="key-hidden">
+                    </div>
+                    <div class="key-hidden">
+                    </div>
+                    <div class="keyJ" :class="{ 'key-pressed': pressedKey === 'KeyJ' }" data-key="KeyJ">
+                        <svg class="key-size" x="310" y="80" width="38" height="38" data-key="KeyJ">
+                            <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10"
+                                y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr">J</text>
+                        </svg>
+                    </div>
+                    <div class="keyK" :class="{ 'key-pressed': pressedKey === 'KeyK' }" data-key="KeyK">
+                        <svg class="key-size" x="350" y="80" width="38" height="38" data-key="KeyK">
+                            <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10"
+                                y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr">K</text>
+                        </svg>
+                    </div>
+                    <div class="keyL" :class="{ 'key-pressed': pressedKey === 'KeyL' }" data-key="KeyL">
+                        <svg class="key-size" x="390" y="80" width="38" height="38" data-key="KeyL">
+                            <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10"
+                                y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr">L</text>
+                        </svg>
+                    </div>
+                    <div class="keyÑ" :class="{ 'key-pressed': pressedKey === 'Semicolon' }" data-key="Semicolon">
+                        <svg class="key-size" x="430" y="80" width="38" height="38" data-key="Semicolon">
+                            <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10"
+                                y="12" text-anchor="middle" dominant-baseline="middle" direction="ltr">Ñ</text>
+                        </svg>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 pr-10">
-                        <p>Keep the left hand four fingers as mentioned below:</p>
-                        <ul>
-                            <li>1. The little finger on 'A'</li>
-                            <li>2. The ring finger on 'S'</li>
-                            <li>3. The middle finger on 'D'</li>
-                            <li>4. The index finger on 'F</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Keep the right hand four fingers as mentioned below:</p>
-                        <ul>
-                            <li>1. The little finger on 'Ñ'</li>
-                            <li>2. The ring finger on 'L'</li>
-                            <li>3. The middle finger on 'K'</li>
-                            <li>4. The index finger on 'J</li>
-                        </ul>
-                    </div>
-                </div>
-                <h3>Practica un poco con las 8 letras principales para tener soltura</h3>
                 <div>
-                    <div class="row">
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyA' }" data-key="KeyA">
-                            <svg class="key-size" x="70" y="80" width="38" height="38" data-key="KeyA">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">A</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyS' }" data-key="KeyS">
-                            <svg class="key-size" x="110" y="80" width="38" height="38" data-key="KeyS">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">S</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyD' }" data-key="KeyD">
-                            <svg class="key-size" x="150" y="80" width="38" height="38" data-key="KeyD">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">D</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyF' }" data-key="KeyF">
-                            <svg class="key-size" x="190" y="80" width="38" height="38" data-key="KeyF">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">F</text>
-                            </svg>
-                        </div>
-                        <div class="key-hidden">
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyJ' }" data-key="KeyJ">
-                            <svg class="key-size" x="310" y="80" width="38" height="38" data-key="KeyJ">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">J</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyK' }" data-key="KeyK">
-                            <svg class="key-size" x="350" y="80" width="38" height="38" data-key="KeyK">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">K</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyL' }" data-key="KeyL">
-                            <svg class="key-size" x="390" y="80" width="38" height="38" data-key="KeyL">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">L</text>
-                            </svg>
-                        </div>
-                        <div class="key" :class="{ 'key-pressed': pressedKey === 'Semicolon' }" data-key="Semicolon">
-                            <svg class="key-size" x="430" y="80" width="38" height="38" data-key="Semicolon">
-                                <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text
-                                    x="10" y="12" text-anchor="middle" dominant-baseline="middle"
-                                    direction="ltr">Ñ</text>
-                            </svg>
-                        </div>
-                    </div>
+                    <img class="posture pb-8" src="@/assets/icons/img/practice.png" alt="good posture" />
                 </div>
             </div>
         </div>
@@ -294,22 +168,34 @@ onUnmounted(() => {
 </script>
 
 <style>
-.page-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-height: 100vh;
+.container-guide {
+    flex: 1;
+    overflow-y: scroll;
+    overflow-x: hidden;
     color: white;
-}
-
-.container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 100vw !important;
 }
 
-.content {
+.container> :first-child {
+    margin-top: 1rem;
+
+}
+
+.init-m {
+    border-top: 1px solid white;
+    padding-top: 24px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-weight: 900 !important;
+}
+
+.content-guide {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -326,10 +212,8 @@ onUnmounted(() => {
 .flex-container {
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
-    width: 100%;
-    padding-bottom: 5px;
-    border-bottom: 1px solid white;
+    margin-bottom: 0.5rem;
+    width: 100dvw;
 }
 
 .q-svg {
@@ -338,26 +222,70 @@ onUnmounted(() => {
     margin-right: 0.5rem;
 }
 
-h1 {
+.title {
     font-size: 2rem;
-    text-align: center;
-    color: white;
-    font-family: 'JetBrains Mono';
-  src: url('~/assets/fonts/JetBrainsMonoNL-Semibold.ttf') format('truetype');
     font-weight: 900;
-    font-style: normal;
 }
 
 .lista {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .key-hidden {
-    width: 38px;
-    height: 38px;
+    width: 65px;
+    height: 65px;
     border-radius: 10%;
-    margin: 5px;
+}
+
+.keyA,
+.keyS,
+.keyD,
+.keyF,
+.keyJ,
+.keyK,
+.keyL,
+.keyÑ {
+    width: 65px;
+    height: 65px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+}
+
+.keyA {
+    background-color: #77e2aa;
+    border: 1px solid #77e2aa;
+}
+
+.keyS{
+    background-color: #62e3fe;
+    border: 1px solid #62e3fe;
+}
+
+.keyD {
+    background-color: #f89bc6;
+    border: 1px solid #f89bc6;
+}
+
+.keyF {
+    background-color: #ffbf82;
+    border: 1px solid #ffbf82;
+}
+
+
+
+.row {
+    display: flex;
+    justify-content: center;
+    padding: 0 15px;
+    /* Ajusta el valor del padding según tus necesidades */
 }
 </style>
