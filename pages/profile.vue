@@ -8,7 +8,7 @@
             </div>
             <div class="flex items-center justify-end">
                 <button v-if="follower.followedBy == false" class="follow-button"
-                    @click="followUser(follower.username)">SEGUIR</button>
+                    @click="followUser(follower.username)">Seguir</button>
                 <span v-else>Siguiendo</span>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <p class="ml-3">{{ friend.username }}</p>
             </div>
             <div class="flex items-center justify-end">
-                <button class="follow-button" @click="unfollowUser(friend.username)">DEJAR DE SEGUIR</button>
+                <button class="follow-button" @click="unfollowUser(friend.username)">Dejar de seguir</button>
                 <!-- <span v-else>No te sigue</span> -->
             </div>
         </div>
@@ -37,8 +37,8 @@
                 <p class="ml-3">{{ user.username }}</p>
             </div>
             <div class="flex items-center justify-end">
-                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">DEJAR DE SEGUIR</button>
-                <button v-else class="follow-button" @click="followUser(user.username)">SEGUIR</button>
+                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">Dejar de seguir</button>
+                <button v-else class="follow-button" @click="followUser(user.username)">Seguir</button>
                 <!-- <span v-else>No te sigue</span> -->
             </div>
         </div>
@@ -111,53 +111,70 @@
                             </div>
                         </button>
                     </div>
-                    <button @click="confirmDeleteProfile" type="button"
-                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
-                        perfil</button>
+                    <button @click="confirmDeleteProfile" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar perfil</button>
                 </div>
 
                 <div v-if="page == 1">
-                    <p>History</p>
+                    <PlayHistory/>
                 </div>
 
                 <div v-if="page == 2">
-                    <p>keyhits</p>
+                    <p>Keyhits</p>
                 </div>
-                <button @click="confirmDeleteProfile" type="button"
-                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
-                    perfil</button>
             </div>
         </div>
         <div>
             <OnlineFriends/>
         </div>
-        <!-- <div>
-            <div class="flex justify-between">
-                <button class="friend-icon">
-                    <img class="icon-button" src="../assets/icons/svg/FaSolidUserFriends.svg" alt="">
-                    <span class="ml-2.5 text-2xl">Friends</span>
-                </button>
-                <button @click="isAddUserOpen = true">
-                    <img class="icon-button" src="../assets/icons/svg/FluentMdl2AddFriend.svg" alt="">
-                </button>
-            </div>
-            <hr>
-
-            <div class="my-1.5 online-friends" v-for="friend in store.$state.friends">
-                <div class="flex justify-between items-center">
-                    <img class="online-state-icon" v-if="friend.online" src="../assets/icons/svg/OnlineCircle.svg"
-                        alt="">
-                    <img class="online-state-icon" v-else src="../assets/icons/svg/OfflineCircle.svg" alt="">
-                    <span>{{ friend.username }}</span>
-                    <img class="play-icon mr-2.5" src="../assets/icons/svg/PlayIcon.svg" alt="">
-                </div>
-            </div>
-        </div> -->
-
     </section>
 </template>
 
 <script setup>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import axios from "axios"
 import Swal from 'sweetalert2'
 import Navbar from "~/components/layout/navbar2.vue";
@@ -165,9 +182,10 @@ import ProfilePic from "~/components/ProfilePic.vue";
 import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
 import Modal from "../components/Modal.vue";
-
+import PlayHistory from "~/components/PlayHistory.vue";
 import { api_ip } from "~/constants";
 import OnlineFriends from "~/components/OnlineFriends.vue";
+import refDebounced from ""
 
 
 var isFollowersModalOpen = ref(false)
@@ -334,6 +352,11 @@ function searchUser(){
             console.error(error);
         });
 }
+
+
+
+const busquedaUsuari = refDebounced(userSearchInput,500)
+watch(searchUser, busquedaUsuari)
 
 </script>
 

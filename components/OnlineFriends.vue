@@ -8,8 +8,8 @@
                 <p class="ml-3">{{ user.username }}</p>
             </div>
             <div class="flex items-center justify-end">
-                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">DEJAR DE SEGUIR</button>
-                <button v-else class="follow-button" @click="followUser(user.username)">SEGUIR</button>
+                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">Dejar de seguir</button>
+                <button v-else class="follow-button" @click="followUser(user.username)">Seguir</button>
                 <!-- <span v-else>No te sigue</span> -->
             </div>
         </div>
