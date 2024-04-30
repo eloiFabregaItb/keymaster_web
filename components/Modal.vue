@@ -50,10 +50,14 @@ function handleClickOutside() {
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 100px;
-  min-width: 100px;
+  min-width: 37dvw;
   padding: 20px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-height: 90dvh;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-background {
@@ -86,5 +90,10 @@ function handleClickOutside() {
 
 .close:hover {
   color: red;
+}
+
+.modal main {
+  flex: 1;
+  overflow: auto;
 }
 </style>

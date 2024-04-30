@@ -9,7 +9,6 @@
             </p>
         </div>
 
-
         <div class="flex justify-center self-center z-10">
             <div class="p-12 bg-white mx-auto rounded-3xl w-96 flex-column gap-5">
                 <div class="mb-7 text-center">
@@ -28,36 +27,27 @@
                             type="email" placeholder="Introduce tu nickname o correo" v-model="user">
                     </div>
 
-
                     <p class="text-lg font-semibold">Contraseña</p>
                     <PasswordInput v-model="password" />
-
-                </div>
-
-
-                <!-- {{ user }}
-                    {{ password }}
-                    {{ showErrors }} -->
 
                 <div v-if="showErrors">
                     <p class="text-red-600">{{ errMsg }}</p>
                 </div>
+                    <div>
+                        <button type="submit" @click="login()"
+                            class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+                            Inicia sesión
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between">
 
-
-                <div>
-                    <button type="submit" @click="login()"
-                        class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
-                        Inicia sesión
-                    </button>
-                </div>
-                <div class="flex items-center justify-between">
-
-                    <div class="text-sm ml-auto">
-                        <span class="text-gray-400">¿Has olvidado tu contraseña?
-                            <nuxt-link to="/recover"
-                                class="color-primary py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                                aria-current="page">Recupérala</nuxt-link>
-                        </span>
+                        <div class="text-sm ml-auto">
+                            <span class="text-gray-400">¿Has olvidado tu contraseña?
+                                <nuxt-link to="/recover"
+                                    class="color-primary py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                                    aria-current="page">Recupérala</nuxt-link>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -66,12 +56,17 @@
 </template>
 
 <script setup>
+
+import { api_ip } from "~/constants";
 import PasswordInput from "../components/PasswordInput.vue"
 import axios from "axios"
 import { userStore } from '../storages/userStore.js'
+//import { handleLoginSocket } from "~/composables/useSocket";
+
+const emit = defineEmits(["login"])
+
 
 const store = userStore()
-
 var user = ref("")
 var password = ref("")
 
@@ -79,20 +74,21 @@ var showErrors = ref(false)
 var errMsg = ref("")
 
 async function login() {
-    axios.post('http://172.30.5.61:3000/auth/login', {
+    axios.post(`http://${api_ip}/auth/login`, {
         login: user.value,
         password: password.value
     })
         .then(response => {
+            console.log(response)
             if (response.data.success) {
                 showErrors.value = false;
                 localStorage.setItem('jwt', response.data.jwt);
+                //handleLoginSocket(response.data.jwt)
                 navigateTo('/')
                 store.updateUser({
                     email: response.data.email,
                     username: response.data.username,
                     profileImg: response.data.profileImg,
-                    //profileImg: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
                     emailVerified: response.data.emailVerified,
                     jwt: response.data.jwt,
                     isLogged: true,
@@ -113,9 +109,7 @@ async function login() {
             }
         });
 }
-
 </script>
-
 
 <style scoped>
 #login {

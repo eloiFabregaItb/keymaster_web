@@ -1,10 +1,57 @@
 <template>
-    <Modal v-if="isModalOpen" @close="closeModal()" title="Hola">
-        <h1>modal</h1>
-
-        <ProfilePic src="http://172.30.5.61:3000/public/usrPic/d8fbf60c-3ae3-48d0-8f27-7b2f27c52d78.webp"
-            isOffline="true" />
+    <Modal class="text-black" v-if="isFollowersModalOpen" @close="isFollowersModalOpen = false"
+        :title="`Seguidores: ${store.$state.followers.length}`">
+        <div class="user-modal-info" v-for="follower in store.$state.followers">
+            <ProfilePic :src="follower.profileImg" />
+            <div class="flex items-center">
+                <p class="ml-3">{{ follower.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="follower.followedBy == false" class="follow-button"
+                    @click="followUser(follower.username)">SEGUIR</button>
+                <span v-else>Siguiendo</span>
+            </div>
+        </div>
     </Modal>
+    <Modal class="text-black" v-if="isFriendsModalOpen" @close="isFriendsModalOpen = false"
+        :title="`Seguidos: ${store.$state.friends.length}`">
+        <div class="user-modal-info" v-for="friend in store.$state.friends">
+            <ProfilePic :src="friend.profileImg" />
+            <div class="flex items-center">
+                <p class="ml-3">{{ friend.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button class="follow-button" @click="unfollowUser(friend.username)">DEJAR DE SEGUIR</button>
+                <!-- <span v-else>No te sigue</span> -->
+            </div>
+        </div>
+    </Modal>
+
+
+    <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false"
+        :title="'Buscador de usuarios'">
+        <input v-model="userSearchInput" @change="searchUser" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Busca un usuario..."/>
+        <div v-if="userSearchResult.length>0" class="user-modal-info" v-for="user in userSearchResult">
+            <ProfilePic :src="user.profileImg" />
+            <div class="flex items-center">
+                <p class="ml-3">{{ user.username }}</p>
+            </div>
+            <div class="flex items-center justify-end">
+                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">DEJAR DE SEGUIR</button>
+                <button v-else class="follow-button" @click="followUser(user.username)">SEGUIR</button>
+                <!-- <span v-else>No te sigue</span> -->
+            </div>
+        </div>
+        <div v-else>
+            <p>No se han encontrado resultados</p>
+        </div>
+    </Modal>
+
+
+
+
+
+
     <Navbar></Navbar>
 
     <div class="flex items-center justify-end pt-16">
@@ -25,62 +72,90 @@
                 <img class="icon-button" src="../assets/icons/svg/gamepad-solid.svg" alt="">
             </button>
             <hr style="width: 95%;">
-        </div>
-        <div class="bg-green-400">
+            <div class="mt-10">
+                <!-- <p class="text-white">{{ page }}</p> -->
 
-        </div>
-        <div class="mt-10">
-            <!-- <p class="text-white">{{ page }}</p> -->
+                <div v-if="page == 0">
+                    <div class="flex gap-20">
+                        <div class="w-2/12">
+                            <label for="file-input" class="file-input-label">
+                                <ProfilePic :src="userData.profileImg" big="true" />
+                            </label>
+                            <input id="file-input" type="file" style="display: none;" @change="upadteProfileImg">
+                        </div>
+                        <div class="ml-10 flex flex-col justify-center">
+                            <div class="w-100 text-2xl flex items-center">
+                                <img width="30" src="../assets/icons/svg/hashtag-solid.svg" alt="">
+                                <span class="ml-2">Nickname: {{ userData.username }}</span>
+                            </div>
+                            <div class="w-100 text-2xl flex items-center">
+                                <img width="30" src="../assets/icons/svg/at-solid.svg" alt="">
+                                <span class="ml-2">Email: {{ userData.email }}</span>
+                            </div>
+                            <div class="w-100 text-2xl flex items-center">
+                                <img width="30" src="../assets/icons/svg/earth-europe-solid.svg" alt="">
+                                <span class="ml-2">Rank: 1230</span>
+                            </div>
 
-            <div v-if="page == 0">
-                <div class="flex gap-20">
-                    <div class="w-2/12">
-                        <label for="file-input" class="file-input-label">
-                            <ProfilePic :src="store.$state.profileImg" big="true" />
-                        </label>
-                        <input id="file-input" type="file" style="display: none;" @change="upadteProfileImg">
+                        </div>
+                        <button @click="isFollowersModalOpen = true" class="followers">
+                            <div class="info">
+                                <p>Seguidores</p>
+                                <p class="text-center">{{ store.followers.length }}</p>
+                            </div>
+                        </button>
+                        <button @click="isFriendsModalOpen = true" class="followers">
+                            <div class="info">
+                                <p>Seguidos</p>
+                                <p class="text-center">{{ store.friends.length }}</p>
+                            </div>
+                        </button>
                     </div>
-                    <div class="ml-10 flex flex-col justify-center">
-                        <div class="w-100 text-2xl flex items-center">
-                            <img width="30" src="../assets/icons/svg/hashtag-solid.svg" alt="">
-                            <span class="ml-2">Nickname: {{ userData.username }}</span>
-                        </div>
-                        <div class="w-100 text-2xl flex items-center">
-                            <img width="30" src="../assets/icons/svg/at-solid.svg" alt="">
-                            <span class="ml-2">Email: {{ userData.email }}</span>
-                        </div>
-                        <div class="w-100 text-2xl flex items-center">
-                            <img width="30" src="../assets/icons/svg/earth-europe-solid.svg" alt="">
-                            <span class="ml-2">Rank: 1230</span>
-                        </div>
-                    </div>
-                    <button @click="isModalOpen = true" class="followers">
-                        <div class="info">
-                            <p>Seguidores</p>
-                            <p class="text-center">{{ store.followers.length }}</p>
-                        </div>
-                    </button>
-                    <div class="followers">
-                        <div class="info">
-                            <p>Seguidos</p>
-                            <p class="text-center">{{ store.friends.length }}</p>
-                        </div>
-                    </div>
+                    <button @click="confirmDeleteProfile" type="button"
+                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
+                        perfil</button>
+                </div>
 
+                <div v-if="page == 1">
+                    <p>History</p>
+                </div>
+
+                <div v-if="page == 2">
+                    <p>keyhits</p>
                 </div>
                 <button @click="confirmDeleteProfile" type="button"
                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
                     perfil</button>
             </div>
-
-            <div v-if="page == 1">
-                <p>History</p>
-            </div>
-
-            <div v-if="page == 2">
-                <p>keyhits</p>
-            </div>
         </div>
+
+        <div>
+            <div class="flex justify-between">
+                <button class="friend-icon">
+                    <img class="icon-button" src="../assets/icons/svg/FaSolidUserFriends.svg" alt="">
+                    <span class="ml-2.5 text-2xl">Friends</span>
+                </button>
+                <button @click="isAddUserOpen = true">
+                    <img class="icon-button" src="../assets/icons/svg/FluentMdl2AddFriend.svg" alt="">
+                </button>
+            </div>
+            <hr>
+
+            <div class="my-1.5 online-friends" v-for="friend in store.$state.friends">
+                <div class="flex justify-between items-center">
+                    <img class="online-state-icon" v-if="friend.online" src="../assets/icons/svg/OnlineCircle.svg"
+                        alt="">
+                    <img class="online-state-icon" v-else src="../assets/icons/svg/OfflineCircle.svg" alt="">
+                    <span>{{ friend.username }}</span>
+                    <img class="play-icon mr-2.5" src="../assets/icons/svg/PlayIcon.svg" alt="">
+                </div>
+            </div>
+            
+
+
+
+        </div>
+
     </section>
 </template>
 
@@ -93,16 +168,20 @@ import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
 import Modal from "../components/Modal.vue";
 
-var isModalOpen = ref(false)
+import { api_ip } from "~/constants";
 
-function closeModal() {
-    console.log('close modal')
-    isModalOpen.value = false
-}
+
+var isFollowersModalOpen = ref(false)
+var isFriendsModalOpen = ref(false)
+var isAddUserOpen = ref(false)
+
+var userSearchInput = ref("")
+var userSearchResult = ref([])
 
 const store = userStore()
 var jwt = store.$state.jwt
-console.log(jwt)
+//console.log(jwt)
+
 
 var userData = store.userInfo
 
@@ -112,7 +191,7 @@ function upadteProfileImg(event) {
     const form = new FormData()
     form.append('image', event.target.files[0])
 
-    axios.post('http://172.30.5.61:3000/user/editimg', form, {
+    axios.post(`http://${api_ip}/user/editimg`, form, {
         headers: {
             Authorization: `Bearer ${jwt}`
         }
@@ -134,7 +213,7 @@ function confirmDeleteProfile() {
         confirmButtonText: 'Sí'
     }).then((result) => {
         if (result.isConfirmed) {
-            sendDeteleEmail()
+            sendDeleteEmail()
             Swal.fire({
                 title: 'Por favor, ingresa el código que recibiste en tu correo',
                 input: 'text',
@@ -145,7 +224,7 @@ function confirmDeleteProfile() {
                 confirmButtonText: 'Confirmar',
                 showLoaderOnConfirm: true,
                 preConfirm: (code) => {
-                    return axios.post('http://172.30.5.61:3000/user/confirmdelete', {
+                    return axios.post(`http://${api_ip}/user/confirmdelete`, {
                         code: code,
                         login: store.$state.username
                     })
@@ -179,8 +258,8 @@ function confirmDeleteProfile() {
     });
 }
 
-function sendDeteleEmail() {
-    axios.post('http://172.30.5.61:3000/user/delete', undefined, {
+function sendDeleteEmail() {
+    axios.post(`http://${api_ip}/user/delete`, undefined, {
         headers: {
             Authorization: `Bearer ${jwt}`
         }
@@ -191,34 +270,77 @@ function sendDeteleEmail() {
 }
 
 
-function deleteProfile() {
-    axios.post('http://172.30.5.61:3000/user/delete', {
-        token: jwt.value,
+// function deleteProfile() {
+//     axios.post(`http://${api_ip}/user/delete`, {
+//         token: jwt.value,
+//     })
+//         .then(response => {
+//             console.log(response)
+//         })
+
+
+
+//     localStorage.removeItem('jwt')
+//     store.clearUser()
+// }
+
+
+function followUser(username) {
+    axios.post(`http://${api_ip}/user/follow`, {
+        follow: username
+    }, {
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
     })
         .then(response => {
-            console.log(response)
+            store.$state.followers = response.data.data.followers
+            store.$state.friends = response.data.data.friends
         })
-
-
-
-    localStorage.removeItem('jwt')
-    store.clearUser()
-    //navigateTo('/')
-
-    // /user/delete
-    // token
-
-    // /user/confirmdelete
-    // code login
+        .catch(error => {
+            console.error(error);
+        });
 }
+
+function unfollowUser(username) {
+    axios.post(`http://${api_ip}/user/unfollow`, {
+        unfollow: username
+    }, {
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    })
+        .then(response => {
+            store.$state.friends = response.data.data.friends
+            store.$state.followers = response.data.data.followers
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function searchUser(){
+    axios.post(`http://${api_ip}/user/search`, {
+        search: userSearchInput.value
+    }, {
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    })
+        .then(response => {
+            //console.log(response)
+            userSearchResult.value = response.data.data.users
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
 </script>
 
 <style scoped>
-* {
-    color: white;
-}
-
 #profile {
+    color: white;
     display: grid;
     grid-template-columns: 10fr 2fr;
 }
@@ -232,10 +354,6 @@ function deleteProfile() {
     border: 1px solid white;
 }
 
-.icon-button {
-    height: 25px;
-    vertical-align: middle;
-}
 
 .img-opacity {
     opacity: 50%;
@@ -260,5 +378,51 @@ function deleteProfile() {
 .followers img {
     width: 50px;
     height: 50px;
+}
+
+.modal-img {
+    height: 50px;
+    width: 50px;
+}
+
+.user-modal-info {
+    display: grid;
+    grid-template-columns: 1fr 5fr 3fr;
+    margin: 10px 0 10px 0;
+    overflow: scroll;
+}
+
+.follow-button {
+    background-color: #43219B;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.icon-button {
+    height: 25px;
+    vertical-align: middle;
+}
+
+.friend-icon {
+    cursor: auto;
+    display: flex;
+    align-items: center;
+}
+
+.online-state-icon {
+    height: 15px;
+    width: 15px;
+}
+
+.play-icon {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.online-friends {
+    max-height: 300px;
+    overflow: scroll;
 }
 </style>
