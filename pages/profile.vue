@@ -28,16 +28,18 @@
     </Modal>
 
 
-    <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false"
-        :title="'Buscador de usuarios'">
-        <input v-model="userSearchInput" @change="searchUser" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Busca un usuario..."/>
-        <div v-if="userSearchResult.length>0" class="user-modal-info" v-for="user in userSearchResult">
+    <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false" :title="'Buscador de usuarios'">
+        <input v-model="userSearchInput" @change="searchUser" type="text"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Busca un usuario..." />
+        <div v-if="userSearchResult.length > 0" class="user-modal-info" v-for="user in userSearchResult">
             <ProfilePic :src="user.profileImg" />
             <div class="flex items-center">
                 <p class="ml-3">{{ user.username }}</p>
             </div>
             <div class="flex items-center justify-end">
-                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">Dejar de seguir</button>
+                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">Dejar de
+                    seguir</button>
                 <button v-else class="follow-button" @click="followUser(user.username)">Seguir</button>
                 <!-- <span v-else>No te sigue</span> -->
             </div>
@@ -111,11 +113,13 @@
                             </div>
                         </button>
                     </div>
-                    <button @click="confirmDeleteProfile" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar perfil</button>
+                    <button @click="confirmDeleteProfile" type="button"
+                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
+                        perfil</button>
                 </div>
 
                 <div v-if="page == 1">
-                    <PlayHistory/>
+                    <PlayHistory />
                 </div>
 
                 <div v-if="page == 2">
@@ -124,7 +128,7 @@
             </div>
         </div>
         <div>
-            <OnlineFriends/>
+            <OnlineFriends />
         </div>
     </section>
 </template>
@@ -185,7 +189,7 @@ import Modal from "../components/Modal.vue";
 import PlayHistory from "~/components/PlayHistory.vue";
 import { api_ip } from "~/constants";
 import OnlineFriends from "~/components/OnlineFriends.vue";
-import refDebounced from ""
+import { refDebounced } from "vue"
 
 
 var isFollowersModalOpen = ref(false)
@@ -336,7 +340,7 @@ function unfollowUser(username) {
         });
 }
 
-function searchUser(){
+function searchUser() {
     axios.post(`http://${api_ip}/user/search`, {
         search: userSearchInput.value
     }, {
@@ -355,7 +359,7 @@ function searchUser(){
 
 
 
-const busquedaUsuari = refDebounced(userSearchInput,500)
+const busquedaUsuari = refDebounced(userSearchInput, 500)
 watch(searchUser, busquedaUsuari)
 
 </script>
