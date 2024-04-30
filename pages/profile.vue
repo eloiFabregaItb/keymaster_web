@@ -96,6 +96,7 @@
                                 <img width="30" src="../assets/icons/svg/earth-europe-solid.svg" alt="">
                                 <span class="ml-2">Rank: 1230</span>
                             </div>
+
                         </div>
                         <button @click="isFollowersModalOpen = true" class="followers">
                             <div class="info">
@@ -122,6 +123,9 @@
                 <div v-if="page == 2">
                     <p>keyhits</p>
                 </div>
+                <button @click="confirmDeleteProfile" type="button"
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
+                    perfil</button>
             </div>
         </div>
 
@@ -163,6 +167,7 @@ import ProfilePic from "~/components/ProfilePic.vue";
 import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
 import Modal from "../components/Modal.vue";
+
 import { api_ip } from "~/constants";
 
 
@@ -176,6 +181,7 @@ var userSearchResult = ref([])
 const store = userStore()
 var jwt = store.$state.jwt
 //console.log(jwt)
+
 
 var userData = store.userInfo
 

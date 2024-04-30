@@ -30,10 +30,9 @@
                     <p class="text-lg font-semibold">Contraseña</p>
                     <PasswordInput v-model="password" />
 
-                    <div v-if="showErrors">
-                        <p class="text-red-600">{{ errMsg }}</p>
-                    </div>
-
+                <div v-if="showErrors">
+                    <p class="text-red-600">{{ errMsg }}</p>
+                </div>
                     <div>
                         <button type="submit" @click="login()"
                             class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
@@ -57,6 +56,7 @@
 </template>
 
 <script setup>
+
 import { api_ip } from "~/constants";
 import PasswordInput from "../components/PasswordInput.vue"
 import axios from "axios"
@@ -65,8 +65,8 @@ import { userStore } from '../storages/userStore.js'
 
 const emit = defineEmits(["login"])
 
-const store = userStore()
 
+const store = userStore()
 var user = ref("")
 var password = ref("")
 
