@@ -230,8 +230,6 @@ body {
 
 .selected-word {
   background-color: #97979783;
-  border-radius: px;
-
 }
 
 .selected-char {
@@ -258,7 +256,6 @@ body {
 
 .word span.error {
   background-color: #b33434;
-  border-radius: 10px;
 }
 
 .start-button {
