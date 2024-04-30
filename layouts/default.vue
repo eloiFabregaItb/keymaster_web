@@ -12,5 +12,10 @@ import "../assets/css/main.css"
 #fondo {
   /* height: 100% !important; */
   background: linear-gradient(#000000, #43219B);
+  height: 100dvh;
+  overflow-y: hidden;
+
+  display: flex;
+  flex-direction: column;
 }
 </style>
