@@ -562,7 +562,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
 .keyboard {
   --unit: 65px;
 

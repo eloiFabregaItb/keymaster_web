@@ -20,6 +20,7 @@
 
 const { title } = defineProps(['title'])
 
+
 const emit = defineEmits(['close'])
 
 function buttonClose() {

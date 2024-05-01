@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 
+export const isOnline = ref(false)
+
 export const userStore = defineStore({
   id: 'userStore',
   state: () => ({
@@ -39,6 +41,7 @@ export const userStore = defineStore({
       this.friends = friends,
       this.followers = followers,
       this.notifications = notifications
+      isOnline.value = isLogged
     },
     updateOnlineFriends(id, isOnline) {
       console.log("entra funcion actualizar")
@@ -56,6 +59,10 @@ export const userStore = defineStore({
       this.friends = [];
       this.followers = [];
       this.notifications = []
+      isOnline.value = false
+    },
+    isOnline(){
+      return this.isLogged
     }
   }
 });

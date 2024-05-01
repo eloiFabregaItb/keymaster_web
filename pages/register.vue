@@ -1,7 +1,8 @@
 <template>
-    <section id="register">
-        <div class="h-dvh flex flex-col justify-center items-center text-style text-white">
-            <nuxt-link to="/">
+    <section class="register">
+
+        <div class="info">
+            <nuxt-link to="/" class="logo">
                 <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
             </nuxt-link>
             <p class="welcome"> <strong>¡Bienvenido futuro Master!</strong> Si has llegado hasta aquí es que
@@ -206,11 +207,25 @@ section {
     overflow-x: hidden;
     overflow-y: hidden;
     /* Añadido overflow-y: hidden; */
+    color: white;
 }
 
-#register {
+.register {
     display: grid;
     grid-template-columns: 5fr 3fr;
+}
+
+.info {
+    display: flex;
+    align-items: cener;
+    justify-content: center;
+    flex-direction: column
+}
+
+.info .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .welcome {
@@ -219,13 +234,5 @@ section {
     font-weight: normal;
     font-style: normal;
     font-size: 1.5rem;
-}
-
-.h-dvh {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    text-align: left;
-    padding-left: 14rem;
 }
 </style>
