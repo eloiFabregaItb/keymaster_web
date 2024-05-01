@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import "../assets/css/main.css"
 
-import { userStore } from '../../storages/userStore.js'
+import { userStore } from '~/storages/userStore.js'
+import Navbar from "~/components/layout/navbar/navbar.vue";
+import Footer from "~/components/layout/footer.vue";
 
 const store = userStore()
 
@@ -10,19 +12,42 @@ const store = userStore()
 </script>
 
 <template>
-  <div id="fondo">
-    <slot />
+  <div class="fondo">
+    <Navbar />
+    <div class="scroller">
+      <div class="content">
+        <slot />
+      </div>
+      <Footer />
+    </div>
   </div>
 </template>
 
+
 <style scoped>
-#fondo {
-  /* height: 100% !important; */
+.fondo {
   background: linear-gradient(#000000, #43219B);
   height: 100dvh;
-  overflow-y: hidden;
+  width: 100vw;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
+}
+
+.scroller {
+  flex: 1;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column
+}
+
+.content {
+  margin: 0 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 </style>

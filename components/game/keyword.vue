@@ -1,30 +1,26 @@
 <template>
-  <div class="flex items-center justify-end pt-16">
-  </div>
-  <section class="game mx-24">
+  <section class="game">
 
-    <div class="flex items-center justify-end pr-20 pb-2 mt-20">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
-        class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round"
-          d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-      </svg>
-      <p style="color: white;" class="pr-2 pl-2"> {{ errors }} errors </p>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
-        class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round"
-          d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-      </svg>
-      <p style="color: white;" class="pr-2 pl-2">{{ wpm }} wpm</p>
+    <div class="information">
 
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
-        class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-      </svg>
-      <p style="color: white;" class="pr-2 pl-2">{{ ellapsed }}s</p>
+
+      <div class="stat">
+        <IcoError />
+        <p style="color: white;" class="pr-2 pl-2"> {{ errors }} errors </p>
+      </div>
+
+      <div class="stat">
+        <IcoWPM />
+        <p style="color: white;" class="pr-2 pl-2">{{ wpm }} wpm</p>
+      </div>
+
+      <div class="stat">
+        <IcoTime />
+        <p style="color: white;" class="pr-2 pl-2">{{ ellapsed || 0 }} s</p>
+      </div>
 
     </div>
-    <hr style="width: 95%;">
+
     <button class="button-wrapper" @keydown="handleKeyPress" @click="startGame" @focusout="handleExitGame" autofocus>
 
       <div class="start-alert">
@@ -37,10 +33,10 @@
             <div v-for="(word, index) in textArr" :key="index" class="word"
               :class="{ 'selected-word': index === wordCount }">
               <span v-for="(char, charIndex) in word" :key="charIndex" :class="{
-        'selected-char': index === wordCount && charIndex === charInWordCount,
-        'error': char.err,
-        'space-dot': char.show === '·'
-      }">
+          'selected-char': index === wordCount && charIndex === charInWordCount,
+          'error': char.err,
+          'space-dot': char.show === '·'
+        }">
                 {{ char.show || char.char }}
               </span>
 
@@ -56,6 +52,10 @@
 </template>
 
 <script setup>
+import IcoError from "~/assets/icons/actions/error.svg"
+import IcoWPM from "~/assets/icons/actions/lightning.svg"
+import IcoTime from "~/assets/icons/actions/time.svg"
+
 import { ref } from 'vue'
 import Keyboard from '~/components/game/keyboard.vue';
 import { splitText } from './splitWords';
@@ -225,10 +225,28 @@ body {
   /* Oculta el scroll vertical */
 }
 
-.game {
-  margin-right: 22rem;
+.information {
+  /* flex items-center justify-end pr-20 pb-2 */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 15px;
+
+  border-bottom: 1px solid white;
 }
 
+.information .stat {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 3px;
+}
+
+.information .stat svg {
+  height: 25px;
+  width: auto;
+}
 
 .text-container {
   display: flex;
