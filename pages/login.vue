@@ -84,7 +84,7 @@ var showErrors = ref(false)
 var errMsg = ref("")
 
 async function login() {
-  axios.post(`http://${api_ip}/auth/login`, {
+  axios.post(`${api_ip}/auth/login`, {
     login: user.value,
     password: password.value
   })

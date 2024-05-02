@@ -356,7 +356,7 @@ body {
 
   filter: none !important;
 
-  z-index: 55;
+  z-index: 19;
   position: absolute;
   top: 50%;
   left: 50%;

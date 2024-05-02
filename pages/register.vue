@@ -122,7 +122,7 @@ async function register() {
         return;
     }
 
-    axios.post(`http://${api_ip}/auth/register`, {
+    axios.post(`${api_ip}/auth/register`, {
         username: username.value,
         email: email.value,
         password: password.value

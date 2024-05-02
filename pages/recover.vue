@@ -5,78 +5,80 @@
                 <div v-if="page == 1">
                     <div class="mb-7 text-center">
                         <h3 class="font-semibold text-2xl text-gray-800">Introduce tu usuario o correo</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-lg font-semibold">Correo o usuario</p>
+                            <input
+                                class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+                                type="text" placeholder="Introduce tu correo o usuario" v-model="usernameOrEmail">
                         </div>
-                        <div class="space-y-6">
-                            <div>
-                                <p class="text-lg font-semibold">Correo o usuario</p>
-                                <input
-                                    class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                                    type="text" placeholder="Introduce tu correo o usuario" v-model="usernameOrEmail">
-                            </div>
+                    </div>
+                    <div v-if="showErrors">
+                        <p class="text-red-600">{{ errMsg }}</p>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit"
+                            class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500"
+                            @click="sendMail">Enviar correo </button>
+                    </div>
+                </div>
+
+                <div v-if="page == 2">
+                    <div class="mb-7 text-center">
+                        <h3 class="font-semibold text-2xl text-gray-800">Introduce el código enviado a {{
+                    hiddenEmail }}
+                        </h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-lg font-semibold">Código</p>
+                            <input v-model="mailCode"
+                                class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+                                type="text" placeholder="Introduce tu código">
                         </div>
                         <div v-if="showErrors">
                             <p class="text-red-600">{{ errMsg }}</p>
                         </div>
-                        <div class="mt-4">
-                            <button type="submit" class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500" @click="sendMail">Enviar correo </button>
+                        <div>
+                            <button type="submit" @click="sendCode"
+                                class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+                                Enviar código
+                            </button>
                         </div>
                     </div>
+                </div>
 
-                    <div v-if="page == 2">
-                        <div class="mb-7 text-center">
-                            <h3 class="font-semibold text-2xl text-gray-800">Introduce el código enviado a {{
-                    hiddenEmail }}
-                            </h3>
-                        </div>
-                        <div class="space-y-6">
-                            <div>
-                                <p class="text-lg font-semibold">Código</p>
-                                <input v-model="mailCode"
-                                    class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                                    type="text" placeholder="Introduce tu código">
-                            </div>
-                            <div v-if="showErrors">
-                                <p class="text-red-600">{{ errMsg }}</p>
-                            </div>
-                            <div>
-                                <button type="submit" @click="sendCode"
-                                    class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
-                                    Enviar código
-                                </button>
-                            </div>
-                        </div>
+                <div v-if="page == 3">
+                    <div class="mb-7 text-center">
+                        <h3 class="font-semibold text-2xl text-gray-800">Introduce tu nueva contraseña</h3>
                     </div>
-
-                    <div v-if="page == 3">
-                        <div class="mb-7 text-center">
-                            <h3 class="font-semibold text-2xl text-gray-800">Introduce tu nueva contraseña</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-lg font-semibold">Contraseña</p>
+                            <input v-model="password"
+                                class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+                                type="text" placeholder="Introduce tu nueva contraseña">
                         </div>
-                        <div class="space-y-6">
-                            <div>
-                                <p class="text-lg font-semibold">Contraseña</p>
-                                <input v-model="password"
-                                    class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                                    type="text" placeholder="Introduce tu nueva contraseña">
-                            </div>
-                            <div>
-                                <p class="text-lg font-semibold">Confirmar contraseña</p>
-                                <input v-model="confirmPassword"
-                                    class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                                    type="text" placeholder="Confirma tu nueva contraseña">
-                            </div>
-                            <div v-if="showErrors">
-                                <p class="text-red-600">{{ errMsg }}</p>
-                            </div>
-                            <div>
-                                <button type="submit" @click="sendNewPassword"
-                                    class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
-                                    Establecer nueva contraseña
-                                </button>
-                            </div>
+                        <div>
+                            <p class="text-lg font-semibold">Confirmar contraseña</p>
+                            <input v-model="confirmPassword"
+                                class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
+                                type="text" placeholder="Confirma tu nueva contraseña">
+                        </div>
+                        <div v-if="showErrors">
+                            <p class="text-red-600">{{ errMsg }}</p>
+                        </div>
+                        <div>
+                            <button type="submit" @click="sendNewPassword"
+                                class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+                                Establecer nueva contraseña
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 </template>
 
@@ -98,7 +100,7 @@ async function sendMail() {
     } else {
         showErrors.value = false
         errMsg.value = ""
-        axios.post(`http://${api_ip}/auth/forgotten`, {
+        axios.post(`${api_ip}/auth/forgotten`, {
             login: usernameOrEmail.value,
         })
             .then(response => {
@@ -115,7 +117,7 @@ async function sendMail() {
     }
 }
 async function sendCode() {
-    axios.post(`http://${api_ip}/auth/checkforgotten`, {
+    axios.post(`${api_ip}/auth/checkforgotten`, {
         login: usernameOrEmail.value,
         code: mailCode.value
     })
@@ -151,7 +153,7 @@ async function sendNewPassword() {
     }
     showErrors.value = false
     errMsg.value = ""
-    axios.post(`http://${api_ip}/auth/changepassword`, {
+    axios.post(`${api_ip}/auth/changepassword`, {
         login: usernameOrEmail.value,
         code: mailCode.value,
         password: password.value

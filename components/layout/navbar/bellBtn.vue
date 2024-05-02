@@ -68,7 +68,7 @@ function showHideNotifications() {
 
   if (mostrarModalNotificaciones.value) {
     const ids = store.$state.notifications.map(x => x.id)
-    axios.post(`http://${api_ip}/notifications/seen`, {
+    axios.post(`${api_ip}/notifications/seen`, {
       ids: ids
     }, {
       headers: {
