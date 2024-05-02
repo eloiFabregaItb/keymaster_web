@@ -91,7 +91,6 @@ async function login() {
     .then(response => {
       if (response.data.success) {
         showErrors.value = false;
-        localStorage.setItem('jwt', response.data.jwt);
         //handleLoginSocket(response.data.jwt)
         navigateTo('/')
         store.updateUser({
