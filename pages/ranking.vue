@@ -1,41 +1,203 @@
 <template>
-    <div>
-        <label for="full_name">Full name</label>
-        <input type="text" id="full_name" v-model="userSearch">
+    <div class="mx-24 mt-16 text-white">
+        <h1 class="text-2xl font-black">Ránking de los mejores jugadores de KeyMaster</h1>
+        <div class="play-container">
+            <table>
+                <thead>
+                    <th>
+                        <img class="table-icon" src="../assets/icons/svg/Podium.svg" alt="">
+                    </th>
+                    <th>
+                        <img class="table-icon" src="../assets/icons/actions/lightning.svg" alt="">
+                    </th>
+                    <th>Palabras por minuto</th>
+                    <th>Número de errores</th>
+                    <th>% de errores</th>
+                </thead>
+            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tbody class="table-wrapper">
+                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>
+                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>                        <tr>
+                            <td>30-04-2024 17:05</td>
+                            <td>50s</td>
+                            <td>77</td>
+                            <td>4</td>
+                            <td>2%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <p class="text-white">{{ userSearchResult }}</p>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import debounce from 'lodash.debounce'
-import { userStore } from '../storages/userStore.js'
-import axios from "axios"
-import { api_ip } from '~/constants'
 
-const store = userStore()
-var jwt = store.$state.jwt
-const userSearchInput = ref("")
-const userSearchResult = ref([])
-
-function searchUser(searchInput) {
-    axios.post(`${api_ip}/user/search`, {
-        search: searchInput.value
-    }, {
-        headers: {
-            Authorization: `Bearer ${jwt}`
-        }
-    })
-        .then(response => {
-            console.log(response)
-            userSearchResult.value = response.data.data.users
-        })
-        .catch(error => {
-            console.error(error);
-        });
-}
-watch(userSearchInput, debounce(() => {
-    //console.log('Send API request')
-    searchUser(userSearchInput)
-}, 1000))
 </script>
+
+<style scoped>
+.play-container {
+    width: 95%;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.table-wrapper {
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border-left: 1px solid #dddddd33;
+    border-right: 1px solid #dddddd33;
+    border-bottom: 1px solid white;
+    padding: 8px;
+    text-align: center;
+    width: 20%;
+}
+
+th {
+    background-color: white;
+    color: #43219B;
+}
+
+.table-icon {
+    height: 40px;
+    display: block;
+    margin: auto;
+}
+</style>
