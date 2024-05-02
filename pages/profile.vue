@@ -29,7 +29,8 @@
 
 
     <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false" :title="'Buscador de usuarios'">
-        <input v-model="userSearchInput" @change="searchUser" type="text"
+        <!-- <input v-model="userSearchInput" @change="searchUser" type="text" -->
+        <input v-model="userSearchInput" type="text"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Busca un usuario..." />
         <div v-if="userSearchResult.length > 0" class="user-modal-info" v-for="user in userSearchResult">
@@ -49,12 +50,7 @@
         </div>
     </Modal>
 
-
-
-
-
-
-    <Navbar></Navbar>
+    <!-- <Navbar>y</Navbar> -->
 
     <div class="flex items-center justify-end pt-16">
         <!-- <img width="20" class="text-white" src="../assets/icons/svg/circle-user-regular.svg" alt="">
@@ -181,7 +177,7 @@
 
 import axios from "axios"
 import Swal from 'sweetalert2'
-import Navbar from "~/components/layout/navbar2.vue";
+import Navbar from "~/components/layout/navbar/navbar.vue";
 import ProfilePic from "~/components/ProfilePic.vue";
 import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
@@ -189,15 +185,16 @@ import Modal from "../components/Modal.vue";
 import PlayHistory from "~/components/PlayHistory.vue";
 import { api_ip } from "~/constants";
 import OnlineFriends from "~/components/OnlineFriends.vue";
-import { refDebounced } from "vue"
+//import { refDebounced } from "vue"
+import { refDebounced } from '@vueuse/core'
 
 
 var isFollowersModalOpen = ref(false)
 var isFriendsModalOpen = ref(false)
 var isAddUserOpen = ref(false)
 
-var userSearchInput = ref("")
-var userSearchResult = ref([])
+//var userSearchInput = ref("")
+//var userSearchResult = ref([])
 
 const store = userStore()
 var jwt = store.$state.jwt
@@ -340,27 +337,42 @@ function unfollowUser(username) {
         });
 }
 
-function searchUser() {
+
+const userSearchInput = ref("")
+// Resultado de la búsqueda de usuarios
+const userSearchResult = ref([])
+
+// Crear un ref debounced que se actualizará después de 500 milisegundos de inactividad
+const busquedaUsuari = refDebounced(userSearchInput, 500)
+
+// Observar cambios en el ref debounced y ejecutar la búsqueda de usuarios
+watch(busquedaUsuari, (newValue) => {
+    console.log("SEARCH ",newValue)
+    searchUser(newValue)
+})
+
+// Observar cambios en userSearchInput y ejecutar la búsqueda de usuarios automáticamente
+watch(userSearchInput, (newValue) => {
+    searchUser(newValue)
+})
+
+// Función para realizar la búsqueda de usuarios
+function searchUser(searchInput) {
     axios.post(`http://${api_ip}/user/search`, {
-        search: userSearchInput.value
+        search: searchInput
     }, {
         headers: {
             Authorization: `Bearer ${jwt}`
         }
     })
-        .then(response => {
-            console.log(response)
-            userSearchResult.value = response.data.data.users
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    .then(response => {
+        console.log(response)
+        userSearchResult.value = response.data.data.users
+    })
+    .catch(error => {
+        console.error(error);
+    });
 }
-
-
-
-const busquedaUsuari = refDebounced(userSearchInput, 500)
-watch(searchUser, busquedaUsuari)
 
 </script>
 
