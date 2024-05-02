@@ -1,11 +1,7 @@
 <template>
-    <div class="flex flex-col min-h-screen">
+    <div class="flex flex-col">
         <div class="content flex-grow">
-            <div class="">
-                <div class="">
-                    
-                </div>
-            </div>
+            <h1 class="text-white">Ranking</h1>
         </div>
     </div>
 </template>
@@ -15,4 +11,6 @@
 import { ref } from 'vue';
 
 </script>
-<style scoped></style>
+<style scoped>
+
+</style>
