@@ -207,7 +207,6 @@ section {
     overflow-x: hidden;
     overflow-y: hidden;
     /* Añadido overflow-y: hidden; */
-    color: white;
 }
 
 .register {
@@ -234,5 +233,6 @@ section {
     font-weight: normal;
     font-style: normal;
     font-size: 1.5rem;
+    color: white;
 }
 </style>
