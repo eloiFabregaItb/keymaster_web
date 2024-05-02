@@ -1,5 +1,5 @@
 <template>
-  <div class="btnBell" @click="showHideNotifications">
+  <div class="btnBell" @click="showHideNotifications" @mouseleave="handleFocusOut">
     <IcoBell class="ico" />
     <span v-if="notifications && notifications.length > 0 && !hadBeenOpen" class="ball" />
 
@@ -61,6 +61,9 @@ const mostrarFechaAbsolutaORealtiva = (fecha) => {
   }
 }
 
+function handleFocusOut() {
+  mostrarModalNotificaciones.value = false
+}
 
 function showHideNotifications() {
   hadBeenOpen.value = true
@@ -68,7 +71,7 @@ function showHideNotifications() {
 
   if (mostrarModalNotificaciones.value) {
     const ids = store.$state.notifications.map(x => x.id)
-    axios.post(`http://${api_ip}/notifications/seen`, {
+    axios.post(`${api_ip}/notifications/seen`, {
       ids: ids
     }, {
       headers: {
@@ -105,6 +108,10 @@ function executeAction(requireToken, url) {
     alert("verificar correo")
   }
 }
+
+
+
+
 
 </script>
 
@@ -157,7 +164,7 @@ function executeAction(requireToken, url) {
   top: 100%;
   right: 0%;
 
-  margin-top: 30px;
+  /* margin-top: 30px; */
   padding: 20px;
 
   width: 500px;

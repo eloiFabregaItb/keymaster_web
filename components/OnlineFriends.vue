@@ -1,14 +1,16 @@
 <template>
-    <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false"
-        :title="'Buscador de usuarios'">
-        <input v-model="userSearchInput" @change="searchUser" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Busca un usuario..."/>
-        <div v-if="userSearchResult.length>0" class="user-modal-info" v-for="user in userSearchResult">
+    <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false" :title="'Buscador de usuarios'">
+        <input v-model="userSearchInput" @change="searchUser" type="text"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Busca un usuario..." />
+        <div v-if="userSearchResult.length > 0" class="user-modal-info" v-for="user in userSearchResult">
             <ProfilePic :src="user.profileImg" />
             <div class="flex items-center">
                 <p class="ml-3">{{ user.username }}</p>
             </div>
             <div class="flex items-center justify-end">
-                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">Dejar de seguir</button>
+                <button v-if="user.following" class="follow-button" @click="unfollowUser(user.username)">Dejar de
+                    seguir</button>
                 <button v-else class="follow-button" @click="followUser(user.username)">Seguir</button>
                 <!-- <span v-else>No te sigue</span> -->
             </div>
@@ -30,8 +32,7 @@
 
     <div class="my-1.5 online-friends" v-for="friend in store.$state.friends">
         <div class="flex justify-between items-center">
-            <img class="online-state-icon" v-if="friend.online" src="../assets/icons/svg/OnlineCircle.svg"
-                alt="">
+            <img class="online-state-icon" v-if="friend.online" src="../assets/icons/svg/OnlineCircle.svg" alt="">
             <img class="online-state-icon" v-else src="../assets/icons/svg/OfflineCircle.svg" alt="">
             <span>{{ friend.username }}</span>
             <img class="play-icon mr-2.5" src="../assets/icons/svg/PlayIcon.svg" alt="">
@@ -51,7 +52,7 @@ var userSearchInput = ref("")
 var userSearchResult = ref([])
 
 function followUser(username) {
-    axios.post(`http://${api_ip}/user/follow`, {
+    axios.post(`${api_ip}/user/follow`, {
         follow: username
     }, {
         headers: {
@@ -68,7 +69,7 @@ function followUser(username) {
 }
 
 function unfollowUser(username) {
-    axios.post(`http://${api_ip}/user/unfollow`, {
+    axios.post(`${api_ip}/user/unfollow`, {
         unfollow: username
     }, {
         headers: {
@@ -84,8 +85,8 @@ function unfollowUser(username) {
         });
 }
 
-function searchUser(){
-    axios.post(`http://${api_ip}/user/search`, {
+function searchUser() {
+    axios.post(`${api_ip}/user/search`, {
         search: userSearchInput.value
     }, {
         headers: {

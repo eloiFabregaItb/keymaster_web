@@ -84,14 +84,13 @@ var showErrors = ref(false)
 var errMsg = ref("")
 
 async function login() {
-  axios.post(`http://${api_ip}/auth/login`, {
+  axios.post(`${api_ip}/auth/login`, {
     login: user.value,
     password: password.value
   })
     .then(response => {
       if (response.data.success) {
         showErrors.value = false;
-        localStorage.setItem('jwt', response.data.jwt);
         //handleLoginSocket(response.data.jwt)
         navigateTo('/')
         store.updateUser({

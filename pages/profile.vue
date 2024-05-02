@@ -50,7 +50,8 @@
         </div>
     </Modal>
 
-    <!-- <Navbar>y</Navbar> -->
+
+
 
     <div class="flex items-center justify-end pt-16">
         <!-- <img width="20" class="text-white" src="../assets/icons/svg/circle-user-regular.svg" alt="">
@@ -209,7 +210,7 @@ function upadteProfileImg(event) {
     const form = new FormData()
     form.append('image', event.target.files[0])
 
-    axios.post(`http://${api_ip}/user/editimg`, form, {
+    axios.post(`${api_ip}/user/editimg`, form, {
         headers: {
             Authorization: `Bearer ${jwt}`
         }
@@ -242,7 +243,7 @@ function confirmDeleteProfile() {
                 confirmButtonText: 'Confirmar',
                 showLoaderOnConfirm: true,
                 preConfirm: (code) => {
-                    return axios.post(`http://${api_ip}/user/confirmdelete`, {
+                    return axios.post(`${api_ip}/user/confirmdelete`, {
                         code: code,
                         login: store.$state.username
                     })
@@ -262,7 +263,6 @@ function confirmDeleteProfile() {
             }).then((result) => {
 
                 if (result.isConfirmed) {
-                    localStorage.removeItem('jwt')
                     store.clearUser()
                     navigateTo("/")
                     Swal.fire(
@@ -277,7 +277,7 @@ function confirmDeleteProfile() {
 }
 
 function sendDeleteEmail() {
-    axios.post(`http://${api_ip}/user/delete`, undefined, {
+    axios.post(`${api_ip}/user/delete`, undefined, {
         headers: {
             Authorization: `Bearer ${jwt}`
         }
@@ -289,7 +289,7 @@ function sendDeleteEmail() {
 
 
 // function deleteProfile() {
-//     axios.post(`http://${api_ip}/user/delete`, {
+//     axios.post(`${api_ip}/user/delete`, {
 //         token: jwt.value,
 //     })
 //         .then(response => {
@@ -298,13 +298,12 @@ function sendDeleteEmail() {
 
 
 
-//     localStorage.removeItem('jwt')
 //     store.clearUser()
 // }
 
 
 function followUser(username) {
-    axios.post(`http://${api_ip}/user/follow`, {
+    axios.post(`${api_ip}/user/follow`, {
         follow: username
     }, {
         headers: {
@@ -321,7 +320,7 @@ function followUser(username) {
 }
 
 function unfollowUser(username) {
-    axios.post(`http://${api_ip}/user/unfollow`, {
+    axios.post(`${api_ip}/user/unfollow`, {
         unfollow: username
     }, {
         headers: {
@@ -373,6 +372,11 @@ function searchUser(searchInput) {
         console.error(error);
     });
 }
+
+
+
+// const busquedaUsuari = refDebounced(userSearchInput, 500)
+// watch(searchUser, busquedaUsuari)
 
 </script>
 
