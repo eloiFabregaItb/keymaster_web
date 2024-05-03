@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     sockets: [ // Required
       { // At least one entry is required
         name: 'play',
-        url: `${api_ip}:3000`,
+        url: `${api_ip}`,
         default: true,
         vuex: { /* see section below */ },
         namespaces: { /* see section below */ }
