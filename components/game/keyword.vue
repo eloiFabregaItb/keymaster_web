@@ -367,7 +367,7 @@ body {
   filter: blur(2px)
 }
 
-.hidden-input:not(:focus) .start-alert {
+.hidden-input:not(:focus)+.button-wrapper .start-alert {
   display: flex;
 }
 

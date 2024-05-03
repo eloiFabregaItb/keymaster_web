@@ -40,7 +40,11 @@ const store = userStore()
   overflow-y: auto;
 
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+
+  max-width: 1500px;
+
+  margin: 0 auto;
 }
 
 .content {
