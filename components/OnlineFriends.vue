@@ -1,6 +1,6 @@
 <template>
     <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false" :title="'Buscador de usuarios'">
-        <input v-model="userSearchInput" @change="searchUser" type="text"
+        <input v-model="userSearchInput" type="text"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Busca un usuario..." />
         <div v-if="userSearchResult.length > 0" class="user-modal-info" v-for="user in userSearchResult">
@@ -41,10 +41,14 @@
 </template>
 
 <script setup>
+
 import axios from "axios"
 import Modal from './Modal.vue';
 import { userStore } from '../storages/userStore.js'
 import { api_ip } from "~/constants";
+import debounce from 'lodash.debounce'
+import { ref, watch } from 'vue'
+
 const store = userStore()
 var jwt = store.$state.jwt
 var isAddUserOpen = ref(false)
@@ -85,9 +89,9 @@ function unfollowUser(username) {
         });
 }
 
-function searchUser() {
+function searchUser(searchInput) {
     axios.post(`${api_ip}/user/search`, {
-        search: userSearchInput.value
+        search: searchInput.value
     }, {
         headers: {
             Authorization: `Bearer ${jwt}`
@@ -101,6 +105,9 @@ function searchUser() {
             console.error(error);
         });
 }
+watch(userSearchInput, debounce(() => {
+    searchUser(userSearchInput)
+}, 100))
 
 </script>
 
