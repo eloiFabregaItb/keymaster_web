@@ -29,7 +29,8 @@
 
 
     <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false" :title="'Buscador de usuarios'">
-        <input v-model="userSearchInput" @change="searchUser" type="text"
+        <!-- <input v-model="userSearchInput" @change="searchUser" type="text" -->
+        <input v-model="userSearch" type="text"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Busca un usuario..." />
         <div v-if="userSearchResult.length > 0" class="user-modal-info" v-for="user in userSearchResult">
@@ -52,7 +53,7 @@
 
 
 
-    <div class="flex items-center justify-end pt-16">
+    <div class="flex items-center justify-end">
         <!-- <img width="20" class="text-white" src="../assets/icons/svg/circle-user-regular.svg" alt="">
         <span class="text-white text-2xl mr-10" @click="page = 0" style="cursor: pointer;">Profile</span> -->
     </div>
@@ -63,11 +64,15 @@
             </button>
 
             <button :class="{ 'img-opacity': page !== 1 }" class="px-5" @click="page = 1">
-                <img class="icon-button" src="../assets/icons/svg/keyboard-solid.svg" alt="">
+                <img class="icon-button" src="../assets/icons/svg/History.svg" alt="">
             </button>
 
             <button :class="{ 'img-opacity': page !== 2 }" class="px-5" @click="page = 2">
-                <img class="icon-button" src="../assets/icons/svg/gamepad-solid.svg" alt="">
+                <img class="icon-button" src="../assets/icons/svg/keyboard-solid.svg" alt="">
+            </button>
+
+            <button :class="{ 'img-opacity': page !== 3 }" class="px-5" @click="page = 3">
+                <img class="icon-button" src="../assets/icons/svg/Settings.svg" alt="">
             </button>
             <hr style="width: 95%;">
             <div class="mt-10">
@@ -109,9 +114,7 @@
                             </div>
                         </button>
                     </div>
-                    <button @click="confirmDeleteProfile" type="button"
-                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
-                        perfil</button>
+
                 </div>
 
                 <div v-if="page == 1">
@@ -120,6 +123,12 @@
 
                 <div v-if="page == 2">
                     <p>Keyhits</p>
+                </div>
+
+                <div v-if="page == 3">
+                    <button @click="confirmDeleteProfile" type="button"
+                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar
+                        perfil</button>
                 </div>
             </div>
         </div>
@@ -130,77 +139,32 @@
 </template>
 
 <script setup>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import axios from "axios"
 import Swal from 'sweetalert2'
+import Navbar from "~/components/layout/navbar/navbar.vue";
 import ProfilePic from "~/components/ProfilePic.vue";
-import { ref } from 'vue';
 import { userStore } from '../storages/userStore.js'
 import Modal from "../components/Modal.vue";
 import PlayHistory from "~/components/PlayHistory.vue";
 import { api_ip } from "~/constants";
 import OnlineFriends from "~/components/OnlineFriends.vue";
-// import { refDebounced } from "vue"
+//import { refDebounced } from "vue"
+//import { refDebounced } from '@vueuse/core'
+import { ref, watch } from 'vue'
+import debounce from 'lodash.debounce'
+
 
 
 var isFollowersModalOpen = ref(false)
 var isFriendsModalOpen = ref(false)
 var isAddUserOpen = ref(false)
 
-var userSearchInput = ref("")
-var userSearchResult = ref([])
+
 
 const store = userStore()
-var jwt = store.$state.jwt
-//console.log(jwt)
-
-
 var userData = store.userInfo
 
+var jwt = store.$state.jwt
 var page = ref(0)
 
 function upadteProfileImg(event) {
@@ -333,9 +297,23 @@ function unfollowUser(username) {
         });
 }
 
-function searchUser() {
+
+
+
+// const props = defineProps({
+//     userSearchInput: String
+// })
+
+// const emit = defineEmits(['userSearchInput'])
+
+
+
+const userSearch = ref("")
+const userSearchResult = ref([])
+
+function searchUser(searchInput) {
     axios.post(`${api_ip}/user/search`, {
-        search: userSearchInput.value
+        search: searchInput.value
     }, {
         headers: {
             Authorization: `Bearer ${jwt}`
@@ -349,8 +327,10 @@ function searchUser() {
             console.error(error);
         });
 }
-
-
+watch(userSearch, debounce(() => {
+    console.log('Send API request')
+    searchUser(userSearch)
+}, 1000))
 
 // const busquedaUsuari = refDebounced(userSearchInput, 500)
 // watch(searchUser, busquedaUsuari)

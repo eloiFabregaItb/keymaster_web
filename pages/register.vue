@@ -36,17 +36,13 @@
 
                     <div>
                         <p class="text-lg font-semibold text-black">Contraseña</p>
-                        <input v-model="password"
-                            class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                            type="text" placeholder="Introduce tu contraseña">
+                        <PasswordInput v-model="password"/>
                     </div>
                     <!-- {{ password }} -->
 
                     <div>
                         <p class="text-lg font-semibold text-black">Confirmar contraseña</p>
-                        <input v-model="confirmPassword"
-                            class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                            type="text" placeholder="Confirma tu contraseña">
+                        <PasswordInputRegister v-model="confirmPassword"/>
                     </div>
                     <!-- {{ confirmPassword }} -->
 
@@ -207,7 +203,6 @@ section {
     overflow-x: hidden;
     overflow-y: hidden;
     /* Añadido overflow-y: hidden; */
-    color: white;
 }
 
 .register {
@@ -234,5 +229,6 @@ section {
     font-weight: normal;
     font-style: normal;
     font-size: 1.5rem;
+    color: white;
 }
 </style>
