@@ -21,6 +21,7 @@
 
     </div>
 
+    <input type="text" v-model="inpValue" class="hidden-input" ref="input">
     <button class="button-wrapper" @keydown="handleKeyPress" @click="startGame" @focusout="handleExitGame" autofocus>
 
       <div class="start-alert">
@@ -62,30 +63,47 @@ import { splitText } from './splitWords';
 import axios from 'axios';
 import { api_ip } from '~/constants';
 import { getErrorsForWords } from './splitWords.js';
+import { calculateSCM } from "../../utils/letters.js"
+
+import { userStore, isOnline } from '../storages/userStore.js'
+const store = userStore()
+var jwt = store.$state.jwt
+var userData = store.userInfo
+
 
 const ignoreKeys = ["Shift", "Alt", "Control", "CapsLock", "Tab", "Escape", "Backspace", "Delete", "Enter", "ArrowUp", "ArrowLeft", "ArrowRight", "ArrowDown", "Home", "PageUp", "PageDown", "End", "AltGraph", "Insert", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"]
 
-const text = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam suscipit cursus erat, convallis rutrum elit ullamcorper convallis.');
+const text = ref({
+  "id": 1521,
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam suscipit cursus erat, convallis rutrum elit ullamcorper convallis.",
+  "length": 129,
+  "words": 17,
+  "category": "Lorem Ipsum"
+})
+
+const input = ref(null) // dom element
+const inpValue = ref("")
 const texts = ref([])
-const textArr = ref(splitText(text.value))
+const textArr = ref(splitText(text.value.text))
 const wordCount = ref(0)
 const charInWordCount = ref(0)
 const startTimestamp = ref(null);
 const started = ref(false)
 const errors = ref(0)
 const wpm = ref(0);
-const words = ref(text.value.split(" ").length)
+const words = ref(text.value.words)
 const ellapsed = ref("")
 // textArr.value = splitText(text.value);
 
 async function fetchTexts() {
   const response = await axios.get(`${api_ip}/play/newtext`)
   const arr = [...response.data.data]
-  const str = arr.pop()
+  const textData = arr.pop()
+
   texts.value = arr
-  text.value = str
-  textArr.value = splitText(str)
-  words.value = str.split(" ").length
+  text.value = textData
+  textArr.value = splitText(textData.text)
+  words.value = textData.words
 }
 fetchTexts()
 
@@ -95,10 +113,10 @@ async function reload() {
   charInWordCount.value = 0;
 
   if (texts.value.length > 0) {
-    const str = texts.value.pop()
-    text.value = str
-    textArr.value = splitText(str)
-    words.value = str.split(" ").length
+    const textData = texts.value.pop()
+    text.value = textData
+    textArr.value = splitText(textData.text)
+    words.value = textData.words
   } else {
     await fetchTexts()
   }
@@ -121,6 +139,10 @@ function handleExitGame() {
 
 // Función para iniciar el juego
 function startGame() {
+
+  if (input.value) {
+    input.value.focus()
+  }
   // Restablecer los valores y el texto
   if (!started.value) {
     wordCount.value = 0;
@@ -128,7 +150,7 @@ function startGame() {
     errors.value = 0;
     wpm.value = 0;
     startTimestamp.value = Date.now();
-    textArr.value = splitText(text.value) // reinicia las letras con error
+    textArr.value = splitText(text.value.text) // reinicia las letras con error
     // words.value = str.split(" ").length
   }
 }
@@ -165,50 +187,74 @@ function increment() {
     charInWordCount.value = ch
   }
 }
-// presionar tecla
-function handleKeyPress(event) {
+
+watch(() => {
+  const key = inpValue.value[0]
+  inpValue.value = ""
+
+  if (!key) return
 
   if (!started.value) {
     //START
     started.value = true
     startTimestamp.value = new Date().getTime()
-    textArr.value = splitText(text.value);
+    textArr.value = splitText(text.value.text);
     startGame();
     updateTimer()
   }
-
-  const key = event.key
 
 
   if (key === textArr.value[wordCount.value][charInWordCount.value].char) {
     //si la tecla coincide
     increment()
-    event.preventDefault()
 
   } else if (!ignoreKeys.includes(key)) {
     //si la tecla no coincide suma 1 al error
     textArr.value[wordCount.value][charInWordCount.value].err++
     errors.value++
-    event.preventDefault()
 
   }
 
+
+
+}, inpValue)
+
+// prevent default
+function handleKeyPress(event) {
+  const key = event.key
+
+  if (!ignoreKeys.includes(key)) {
+    event.preventDefault()
+  }
 
   if (["Tab"].includes(key)) {
     event.preventDefault()
 
   }
-  // calcularWPM(); // Calcular WPM después de cada pulsación de tecla
 }
 
 
 
 function handleFinisih(time) {
-  const mappedErrors = getErrorsForWords(textArr.value)
 
-
-  console.log("FINISHED IN ", time / 1000, "Seconds")
-  console.log(mappedErrors)
+  if (isOnline.value && jwt) {
+    const mappedErrors = getErrorsForWords(textArr.value)
+    const scm = calculateSCM(userData.email, text.value.id, time, wpm.value, mappedErrors)
+    axios.post(`${api_ip}/play/save`, {
+      textId: text.value.id,
+      time,
+      wpm: wpm.value,
+      errors: mappedErrors,
+      scm
+    }, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    })
+      .then(response => {
+        console.log(response)
+      })
+  }
 }
 </script>
 
@@ -314,6 +360,12 @@ body {
   background-color: #b33434;
 }
 
+.hidden-input {
+  opacity: 0;
+  height: 1px;
+  width: 1px;
+}
+
 .button-wrapper {
   color: rgb(255, 255, 255);
   background: none;
@@ -332,14 +384,21 @@ body {
   outline: none;
 }
 
-
-.button-wrapper:not(:focus) * {
+.hidden-input:not(:focus)+.button-wrapper * {
   filter: blur(2px)
+}
+
+.hidden-input:not(:focus)+.button-wrapper .start-alert {
+  display: flex;
+}
+
+/* 
+.button-wrapper:not(:focus) * {
 }
 
 .button-wrapper:not(:focus) .start-alert {
   display: flex;
-}
+} */
 
 .start-alert {
   background-color: white;
@@ -356,7 +415,7 @@ body {
 
   filter: none !important;
 
-  z-index: 55;
+  z-index: 19;
   position: absolute;
   top: 50%;
   left: 50%;

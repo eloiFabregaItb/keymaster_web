@@ -1,6 +1,12 @@
+import axios from 'axios';
 import { defineStore } from 'pinia';
+import { api_ip } from '~/constants';
 
 export const isOnline = ref(false)
+
+
+
+
 
 export const userStore = defineStore({
   id: 'userStore',
@@ -42,6 +48,10 @@ export const userStore = defineStore({
       this.followers = followers,
       this.notifications = notifications
       isOnline.value = isLogged
+      console.log("isOnline",isLogged)
+
+      localStorage.setItem('jwt', jwt);
+
     },
     updateOnlineFriends(id, isOnline) {
       console.log("entra funcion actualizar")
@@ -60,9 +70,60 @@ export const userStore = defineStore({
       this.followers = [];
       this.notifications = []
       isOnline.value = false
+      localStorage.removeItem("jwt")
     },
     isOnline(){
       return this.isLogged
     }
   }
 });
+
+// const store = userStore()
+
+
+// async function tryAutoLogin(){
+//   const token = localStorage.getItem('jwt');
+//   console.log("TOKEN",token)
+
+//   if(!token) return
+
+//   try{
+
+//     const response = await axios.post(`${api_ip}/auth/loginjwt`, {}, {
+//       headers: {
+//         Authorization: `Bearer ${token}`
+//       }
+//     })
+  
+//     if (response.data.success) {
+//       localStorage.setItem('jwt', response.data.jwt);
+  
+//       console.log("AUTOLOGIN")
+  
+//       store.updateUser({
+//         email: response.data.email,
+//         username: response.data.username,
+//         profileImg: response.data.profileImg,
+//         emailVerified: response.data.emailVerified,
+//         jwt: response.data.jwt,
+//         isLogged: true,
+//         friends: response.data.friends,
+//         followers: response.data.followers,
+//         notifications: response.data.notifications
+//       })
+  
+//     }else{
+//       console.log("USER NOT LOGGED")
+//       localStorage.removeItem("jwt")
+//     }
+
+//   }catch(error){
+
+//     console.error(error)
+//     console.log("USER NOT LOGGED")
+//     localStorage.removeItem("jwt")
+//   }
+
+// }
+
+// tryAutoLogin()

@@ -40,7 +40,11 @@ const store = userStore()
   overflow-y: auto;
 
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+
+  max-width: 1500px;
+
+  margin: 0 auto;
 }
 
 .content {
@@ -48,6 +52,6 @@ const store = userStore()
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 </style>

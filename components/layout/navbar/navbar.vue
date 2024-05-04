@@ -3,26 +3,26 @@
 
 <template>
   <nav class="navbar">
-    <nuxt-link to="/" class="logo" @click="handleClickLink">
+    <nuxt-link to="/" class="logo" @click="hideNavbar">
       <img width="250" src="~/assets/icons/logo/logo.png" alt="Key Master">
     </nuxt-link>
 
-    <div class="blurbg" :class="{ open: isOpen }" onclick="" />
+    <div class="blurbg" :class="{ open: isOpen }" @click="hideNavbar" />
     <div class="links" :class="{ open: isOpen }">
       <ul class="left">
 
         <li>
-          <nuxt-link to="/info" @click="handleClickLink">
+          <nuxt-link to="/info" @click="hideNavbar">
             <navbarBtn :srcIco="IcoInfo">Info</navbarBtn>
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/ranking" @click="handleClickLink">
+          <nuxt-link to="/ranking" @click="hideNavbar">
             <navbarBtn :srcIco="IcoRanking">Ranking</navbarBtn>
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/guide" @click="handleClickLink">
+          <nuxt-link to="/guide" @click="hideNavbar">
             <navbarBtn :srcIco="IcoGuide">Guide</navbarBtn>
           </nuxt-link>
         </li>
@@ -31,12 +31,12 @@
 
         <!-- NO LOGGED -->
         <li v-if="!isOnline">
-          <nuxt-link to="/register" @click="handleClickLink">
+          <nuxt-link to="/register" @click="hideNavbar">
             <navbarBtn :srcIco="IcoRegister">Register</navbarBtn>
           </nuxt-link>
         </li>
         <li v-if="!isOnline">
-          <nuxt-link to="/login" @click="handleClickLink">
+          <nuxt-link to="/login" @click="hideNavbar">
             <navbarBtn :srcIco="IcoLogin">Login</navbarBtn>
           </nuxt-link>
         </li>
@@ -98,12 +98,12 @@ function handleOpen() {
   isOpen.value = !isOpen.value
 }
 
-function handleClickLink(){
+function hideNavbar(){
   isOpen.value = false
 }
 
+
 function logout() {
-  localStorage.removeItem('jwt')
   store.clearUser()
   navigateTo('/')
 }
@@ -123,11 +123,12 @@ function logout() {
   color: white;
   justify-content: space-between;
 
-  padding: 0 1.5rem;
+  /* padding: 0 1.5rem; */
   gap: .5rem;
 }
 
 .navbar .logo {
+  margin-left: 1.5rem;
   z-index: 24;
   height: 100%;
   display: flex;
@@ -228,6 +229,11 @@ function logout() {
 
   .links.open {
     top: 100%;
+  }
+
+  .links.open li a {
+    flex: 1;
+    margin: 0 2rem;
   }
 }
 </style>

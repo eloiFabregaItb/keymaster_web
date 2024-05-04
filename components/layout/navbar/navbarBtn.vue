@@ -35,7 +35,8 @@ const { srcIco } = defineProps(['srcIco'])
 }
 
 .navbar-btn .icoWrapper {
-  width: 34px;
+  /* width: 34px; */
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +44,7 @@ const { srcIco } = defineProps(['srcIco'])
 
 .navbar-btn img,
 .navbar-btn svg {
-  height: 30px;
+  height: 100%;
   width: auto;
 }
 
@@ -72,7 +73,10 @@ const { srcIco } = defineProps(['srcIco'])
 
 @media (width<750px) {
   .navbar-btn {
-    margin-bottom: 1px solid white
+    margin-bottom: 1px solid white;
+
+    width: 100%;
+    flex: 1;
   }
 
   .navbar-btn .textWrapper {

@@ -14,9 +14,8 @@
         <div class="mb-7 text-center">
           <h3 class="font-semibold text-3xl text-gray-800">Inicia sesión</h3>
           <span class="text-gray-400 text-center">¿No tienes cuenta?
-            <nuxt-link to="/register"
-              class="color-primary py-2 px-3 text-white rounded"
-              aria-current="page">Crea una</nuxt-link>
+            <nuxt-link to="/register" class="color-primary py-2 px-3 text-white rounded" aria-current="page">Crea
+              una</nuxt-link>
           </span>
         </div>
         <div class="space-y-6">
@@ -40,7 +39,7 @@
             </div>
 
             <div>
-              <button type="submit" @click="login()"
+              <button type="submit"
                 class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
                 Inicia sesión
               </button>
@@ -53,8 +52,7 @@
 
             <div class="text-sm ml-auto">
               <span class="text-gray-400">¿Has olvidado tu contraseña?
-                <nuxt-link to="/recover"
-                  class="color-primary py-2 px-3 text-white rounded"
+                <nuxt-link to="/recover" class="color-primary py-2 px-3 text-white rounded"
                   aria-current="page">Recupérala</nuxt-link>
               </span>
             </div>
@@ -63,6 +61,7 @@
       </div>
     </div>
   </section>
+
 </template>
 
 <script setup>
@@ -84,14 +83,13 @@ var showErrors = ref(false)
 var errMsg = ref("")
 
 async function login() {
-  axios.post(`http://${api_ip}/auth/login`, {
+  axios.post(`${api_ip}/auth/login`, {
     login: user.value,
     password: password.value
   })
     .then(response => {
       if (response.data.success) {
         showErrors.value = false;
-        localStorage.setItem('jwt', response.data.jwt);
         //handleLoginSocket(response.data.jwt)
         navigateTo('/')
         store.updateUser({

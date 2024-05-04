@@ -231,7 +231,9 @@ table {
 
 th,
 td {
-    border: 1px solid #dddddd;
+    border-left: 1px solid #dddddd33;
+    border-right: 1px solid #dddddd33;
+    border-bottom: 1px solid white;
     padding: 8px;
     text-align: center;
     width: 20%;

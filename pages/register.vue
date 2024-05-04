@@ -12,7 +12,7 @@
 
 
         <div class="flex justify-center self-center z-10">
-            <div class="p-12 bg-white mx-auto rounded-3xl w-96 ">
+            <form class="p-12 bg-white mx-auto rounded-3xl w-96 " @submit.prevent="register()">
                 <div class="mb-7">
                     <h3 class="font-semibold text-3xl text-gray-800 text-center">Registro</h3>
                 </div>
@@ -36,13 +36,13 @@
 
                     <div>
                         <p class="text-lg font-semibold text-black">Contraseña</p>
-                        <PasswordInput v-model="password"/>
+                        <PasswordInput v-model="password" />
                     </div>
                     <!-- {{ password }} -->
 
                     <div>
                         <p class="text-lg font-semibold text-black">Confirmar contraseña</p>
-                        <PasswordInputRegister v-model="confirmPassword"/>
+                        <PasswordInputRegister v-model="confirmPassword" />
                     </div>
                     <!-- {{ confirmPassword }} -->
 
@@ -63,13 +63,11 @@
                         </div>
                     </div>
                     <div>
-                        <button type="submit" @click="register()"
-                            class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
-                            Registrarse
-                        </button>
+                        <input type="submit" value="Registrarse"
+                            class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500" />
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 </template>
@@ -118,7 +116,7 @@ async function register() {
         return;
     }
 
-    axios.post(`http://${api_ip}/auth/register`, {
+    axios.post(`${api_ip}/auth/register`, {
         username: username.value,
         email: email.value,
         password: password.value
