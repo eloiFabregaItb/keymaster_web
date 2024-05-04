@@ -63,10 +63,12 @@ import { splitText } from './splitWords';
 import axios from 'axios';
 import { api_ip } from '~/constants';
 import { getErrorsForWords } from './splitWords.js';
+import { calculateSCM } from "../../utils/letters.js"
 
 import { userStore, isOnline } from '../storages/userStore.js'
 const store = userStore()
 var jwt = store.$state.jwt
+var userData = store.userInfo
 
 
 const ignoreKeys = ["Shift", "Alt", "Control", "CapsLock", "Tab", "Escape", "Backspace", "Delete", "Enter", "ArrowUp", "ArrowLeft", "ArrowRight", "ArrowDown", "Home", "PageUp", "PageDown", "End", "AltGraph", "Insert", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"]
@@ -235,15 +237,15 @@ function handleKeyPress(event) {
 
 function handleFinisih(time) {
 
-  console.log("SHOULD SEND", isOnline.value, jwt)
   if (isOnline.value && jwt) {
     const mappedErrors = getErrorsForWords(textArr.value)
-    console.log("sending game", mappedErrors)
+    const scm = calculateSCM(userData.email, text.value.id, time, wpm.value, mappedErrors)
     axios.post(`${api_ip}/play/save`, {
       textId: text.value.id,
       time,
       wpm: wpm.value,
       errors: mappedErrors,
+      scm
     }, {
       headers: {
         Authorization: `Bearer ${jwt}`
