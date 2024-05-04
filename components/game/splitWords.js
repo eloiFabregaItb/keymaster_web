@@ -22,20 +22,23 @@ export function splitText(text) {
 
 export function getErrorsForWords(textArr){
 
+
   const resultData = {}
 
+  let charIndex = 0
   for (const word of textArr) {
     for (const {char,err} of word) {
-      const originalChar = letterMap[char]
-      if(originalChar){
-        
-        if(resultData[originalChar] !== undefined){
-          resultData[originalChar]+= err
-        }else{
-          resultData[originalChar] = err
-        }
+      const originalChar = letterMap[char] //char without punctuation
 
+      if(err){
+        resultData[charIndex] = {
+          char,
+          letter:originalChar,
+          err
+        }
       }
+
+      charIndex++
     }
   }
 

@@ -64,6 +64,11 @@ import axios from 'axios';
 import { api_ip } from '~/constants';
 import { getErrorsForWords } from './splitWords.js';
 
+import { userStore, isOnline } from '../storages/userStore.js'
+const store = userStore()
+var jwt = store.$state.jwt
+
+
 const ignoreKeys = ["Shift", "Alt", "Control", "CapsLock", "Tab", "Escape", "Backspace", "Delete", "Enter", "ArrowUp", "ArrowLeft", "ArrowRight", "ArrowDown", "Home", "PageUp", "PageDown", "End", "AltGraph", "Insert", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"]
 
 const text = ref({
@@ -229,11 +234,25 @@ function handleKeyPress(event) {
 
 
 function handleFinisih(time) {
-  const mappedErrors = getErrorsForWords(textArr.value)
 
-
-  console.log("FINISHED IN ", time / 1000, "Seconds")
-  console.log(mappedErrors)
+  console.log("SHOULD SEND", isOnline.value, jwt)
+  if (isOnline.value && jwt) {
+    const mappedErrors = getErrorsForWords(textArr.value)
+    console.log("sending game", mappedErrors)
+    axios.post(`${api_ip}/play/save`, {
+      textId: text.value.id,
+      time,
+      wpm: wpm.value,
+      errors: mappedErrors,
+    }, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    })
+      .then(response => {
+        console.log(response)
+      })
+  }
 }
 </script>
 
