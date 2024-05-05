@@ -145,6 +145,8 @@
           </div>
         </nav>
       </div>
+      <p class="mt-2">Si no hay más dudas ya sabes lo que toca...
+      </p>
       <h1 class="title pt-8">¡ES HORA DE EMPEZAR A PRACTICAR!</h1>
     </div>
   </div>
