@@ -23,7 +23,7 @@
         </li>
         <li>
           <nuxt-link to="/guide" @click="hideNavbar">
-            <navbarBtn :srcIco="IcoGuide">Guide</navbarBtn>
+            <navbarBtn :srcIco="IcoGuide">Guía</navbarBtn>
           </nuxt-link>
         </li>
       </ul>

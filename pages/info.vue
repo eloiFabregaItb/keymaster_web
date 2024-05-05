@@ -67,38 +67,83 @@
       <div class="lista d-flex flex-column align-items-center">
         <StatisticsIco class="ico pt-6" />
         <h2>Estadísticas</h2>
-        <p>En KeyMaster queremos que veas tu propia evolución cuanto más practiques, es por ello que ofrecemos tus
+        <p>En KeyMaster queremos que veas tu propia evolución cuanto más practiques, es por ello que ofrecemos que
+          puedas ver tus
           propias estadísticas.</p>
         <HistoryIco class="ico-game pt-6" />
         <h3>Historial</h3>
-        <p>Una de las cosas más importantes en tú evolución es ser consciente de la cantidad de partidas que realizas, a
-          mayor cantidad de partidas que realices más habilidad obtendrás. Es por ello que podrás recurrir a tú
+        <p>Una de las cosas más importantes en tu evolución es ser consciente de la cantidad de partidas que realizas, a
+          mayor cantidad de partidas que realices más habilidad obtendrás. Es por ello que podrás recurrir a tu
           historial
           de partidas. Podrás ver la fecha de la partida, el tiempo, las WPM, el número de errores, el % de errores, los
-          carácteres más fallados y la logintud del texto
-          mecanografiado.
+          caracteres más fallados y la longitud del texto con el que has practicado.
+        </p>
+        <ErrorIco class="ico-game pt-6" />
+        <h3>Errores</h3>
+        <p>Deberás prestar mucha atención a las letras que conforman una palabra, cualquier letra incorrecta creará un
+          error y no te dejará avanzar en el texto hasta que esta se haya escrito bien, esto implica que si uno de tus
+          dedos
+          pulsa una letra incorrecta esta se resaltará en color rojo indicando que has pulsado mal en ese momento, es
+          importante que sepas que aquí los errores son acumulativos, es decir, si una letra que no has escrito bien la
+          fallas no te dejará avanzar en el texto y contará como un error,
+          pero si vuelves a fallarla volverá a contar como otro error y así sucesivamente hasta que des con la tecla
+          adecuada. Con este método queremos que seas lo más técnico posible a la hora de teclear y seas capaz de ver
+          tus propios errores una y otra vez.
         </p>
         <WpmIco class="ico-game pt-6" />
         <h3>WPM</h3>
         <p>Las siglas "WPM" se refieren a "Words Per Minute" en inglés, lo que traducido al español significa "Palabras
-          Por Minuto". Este término se utiliza comúnmente para medir la velocidad de escritura del tecleo de una
-          persona.
+          Por Minuto". Este término se utiliza comúnmente para medir la velocidad de escritura en el tecleo de una
+          persona, básicamente mide la cantidad de palabras que eres capaz de escribir por minuto,a mayor cantidad de
+          palabras por minuto mayor velocidad de escritura.
           En un mundo digitalizado y que se centra en la comunicación escrita, la velocidad de escritura es una
           habilidad muy preciada
-          y, en muchos casos, indispensable. Ya sea redactando correos electrónicos,
+          y en muchos casos indispensable. Ya sea redactando correos electrónicos,
           mensajes de texto, trabajando en documentos o participando en chats en línea, la capacidad de escribir rápido
           y con precisión puede marcar la diferencia en la eficiencia y productividad.
         </p>
-        <p> wpm - palabras por minuto. Indica al usuario a la velocidad que es capaz de escribir
-
-
-
-
-          -- RESULTS SCREEN
-          Al final de la partida el jugador podrá ver las estadísticas de esta, así como el tiempo que ha tardado en
-          completar el texto, las palabras por minuto y su porcentaje de acierto. Más tarde, si así lo desea desde el
-          apartado de su perfil podrá recuperar y ver las estadísiticas de sus partidas.
+        <TimeIco class="ico-game pt-6" />
+        <h3>Tiempo</h3>
+        <p>El tiempo también es un factor determinante a la hora de escribir un texto junto con las WPM, si las
+          "Palabras por minuto" miden la cantidad de palabras que escribes, tiempo en que tardas en
+          escribir el texto en conjunto te permite medir tu progreso y ver si has mejorado en la velocidad de
+          escritura. Cuanto menos tiempo tardas en escribir un texto implica que tú velocidad de
+          escritura ha aumentado, por lo tanto tus WPM han aumentado
+          también.
         </p>
+        <QuestionIco class="ico pt-6" />
+        <h2>¿Preguntas?</h2>
+        <p>Si es tu primera vez en una web de mecanografía y has llegado hasta aquí te instamos a que primero visites
+          nuestra
+        </p>
+        <nav class="navbar pt-2">
+          <div class="blurbg" :class="{ open: isOpen }" @click="hideNavbar" />
+          <div class="links" :class="{ open: isOpen }">
+            <ul>
+              <li>
+                <nuxt-link to="/guide" @click="hideNavbar">
+                  <navbarBtn :srcIco="IcoGuide">Guía</navbarBtn>
+                </nuxt-link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <p class="mt-2">En cualquier otro caso siempre puedes contactar con nosotros mediante redes sociales o enviarnos
+          un correo
+          electrónico a
+        </p>
+        <nav class="navbar pt-2">
+          <div class="blurbg" :class="{ open: isOpen }" @click="hideNavbar" />
+          <div class="links" :class="{ open: isOpen }">
+            <ul>
+              <li>
+                <nuxt-link to="mailto:info@keymaster.com" @click="hideNavbar">
+                  <navbarBtn class="mailto" :srcIco="AtsignIco">info@keymaster.com</navbarBtn>
+                </nuxt-link>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
       <h1 class="title pt-8">¡ES HORA DE EMPEZAR A PRACTICAR!</h1>
     </div>
@@ -116,6 +161,13 @@ import OnevoneIco from "~/assets/icons/actions/onevoneIco.svg";
 import HistoryIco from "~/assets/icons/actions/historyIco.svg";
 import StatisticsIco from "~/assets/icons/actions/statisticsIco.svg";
 import WpmIco from "~/assets/icons/actions/wpmIco.svg";
+import TimeIco from "~/assets/icons/actions/timeIco.svg"
+import ErrorIco from "~/assets/icons/actions/errorIco.svg"
+import QuestionIco from "~/assets/icons/actions/questionIco.svg"
+import IcoGuide from "~/assets/icons/actions/guide.svg"
+import AtsignIco from "~/assets/icons/actions/atsignIco.svg"
+import navbarBtn from "~/components/layout/navbar/navbarBtn.vue"
+
 </script>
 
 <style scoped>
@@ -167,8 +219,8 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  width: 95px;
+  height: 95px;
 }
 
 .ico-game {
@@ -179,9 +231,20 @@ h3 {
   height: 70px;
 }
 
+.guide-ico {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+}
+
 p {
   font-size: 1.2rem;
-  padding-bottom: 1rem;
+}
+
+.guia {
+  font-size: 1.2rem;
 }
 
 li {
@@ -207,5 +270,10 @@ li {
   display: flex;
   justify-content: center;
   padding: 0 15px;
+}
+
+.mailto {
+  width: 100%;
+  white-space: nowrap;
 }
 </style>
