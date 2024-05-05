@@ -138,7 +138,7 @@
             <ul>
               <li>
                 <nuxt-link to="mailto:info@keymaster.com" @click="hideNavbar">
-                  <navbarBtn class="mailto" :srcIco="AtsignIco">info@keymaster.com</navbarBtn>
+                  <navbarBtn class="mailto" :srcIco="AtsignIco">KeyMail</navbarBtn>
                 </nuxt-link>
               </li>
             </ul>
