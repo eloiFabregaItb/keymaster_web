@@ -1,5 +1,5 @@
 <template>
-  <section id="login">
+  <section id="login" class="login">
     <div class="h-vh flex flex-col justify-center items-center text-style text-white">
       <nuxt-link to="/">
         <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
