@@ -64,7 +64,8 @@ const store = userStore()
 }
 
 .content>div:has(.login),
-.content>div:has(.register) {
+.content>div:has(.register),
+.content>div:has(.recover) {
 
   display: flex;
   justify-content: center;

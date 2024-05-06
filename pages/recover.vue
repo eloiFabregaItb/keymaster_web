@@ -1,7 +1,7 @@
 <template>
-    <section id="login">
-        <div class="flex h-screen justify-center items-center z-10">
-            <div class="p-12 bg-white mx-auto rounded-3xl w-4/12 flex-column gap-5">
+    <section id="login" class="recover">
+        <div class="flex justify-center items-center z-10">
+            <div class=" container p-12 bg-white rounded-3xl w-4/12 flex-column gap-5">
                 <div v-if="page == 1">
                     <div class="mb-7 text-center">
                         <h3 class="font-semibold text-2xl text-gray-800">Introduce tu usuario o correo</h3>
@@ -204,5 +204,9 @@ function validatePassword(password = "") {
 #login {
     display: grid;
     grid-template-columns: 1fr;
+}
+
+.container {
+    width: 100%;
 }
 </style>
