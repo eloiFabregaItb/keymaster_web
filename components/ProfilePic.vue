@@ -1,41 +1,53 @@
 <template>
-
-
-  <div class="ProfilePic" :class="{ 'big': Boolean(big), 'small':Boolean(small) }" :style="`background: url(${src})`">
-    <span v-if="isOnline" class="isOnline"></span>
-    <span v-else-if="isOffline" class="isOffline"></span>
+  <div class="ProfilePicWrapper"
+    :class="{ 'big': Boolean(big), 'small': Boolean(small), 'superSmall': Boolean(superSmall) }">
+    <div class="ProfilePic" :style="`background: url(${src})`">
+      <span v-if="isOnline" class="isOnline"></span>
+      <span v-else-if="isOffline" class="isOffline"></span>
+    </div>
   </div>
 </template>
 
 <script setup>
 
 
-const { src, isOnline, isOffline, big, small } = defineProps(['src', 'isOnline', 'isOffline', 'big', 'small'])
+const { src, isOnline, isOffline, big, small, superSmall } = defineProps(['src', 'isOnline', 'isOffline', 'big', 'small', 'superSmall'])
 
 </script>
 
 <style scoped>
-.ProfilePic {
+.ProfilePicWrapper {
   --size: 70px;
-  --size-small: calc(var(--size)/6);
-  --alpha: 315deg;
-  --rad: calc(var(--size)/2);
 }
 
-
-.ProfilePic.big {
+.ProfilePicWrapper.big {
   --size: 200px;
+}
+
+.ProfilePicWrapper.small {
+  --size: 50px;
+}
+
+.ProfilePicWrapper.superSmall {
+  --size: 32px;
+}
+
+.ProfilePicWrapper {
   --size-small: calc(var(--size)/6);
   --alpha: 315deg;
   --rad: calc(var(--size)/2);
 }
 
+.ProfilePicWrapper {
+  border: 2px solid #9c73ff;
+  background-color: #9c73ff;
+  border-radius: 50%;
+  width: var(--size);
+  height: var(--size);
 
-.ProfilePic.small {
-  --size: 50px;
-  --size-small: calc(var(--size)/6);
-  --alpha: 315deg;
-  --rad: calc(var(--size)/2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ProfilePic {

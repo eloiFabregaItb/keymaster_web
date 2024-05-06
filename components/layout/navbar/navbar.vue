@@ -45,7 +45,8 @@
         <li v-if="isOnline">
           <nuxt-link to="/profile">
             <div class="userCard">
-              <img class="navbar-user-img" :src="userData.profileImg" alt="">
+              <ProfilePic :src="userData.profileImg" superSmall="true" />
+              <!-- <img class="navbar-user-img" :src="userData.profileImg" alt=""> -->
               ¡Hola, <b>{{ userData.username }}</b>!
             </div>
           </nuxt-link>
