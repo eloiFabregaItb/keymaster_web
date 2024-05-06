@@ -8,150 +8,40 @@
                         <img class="table-icon" src="../assets/icons/svg/Podium.svg" alt="">
                     </th>
                     <th>
-                        <img class="table-icon" src="../assets/icons/actions/lightning.svg" alt="">
+                        <img class="table-icon" src="../assets/icons/svg/circle-user-regular.svg" alt="">
                     </th>
-                    <th>Palabras por minuto</th>
-                    <th>Número de errores</th>
-                    <th>% de errores</th>
+                    <th>
+                        <img class="table-icon" src="../assets/icons/actions/lightning2.svg" alt="">
+                    </th>
+                    <th>
+                        <img class="table-icon" src="../assets/icons/svg/BxsError.svg" alt="">
+                    </th>
                 </thead>
             </table>
             <div class="table-wrapper">
                 <table>
                     <tbody class="table-wrapper">
                         <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
+                            <td>#1</td>
+                            <td>Nombre</td>
+                            <td>wpm</td>
+                            <td>% de errores</td>
                         </tr>
-                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>                        <tr>
-                            <td>30-04-2024 17:05</td>
-                            <td>50s</td>
-                            <td>77</td>
-                            <td>4</td>
-                            <td>2%</td>
-                        </tr>
+                        <!-- <tr v-for="user in rankingUsers">
+                            <td>
+                                {{ user. }}
+                            </td>
+                            <td>
+                                <ProfilePic :src="user.profileImg" />
+                                {{ user. }}
+                            </td>
+                            <td>
+                                {{ user. }}
+                            </td>
+                            <td>
+                                {{ user. }}
+                            </td>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -160,7 +50,7 @@
 </template>
 
 <script setup>
-
+import ProfilePic from '~/components/ProfilePic.vue';
 </script>
 
 <style scoped>
