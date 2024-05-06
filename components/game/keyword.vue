@@ -3,7 +3,6 @@
 
     <div class="information">
 
-
       <div class="stat">
         <IcoError />
         <p style="color: white;" class="pr-2 pl-2"> {{ errors }} errors </p>

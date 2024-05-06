@@ -114,7 +114,8 @@
         <QuestionIco class="ico pt-6" />
         <h2>¿Preguntas?</h2>
         <p>Si es tu primera vez en una web de mecanografía y has llegado hasta aquí te instamos a que primero visites
-          nuestra
+          nuestra Guía, es un punto de partida para que puedas entender cómo funciona KeyMaster y puedas empezar a
+          practicar:
         </p>
         <nav class="navbar pt-2">
           <div class="blurbg" :class="{ open: isOpen }" @click="hideNavbar" />
@@ -130,7 +131,7 @@
         </nav>
         <p class="mt-2">En cualquier otro caso siempre puedes contactar con nosotros mediante redes sociales o enviarnos
           un correo
-          electrónico a
+          electrónico a la siguiente dirección, estaremos encantados de ayudarte en lo que necesites:
         </p>
         <nav class="navbar pt-2">
           <div class="blurbg" :class="{ open: isOpen }" @click="hideNavbar" />
@@ -243,6 +244,7 @@ h3 {
 
 p {
   font-size: 1.2rem;
+  text-align: left;
 }
 
 .guia {
@@ -253,6 +255,7 @@ li {
   font-size: 1.1rem;
   padding-bottom: 0.25rem;
   font-weight: normal !important;
+  text-align: left;
 }
 
 .key-conf {
