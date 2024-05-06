@@ -108,3 +108,28 @@ export const letterMap = {
 	'z':"Z",
 
 }
+
+
+export function calculateSCM(username, textId, time, wpm, errors){
+
+  const a = Number(Number(time).toString(16).split("").filter(x=>!isNaN(x)).join(""))
+
+  let b = 123
+  const keys = Object.keys(errors)
+  for(let i=0;i<keys.length;i++){
+    const key = keys[i]
+    const value = errors[key]
+    const parsed = Number(key) * Number(value.err)
+
+    b+= (i%2===0 ? parsed : -parsed)
+  }
+  b=Math.abs(b)
+
+  const c = (textId * 17 + 12345) % 100000;
+  const d = (wpm * 31 + 6789) % 100000;
+  const e = username.split("").map(x=>x.charCodeAt(0)).reduce((acc,v)=>(acc*33+v)%1000)
+
+  const checksum = a+b+c+d+e
+  return checksum
+
+}
