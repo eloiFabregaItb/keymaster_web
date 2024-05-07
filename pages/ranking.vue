@@ -9,9 +9,9 @@
         <span v-for="(letra, index) in bestPlayModalData.history[0].textArr" :key="index" :class="{ 'text-white bg-red-600': bestPlayModalData.history[0].errIndexes.includes(index) }">{{ letra }}</span>
 
 
-        <p class="mt-8">Tiempo: {{ formatTime(bestPlayModalData.history[0].time) }} segundos</p>
-        <p class="">Palabras totales: {{ bestPlayModalData.history[0].words }} segundos</p>
-        <p class="text-red-600">Errores: {{ bestPlayModalData.history[0].totalErrors }}</p>
+        <p class="mt-8">{{ formatTime(bestPlayModalData.history[0].time) }} segundos</p>
+        <p class="">{{ bestPlayModalData.history[0].words }} palabras</p>
+        <p class="text-red-600">{{ bestPlayModalData.history[0].totalErrors }} errores</p>
     </Modal>
     <div class="mx-24 mt-16 text-white">
         <h1 class="text-2xl font-black">Ránking de los mejores jugadores de KeyMaster</h1>
