@@ -1,27 +1,51 @@
 <template>
+
+  <Modal v-if="modalInputCustomText" @close="modalInputCustomText = false" title="Añadir texto personalizado">
+    <small>Los textos personalizados no puntuan.</small>
+    <textarea v-model="customText" class="inputCustomText-textarea"></textarea>
+    <button class="inputCustomText-button" @click="handleEditText">Cargar texto</button>
+  </Modal>
+
   <section class="game">
 
-    <div class="information">
+    <div class="information-wrapper">
 
-      <div class="stat">
-        <IcoError />
-        <p style="color: white;" class="pr-2 pl-2"> {{ errors }} errors </p>
+      <div class="information">
+
+        <button class="stat" @click="handleNextText">
+          <IcoNext filled />
+        </button>
+
+
+        <button class="stat" @click="handleOpenModalEditText">
+          <IcoEdit filled />
+        </button>
+
       </div>
 
-      <div class="stat">
-        <IcoWPM />
-        <p style="color: white;" class="pr-2 pl-2">{{ wpm }} wpm</p>
-      </div>
+      <div class="information">
+        <div class="stat">
+          <IcoError />
 
-      <div class="stat">
-        <IcoTime />
-        <p style="color: white;" class="pr-2 pl-2">{{ ellapsed || 0 }} s</p>
+          <p style="color: white;" class="pr-2 pl-2"> {{ errors }} errors </p>
+        </div>
+
+        <div class="stat">
+          <IcoWPM />
+          <p style="color: white;" class="pr-2 pl-2">{{ wpm }} wpm</p>
+        </div>
+
+        <div class="stat">
+          <IcoTime />
+          <p style="color: white;" class="pr-2 pl-2">{{ ellapsed || 0 }} s</p>
+        </div>
       </div>
 
     </div>
 
     <input type="text" v-model="inpValue" class="hidden-input" ref="input">
-    <button class="button-wrapper" @keydown="handleKeyPress" @click="startGame" @focusout="handleExitGame" autofocus>
+    <button class="button-wrapper" @keydown="handleKeyPress" @click="startGame" @focusout="handleExitGame" autofocus
+      ref="buttonRef">
 
       <div class="start-alert">
         Pulsa para empezar a jugar
@@ -33,10 +57,10 @@
             <div v-for="(word, index) in textArr" :key="index" class="word"
               :class="{ 'selected-word': index === wordCount }">
               <span v-for="(char, charIndex) in word" :key="charIndex" :class="{
-          'selected-char': index === wordCount && charIndex === charInWordCount,
-          'error': char.err,
-          'space-dot': char.show === '·'
-        }">
+    'selected-char': index === wordCount && charIndex === charInWordCount,
+    'error': char.err,
+    'space-dot': char.show === '·'
+  }">
                 {{ char.show || char.char }}
               </span>
 
@@ -53,16 +77,19 @@
 
 <script setup>
 import IcoError from "~/assets/icons/actions/error.svg"
+import IcoNext from "~/assets/icons/actions/next.svg"
 import IcoWPM from "~/assets/icons/actions/lightning.svg"
 import IcoTime from "~/assets/icons/actions/time.svg"
+import IcoEdit from "~/assets/icons/actions/edit.svg"
 
 import { ref } from 'vue'
 import Keyboard from '~/components/game/keyboard.vue';
-import { splitText } from './splitWords';
+import { splitText, splitBigText } from './splitWords';
 import axios from 'axios';
 import { api_ip } from '~/constants';
 import { getErrorsForWords } from './splitWords.js';
 import { calculateSCM } from "../../utils/letters.js"
+
 
 import { userStore, isOnline } from '../storages/userStore.js'
 const store = userStore()
@@ -92,7 +119,16 @@ const errors = ref(0)
 const wpm = ref(0);
 const words = ref(text.value.words)
 const ellapsed = ref("")
+const modalInputCustomText = ref(false)
 // textArr.value = splitText(text.value);
+const buttonRef = ref(null) //dom
+const customText = ref("")
+
+
+function focusBtn() {
+  buttonRef.value.click()
+  // console.log(buttonRef.value)
+}
 
 async function fetchTexts() {
   const response = await axios.get(`${api_ip}/play/newtext`)
@@ -106,10 +142,60 @@ async function fetchTexts() {
 }
 fetchTexts()
 
+function handleNextText() {
+  const textData = texts.value.pop()
+  focusBtn()
+
+
+  text.value = textData
+  textArr.value = splitText(textData.text)
+  words.value = textData.words
+}
+
+
+
+function handleOpenModalEditText() {
+  modalInputCustomText.value = true
+  customText.value = ""
+
+}
+
+function handleEditText() {
+
+  wordCount.value = 0;
+  charInWordCount.value = 0;
+  errors.value = 0;
+
+
+  const textsSplit = splitBigText(customText.value)
+
+  const textFormated = textsSplit.map(text => ({
+    text,
+    isCustom: true,
+    length: text.length,
+    words: text.split(" ").length,
+  }))
+
+  const textData = textFormated.shift()
+
+  texts.value = [...texts.value, ...textFormated.reverse()]
+
+  textArr.value = splitText(textData.text)
+  text.value = textData
+  words.value = textData.words
+
+  focusBtn()
+  modalInputCustomText.value = false
+}
+
+
+
+
 async function reload() {
 
   wordCount.value = 0;
   charInWordCount.value = 0;
+  errors.value = 0;
 
   if (texts.value.length > 0) {
     const textData = texts.value.pop()
@@ -127,7 +213,7 @@ function updateTimer() {
     const seconds = (Date.now() - startTimestamp.value) / 1000
     ellapsed.value = seconds.toFixed(3)
     wpm.value = Math.floor(wordCount.value / (seconds / 60))
-    setTimeout(updateTimer, 7)
+    setTimeout(updateTimer, 100)
   }
 }
 
@@ -236,7 +322,7 @@ function handleKeyPress(event) {
 
 function handleFinisih(time) {
 
-  if (isOnline.value && jwt) {
+  if (isOnline.value && jwt && !text.value.isCustom) {
     const mappedErrors = getErrorsForWords(textArr.value)
     const scm = calculateSCM(userData.email, text.value.id, time, wpm.value, mappedErrors)
     axios.post(`${api_ip}/play/save`, {
@@ -270,6 +356,17 @@ body {
   /* Oculta el scroll vertical */
 }
 
+.nuxt-icon--fill,
+.nuxt-icon--fill * {
+  fill: white;
+}
+
+.information-wrapper {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid white;
+}
+
 .information {
   /* flex items-center justify-end pr-20 pb-2 */
   display: flex;
@@ -278,7 +375,6 @@ body {
 
   gap: 15px;
 
-  border-bottom: 1px solid white;
 }
 
 .information .stat {
@@ -286,6 +382,7 @@ body {
   gap: 5px;
   align-items: center;
   padding: 3px;
+  fill: white !important;
 }
 
 .information .stat svg {
@@ -419,5 +516,23 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.inputCustomText-textarea {
+  box-shadow: rgba(50, 50, 93, 0.1) 0px 30px 60px -5px inset, rgba(0, 0, 0, 0.2) 0px 18px 36px -7px inset;
+
+
+  width: 100%;
+  min-width: 60vw;
+  min-height: 300px;
+}
+
+.inputCustomText-button {
+  background-color: #43219B;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+
 }
 </style>
