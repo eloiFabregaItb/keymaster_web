@@ -6,7 +6,6 @@
     <button class="inputCustomText-button" @click="handleEditText">Cargar texto</button>
   </Modal>
 
-  {{ started ? "started" : "no" }}
   <section class="game">
 
     <div class="information-wrapper">
@@ -125,7 +124,6 @@ const modalInputCustomText = ref(false)
 const buttonRef = ref(null) //dom
 const customText = ref("")
 
-const timerId = ref(null)
 
 function focusBtn() {
   buttonRef.value.click()
@@ -159,17 +157,15 @@ function handleNextText() {
 function handleOpenModalEditText() {
   modalInputCustomText.value = true
   customText.value = ""
+
 }
 
 function handleEditText() {
-  // author: "Fiódor Dostoyevski"
-  // category: "book"
-  // id: 7696
-  // language: "ES"
-  // length: 232
-  // text: "no es eso lo que has querido decir; yo leeré tu artículo. Sucede, que hablando suele ir uno más lejos de lo que se proponía. Tú no puedes pensar tal cosa; yo lo leeré. No hay nada de eso en mi artículo; apenas he tocado esa cuestión"
-  // title: "Crimen y castigo"
-  // words: 47
+
+  wordCount.value = 0;
+  charInWordCount.value = 0;
+  errors.value = 0;
+
 
   const textsSplit = splitBigText(customText.value)
 
@@ -183,9 +179,6 @@ function handleEditText() {
   const textData = textFormated.shift()
 
   texts.value = [...texts.value, ...textFormated.reverse()]
-
-  console.log(texts.value)
-
 
   textArr.value = splitText(textData.text)
   text.value = textData
@@ -216,7 +209,6 @@ async function reload() {
 }
 
 function updateTimer() {
-  console.log(started.value)
   if (started.value && startTimestamp.value) {
     const seconds = (Date.now() - startTimestamp.value) / 1000
     ellapsed.value = seconds.toFixed(3)
