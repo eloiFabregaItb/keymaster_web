@@ -24,7 +24,7 @@
 
       <PlayIco class="ico pt-6" />
       <h2>Modos de juego</h2>
-      <p>Atualmente KeyMaster ofrece 3 modos de juego:</p>
+      <p>Atualmente KeyMaster ofrece 2 modos de juego:</p>
 
       <div class="lista d-flex flex-column align-items-center">
         <ZenIco class="ico-game pt-6" />
@@ -38,28 +38,12 @@
             mejorando.
           </li>
         </ul>
-        <OnevoneIco class="ico-game pt-6" />
+        <TimeIco class="ico-game pt-6" />
         <ul>
-          <h3>1v1</h3>
-          <li>El modo 1v1 es un modo de juego en el que te enfrentarás a tus propios amigos o a alguien al cual no
-            conozcas, y puedas llegar establecer una amistad añadiendolo a tu lista de amigos para seguir compitiendo
-            contra él. En este modo de competición en tiempo real sirve para ver quien es el más rápido a la hora de
-            escribir
-            y quien es capaz de cometer menos errores. Este modo de juego es ideal para aquellos que les guste la
-            competición y
-            quieran demostrar que son los más rápidos a la hora de escribir a partir de sus estadísticas.
-          </li>
-        </ul>
-
-        <PeopleIco class="ico-game pt-6" />
-        <ul>
-          <h3>Multiplayer</h3>
-          <li>El modo Multiplayer es un modo de juego en el que no sólo te enfrentarás a un amigo si no que pueden ser
-            varios de ellos, en este modo ya no
-            compites contra uno si no contra varios amigos a la vez, en el cual de nuevo podréis ver quien es el más
-            rápido a la hora de escribir y quien es capaz de cometer menos errores.
-            Este modo es ideal para aquel grupo de amigos que quieran desafiarse mientras mejoran sus habilidades de
-            mecanografía.
+          <h3>Contrarreloj</h3>
+          <li>El modo contrarreloj es el modo por defecto de la aplicación. Al usuario le saldrá un texto aleatorio y cuando 
+            comienze a escribir el cronómetro se pondrá en marcha y deberá completar el texto en el menor tiempo posible y haciendo 
+            el menor número de errores.
           </li>
         </ul>
       </div>
@@ -111,10 +95,50 @@
           escritura ha aumentado, por lo tanto tus WPM han aumentado
           también.
         </p>
+        
+        <h2 class="pt-6">Próximamente</h2>
+        <div class="lista d-flex flex-column align-items-center">
+        <OnevoneIco class="ico-game pt-6" />
+        <ul>
+          <h3>1v1</h3>
+          <li>El modo 1v1 es un modo de juego en el que te enfrentarás a tus propios amigos o a alguien al cual no
+            conozcas, y puedas llegar establecer una amistad añadiendolo a tu lista de amigos para seguir compitiendo
+            contra él. En este modo de competición en tiempo real sirve para ver quien es el más rápido a la hora de
+            escribir
+            y quien es capaz de cometer menos errores. Este modo de juego es ideal para aquellos que les guste la
+            competición y
+            quieran demostrar que son los más rápidos a la hora de escribir a partir de sus estadísticas.
+          </li>
+        </ul>
+
+        <PeopleIco class="ico-game pt-6" />
+        <ul>
+          <h3>Multiplayer</h3>
+          <li>El modo Multiplayer es un modo de juego en el que no sólo te enfrentarás a un amigo si no que pueden ser
+            varios de ellos, en este modo ya no
+            compites contra uno si no contra varios amigos a la vez, en el cual de nuevo podréis ver quien es el más
+            rápido a la hora de escribir y quien es capaz de cometer menos errores.
+            Este modo es ideal para aquel grupo de amigos que quieran desafiarse mientras mejoran sus habilidades de
+            mecanografía.
+          </li>
+        </ul>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
         <QuestionIco class="ico pt-6" />
         <h2>¿Preguntas?</h2>
         <p>Si es tu primera vez en una web de mecanografía y has llegado hasta aquí te instamos a que primero visites
-          nuestra
+          nuestra Guía, es un punto de partida para que puedas entender cómo funciona KeyMaster y puedas empezar a
+          practicar:
         </p>
         <nav class="navbar pt-2">
           <div class="blurbg" :class="{ open: isOpen }" @click="hideNavbar" />
@@ -130,7 +154,7 @@
         </nav>
         <p class="mt-2">En cualquier otro caso siempre puedes contactar con nosotros mediante redes sociales o enviarnos
           un correo
-          electrónico a
+          electrónico a la siguiente dirección, estaremos encantados de ayudarte en lo que necesites:
         </p>
         <nav class="navbar pt-2">
           <div class="blurbg" :class="{ open: isOpen }" @click="hideNavbar" />
@@ -243,6 +267,7 @@ h3 {
 
 p {
   font-size: 1.2rem;
+  text-align: left;
 }
 
 .guia {
@@ -253,6 +278,7 @@ li {
   font-size: 1.1rem;
   padding-bottom: 0.25rem;
   font-weight: normal !important;
+  text-align: left;
 }
 
 .key-conf {
