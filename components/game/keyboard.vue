@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit1' }" data-key="Digit1">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('1')">
             <svg x="40" y="0" width="38" height="38">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect>
               <text x="10" y="27" text-anchor="middle" dominant-baseline="middle" direction="ltr">1</text>
@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit2' }" data-key="Digit2">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('2')">
             <svg class="key-size" x="80" y="0" width="38" height="38">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect>
               <text x="10" y="27" text-anchor="middle" dominant-baseline="middle" direction="ltr">2</text>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit3' }" data-key="Digit3">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('3')">
             <svg class="key-size" x="120" y="0" width="38" height="38">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect>
               <text x="10" y="27" text-anchor="middle" dominant-baseline="middle" direction="ltr">3</text>
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit4' }" data-key="Digit4">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('4')">
             <svg class="key-size" x="160" y="0" width="38" height="38" data-key="Digit4">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">4</text><text x="10" y="12"
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit5' }" data-key="Digit5">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('5')">
             <svg class="key-size" x="200" y="0" width="38" height="38" data-key="Digit5">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">5</text><text x="10" y="12"
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit6' }" data-key="Digit6">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('6')">
             <svg class="key-size" x="240" y="0" width="38" height="38" data-key="Digit6">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">6</text><text x="10" y="12"
@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit7' }" data-key="Digit7">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('7')">
             <svg class="key-size" x="280" y="0" width="38" height="38" data-key="Digit7">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">7</text><text x="10" y="12"
@@ -77,7 +77,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit8' }" data-key="Digit8">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('8')">
             <svg class="key-size" x="320" y="0" width="38" height="38" data-key="Digit8">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">8</text><text x="10" y="12"
@@ -86,7 +86,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit9' }" data-key="Digit9">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('9')">
             <svg class="key-size" x="360" y="0" width="38" height="38" data-key="Digit9">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">9</text><text x="10" y="12"
@@ -95,7 +95,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Digit0' }" data-key="Digit0">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('0')">
             <svg class="key-size" x="400" y="0" width="38" height="38" data-key="Digit0">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">0</text><text x="10" y="12"
@@ -141,7 +141,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyQ' }" data-key="KeyQ">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('Q')">
             <svg class="key-size" x="60" y="40" width="38" height="38" data-key="KeyQ">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">Q</text>
@@ -149,7 +149,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyW' }" data-key="KeyW">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('W')">
             <svg class="key-size" x="100" y="40" width="38" height="38" data-key="KeyW">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">W</text>
@@ -157,7 +157,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyE' }" data-key="KeyE">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('E')">
             <svg class="key-size" x="140" y="40" width="38" height="38" data-key="KeyE">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">E</text>
@@ -165,7 +165,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyR' }" data-key="KeyR">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('R')">
             <svg class="key-size" x="180" y="40" width="38" height="38" data-key="KeyR">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">R</text>
@@ -173,7 +173,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyT' }" data-key="KeyT">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('T')">
             <svg class="key-size" x="220" y="40" width="38" height="38" data-key="KeyT">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">T</text>
@@ -181,7 +181,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyY' }" data-key="KeyY">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('Y')">
             <svg class="key-size" x="260" y="40" width="38" height="38" data-key="KeyY">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">Y</text>
@@ -189,7 +189,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyU' }" data-key="KeyU">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('U')">
             <svg class="key-size" x="300" y="40" width="38" height="38" data-key="KeyU">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">U</text>
@@ -197,7 +197,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyI' }" data-key="KeyI">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('I')">
             <svg class="key-size" x="340" y="40" width="38" height="38" data-key="KeyI">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">I</text>
@@ -205,7 +205,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyO' }" data-key="KeyO">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('O')">
             <svg class="key-size" x="380" y="40" width="38" height="38" data-key="KeyO">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">O</text>
@@ -213,7 +213,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyP' }" data-key="KeyP">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('P')">
             <svg class="key-size" x="420" y="40" width="38" height="38" data-key="KeyP">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">P</text>
@@ -259,7 +259,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyA' }" data-key="KeyA">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('A')">
             <svg class="key-size" x="70" y="80" width="38" height="38" data-key="KeyA">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">A</text>
@@ -267,7 +267,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyS' }" data-key="KeyS">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('S')">
             <svg class="key-size" x="110" y="80" width="38" height="38" data-key="KeyS">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">S</text>
@@ -275,7 +275,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyD' }" data-key="KeyD">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('D')">
             <svg class="key-size" x="150" y="80" width="38" height="38" data-key="KeyD">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">D</text>
@@ -283,7 +283,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyF' }" data-key="KeyF">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('F')">
             <svg class="key-size" x="190" y="80" width="38" height="38" data-key="KeyF">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">F</text>
@@ -291,7 +291,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyG' }" data-key="KeyG">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('G')">
             <svg class="key-size" x="230" y="80" width="38" height="38" data-key="KeyG">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">G</text>
@@ -299,7 +299,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyH' }" data-key="KeyH">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('H')">
             <svg class="key-size" x="270" y="80" width="38" height="38" data-key="KeyH">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">H</text>
@@ -307,7 +307,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyJ' }" data-key="KeyJ">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('J')">
             <svg class="key-size" x="310" y="80" width="38" height="38" data-key="KeyJ">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">J</text>
@@ -315,7 +315,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyK' }" data-key="KeyK">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('K')">
             <svg class="key-size" x="350" y="80" width="38" height="38" data-key="KeyK">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">K</text>
@@ -323,7 +323,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyL' }" data-key="KeyL">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('L')">
             <svg class="key-size" x="390" y="80" width="38" height="38" data-key="KeyL">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">L</text>
@@ -386,7 +386,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyZ' }" data-key="KeyZ">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('Z')">
             <svg class="key-size" x="90" y="120" width="38" height="38" data-key="KeyZ">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">Z</text>
@@ -394,7 +394,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyX' }" data-key="KeyX">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('X')">
             <svg class="key-size" x="130" y="120" width="38" height="38" data-key="KeyX">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">X</text>
@@ -402,7 +402,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyC' }" data-key="KeyC">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('C')">
             <svg class="key-size" x="170" y="120" width="38" height="38" data-key="KeyC">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">C</text>
@@ -410,7 +410,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyV' }" data-key="KeyV">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('V')">
             <svg class="key-size" x="210" y="120" width="38" height="38" data-key="KeyV">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">V</text>
@@ -418,7 +418,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyB' }" data-key="KeyB">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('B')">
             <svg class="key-size" x="250" y="120" width="38" height="38" data-key="KeyB">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">B</text>
@@ -426,7 +426,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyN' }" data-key="KeyN">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('N')">
             <svg class="key-size" x="290" y="120" width="38" height="38" data-key="KeyN">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">N</text>
@@ -434,7 +434,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'KeyM' }" data-key="KeyM">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('M')">
             <svg class="key-size" x="330" y="120" width="38" height="38" data-key="KeyM">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="12"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">M</text>
@@ -442,7 +442,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Comma' }" data-key="Comma">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor(',')">
             <svg class="key-size" x="370" y="120" width="38" height="38" data-key="Comma">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">,</text><text x="10" y="12"
@@ -451,7 +451,7 @@
           </div>
         </div>
         <div class="key" :class="{ 'key-pressed': pressedKey === 'Period' }" data-key="Period">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('.')">
             <svg class="key-size" x="410" y="120" width="38" height="38" data-key="Period">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">.</text><text x="10" y="12"
@@ -460,7 +460,7 @@
           </div>
         </div>
         <div class="key hideKey" :class="{ 'key-pressed': pressedKey === 'Slash' }" data-key="Slash">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor('-')">
             <svg class="key-size" x="450" y="120" width="38" height="38" data-key="Slash">
               <rect class="key-size" fill="none" x="0" y="0" width="38" height="38"></rect><text x="10" y="27"
                 text-anchor="middle" dominant-baseline="middle" direction="ltr">-</text><text x="10" y="12"
@@ -487,9 +487,9 @@
             </svg>
           </div>
         </div>
-        <div class="key u1-25 hideKey" :class="{ 'key-pressed': pressedKey === 'ControlLeft' }" data-key="ControlLeft">
+        <div class="key u1-25 hideKey" :class="{ 'key-pressed': pressedKey === 'MetaMetaLeft' }" data-key="Meta">
           <div class="innerKey">
-            <svg class="key-size" x="0" y="160" width="58" height="38" data-key="ControlLeft">
+            <svg class="key-size" x="0" y="160" width="58" height="38" data-key="Meta">
               <rect class="key-size" fill="none" x="0" y="0" width="58" height="38"></rect><text x="10" y="20"
                 text-anchor="start" dominant-baseline="middle" direction="ltr">Win</text>
             </svg>
@@ -504,7 +504,7 @@
           </div>
         </div>
         <div class="key u5" :class="{ 'key-pressed': pressedKey === 'Space' }" data-key="Space">
-          <div class="innerKey">
+          <div class="innerKey" :style="makeColor(' ')">
             <svg class="key-size" x="120" y="160" width="358" height="38" data-key="Space">
               <rect class="key-size" fill="none" x="0" y="0" width="358" height="38"></rect>
             </svg>
@@ -534,6 +534,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
+const { keys } = defineProps(['keys'])
+
+console.log(keys)
+
+
 const pressedKey = ref(null);
 const shiftPressed = ref(false);
 
@@ -560,6 +565,33 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKeyDown);
   window.removeEventListener('keyup', handleKeyUp);
 });
+
+
+
+function makeColor(letter) {
+  if (!keys) return ""
+  let percentage = keys[letter] || 0
+  // if (isNaN(percentage)) return ""
+
+  if (percentage < 0) percentage = 0;
+  if (percentage > 100) percentage = 100;
+
+  // Calculate the ratio (from 0 to 1)
+  const ratio = percentage / 100;
+
+  // Interpolate the RGB values
+  const red = Math.round(255 * ratio); // 0 to 255 as percentage goes from 0 to 100
+  const green = Math.round(255 * (1 - ratio)); // 255 to 0 as percentage goes from 0 to 100
+  const blue = 0; // Blue remains constant at 0 for the green-to-red gradient
+
+  // Convert RGB values to a hex string
+  const toHex = (value) => value.toString(16).padStart(2, '0'); // Convert to hex with padding
+
+  const color = `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
+
+  return `background-color:${color}; border-color:${color}`
+
+}
 </script>
 
 <style scoped>
@@ -600,6 +632,7 @@ onUnmounted(() => {
   color: transparent;
   /* border-color: transparent; */
 
+  color: #00cb2f;
 
 }
 
