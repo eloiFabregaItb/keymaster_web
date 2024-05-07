@@ -67,7 +67,7 @@
                 <img class="icon-button" src="../assets/icons/svg/History.svg" alt="">
             </button>
 
-            <button :class="{ 'img-opacity': page !== 2 }" class="px-5" @click="page = 2">
+            <button :class="{ 'img-opacity': page !== 2 }" class="px-5" @click="handleButtonClick">
                 <img class="icon-button" src="../assets/icons/svg/keyboard-solid.svg" alt="">
             </button>
 
@@ -122,7 +122,7 @@
                 </div>
 
                 <div v-if="page == 2">
-                    <p>Keyhits</p>
+                    <Keyboard :keys="keys"/>
                 </div>
 
                 <div v-if="page == 3">
@@ -152,20 +152,37 @@ import OnlineFriends from "~/components/OnlineFriends.vue";
 //import { refDebounced } from '@vueuse/core'
 import { ref, watch } from 'vue'
 import debounce from 'lodash.debounce'
-
-
+import Keyboard from "~/components/game/keyboard.vue";
 
 var isFollowersModalOpen = ref(false)
 var isFriendsModalOpen = ref(false)
 var isAddUserOpen = ref(false)
 
-
-
 const store = userStore()
 var userData = store.userInfo
 
 var jwt = store.$state.jwt
+
 var page = ref(0)
+
+var keys = ref([""])
+
+async function handleButtonClick() {
+    await getKeyHits();
+    page.value = 2;
+}
+
+async function getKeyHits(){
+    await axios.get(`${api_ip}/play/history`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
+        .then(response => {
+            keys.value = response.data.data.keyboard
+        })
+}
+
 
 function upadteProfileImg(event) {
     const form = new FormData()
@@ -250,20 +267,6 @@ function sendDeleteEmail() {
 }
 
 
-// function deleteProfile() {
-//     axios.post(`${api_ip}/user/delete`, {
-//         token: jwt.value,
-//     })
-//         .then(response => {
-//             console.log(response)
-//         })
-
-
-
-//     store.clearUser()
-// }
-
-
 function followUser(username) {
     axios.post(`${api_ip}/user/follow`, {
         follow: username
@@ -298,17 +301,6 @@ function unfollowUser(username) {
         });
 }
 
-
-
-
-// const props = defineProps({
-//     userSearchInput: String
-// })
-
-// const emit = defineEmits(['userSearchInput'])
-
-
-
 const userSearch = ref("")
 const userSearchResult = ref([])
 
@@ -329,13 +321,12 @@ function searchUser(searchInput) {
         });
 }
 watch(userSearch, debounce(() => {
-    console.log('Send API request')
     searchUser(userSearch)
 }, 1000))
 
-// const busquedaUsuari = refDebounced(userSearchInput, 500)
-// watch(searchUser, busquedaUsuari)
 
+
+// /play/history
 </script>
 
 <style scoped>
