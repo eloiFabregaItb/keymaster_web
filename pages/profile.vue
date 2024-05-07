@@ -67,7 +67,7 @@
                 <img class="icon-button" src="../assets/icons/svg/History.svg" alt="">
             </button>
 
-            <button :class="{ 'img-opacity': page !== 2 }" class="px-5" @click="page = 2">
+            <button :class="{ 'img-opacity': page !== 2 }" class="px-5" @click="handleButtonClick">
                 <img class="icon-button" src="../assets/icons/svg/keyboard-solid.svg" alt="">
             </button>
 
@@ -86,17 +86,17 @@
                             </label>
                             <input id="file-input" type="file" style="display: none;" @change="upadteProfileImg">
                         </div>
-                        <div class="ml-10 flex flex-col justify-center">
-                            <div class="w-100 text-2xl flex items-center">
-                                <img width="30" src="../assets/icons/svg/hashtag-solid.svg" alt="">
+                        <div class="flex flex-col justify-center">
+                            <div class="w-100 text-xl flex items-center">
+                                <img width="20" src="../assets/icons/svg/hashtag-solid.svg" alt="">
                                 <span class="ml-2">Nickname: {{ userData.username }}</span>
                             </div>
-                            <div class="w-100 text-2xl flex items-center">
-                                <img width="30" src="../assets/icons/svg/at-solid.svg" alt="">
+                            <div class="w-100 text-xl flex items-center">
+                                <img width="20" src="../assets/icons/svg/at-solid.svg" alt="">
                                 <span class="ml-2">Email: {{ userData.email }}</span>
                             </div>
-                            <div class="w-100 text-2xl flex items-center">
-                                <img width="30" src="../assets/icons/svg/earth-europe-solid.svg" alt="">
+                            <div class="w-100 text-xl flex items-center">
+                                <img width="20" src="../assets/icons/svg/earth-europe-solid.svg" alt="">
                                 <span class="ml-2">Rank: 1230</span>
                             </div>
 
@@ -122,7 +122,7 @@
                 </div>
 
                 <div v-if="page == 2">
-                    <p>Keyhits</p>
+                    <Keyboard :keys="keys"/>
                 </div>
 
                 <div v-if="page == 3">
@@ -152,20 +152,37 @@ import OnlineFriends from "~/components/OnlineFriends.vue";
 //import { refDebounced } from '@vueuse/core'
 import { ref, watch } from 'vue'
 import debounce from 'lodash.debounce'
-
-
+import Keyboard from "~/components/game/keyboard.vue";
 
 var isFollowersModalOpen = ref(false)
 var isFriendsModalOpen = ref(false)
 var isAddUserOpen = ref(false)
 
-
-
 const store = userStore()
 var userData = store.userInfo
 
 var jwt = store.$state.jwt
+
 var page = ref(0)
+
+var keys = ref([""])
+
+async function handleButtonClick() {
+    await getKeyHits();
+    page.value = 2;
+}
+
+async function getKeyHits(){
+    await axios.get(`${api_ip}/play/history`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
+        .then(response => {
+            keys.value = response.data.data.keyboard
+        })
+}
+
 
 function upadteProfileImg(event) {
     const form = new FormData()
@@ -179,6 +196,7 @@ function upadteProfileImg(event) {
         .then(response => {
             console.log(response)
             store.$state.profileImg = response.data.data.url
+            userData = store.userInfo
         })
 }
 
@@ -249,20 +267,6 @@ function sendDeleteEmail() {
 }
 
 
-// function deleteProfile() {
-//     axios.post(`${api_ip}/user/delete`, {
-//         token: jwt.value,
-//     })
-//         .then(response => {
-//             console.log(response)
-//         })
-
-
-
-//     store.clearUser()
-// }
-
-
 function followUser(username) {
     axios.post(`${api_ip}/user/follow`, {
         follow: username
@@ -297,17 +301,6 @@ function unfollowUser(username) {
         });
 }
 
-
-
-
-// const props = defineProps({
-//     userSearchInput: String
-// })
-
-// const emit = defineEmits(['userSearchInput'])
-
-
-
 const userSearch = ref("")
 const userSearchResult = ref([])
 
@@ -328,13 +321,12 @@ function searchUser(searchInput) {
         });
 }
 watch(userSearch, debounce(() => {
-    console.log('Send API request')
     searchUser(userSearch)
 }, 1000))
 
-// const busquedaUsuari = refDebounced(userSearchInput, 500)
-// watch(searchUser, busquedaUsuari)
 
+
+// /play/history
 </script>
 
 <style scoped>
