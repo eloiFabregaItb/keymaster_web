@@ -82,7 +82,7 @@
                     <div class="flex gap-20">
                         <div class="w-2/12">
                             <label for="file-input" class="file-input-label">
-                                <ProfilePic :src="userData.profileImg" big="true" />
+                                <ProfilePic :src="userPicture || userData.profileImg" big="true" />
                             </label>
                             <input id="file-input" type="file" style="display: none;" @change="upadteProfileImg">
                         </div>
@@ -143,7 +143,7 @@ import axios from "axios"
 import Swal from 'sweetalert2'
 import Navbar from "~/components/layout/navbar/navbar.vue";
 import ProfilePic from "~/components/ProfilePic.vue";
-import { userStore } from '../storages/userStore.js'
+import { userStore, isOnline } from '../storages/userStore.js'
 import Modal from "../components/Modal.vue";
 import PlayHistory from "~/components/PlayHistory.vue";
 import { api_ip } from "~/constants";
@@ -154,9 +154,12 @@ import { ref, watch } from 'vue'
 import debounce from 'lodash.debounce'
 import Keyboard from "~/components/game/keyboard.vue";
 
+
 var isFollowersModalOpen = ref(false)
 var isFriendsModalOpen = ref(false)
 var isAddUserOpen = ref(false)
+
+const userPicture = ref(null)
 
 const store = userStore()
 var userData = store.userInfo
@@ -190,11 +193,12 @@ function upadteProfileImg(event) {
 
     axios.post(`${api_ip}/user/editimg`, form, {
         headers: {
-            Authorization: `Bearer ${jwt}`
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
     })
         .then(response => {
             console.log(response)
+            userPicture.value = response.data.data.url
             store.$state.profileImg = response.data.data.url
             userData = store.userInfo
         })
@@ -258,7 +262,7 @@ function confirmDeleteProfile() {
 function sendDeleteEmail() {
     axios.post(`${api_ip}/user/delete`, undefined, {
         headers: {
-            Authorization: `Bearer ${jwt}`
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
     })
         .then(response => {
@@ -272,7 +276,7 @@ function followUser(username) {
         follow: username
     }, {
         headers: {
-            Authorization: `Bearer ${jwt}`
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
     })
         .then(response => {
@@ -289,7 +293,7 @@ function unfollowUser(username) {
         unfollow: username
     }, {
         headers: {
-            Authorization: `Bearer ${jwt}`
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
     })
         .then(response => {
@@ -309,7 +313,7 @@ function searchUser(searchInput) {
         search: searchInput.value
     }, {
         headers: {
-            Authorization: `Bearer ${jwt}`
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
     })
         .then(response => {
@@ -320,6 +324,8 @@ function searchUser(searchInput) {
             console.error(error);
         });
 }
+
+
 watch(userSearch, debounce(() => {
     searchUser(userSearch)
 }, 1000))

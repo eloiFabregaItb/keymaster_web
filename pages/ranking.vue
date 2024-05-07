@@ -2,7 +2,7 @@
     <Modal class="text-black" v-if="isBestPlayModalOpen" @close="isBestPlayModalOpen = false"
         :title="`Mejor partida de ${bestPlayModalData.username}`">
         <!-- <pre>{{ bestPlayModalData }}</pre> -->
-        <h1 class="text-5xl my-8">{{ bestPlayModalData.history[0].title }} de {{ bestPlayModalData.history[0].author }}</h1>
+        <h1 class="text-3xl my-8">{{ bestPlayModalData.history[0].title }} de {{ bestPlayModalData.history[0].author }}</h1>
 
 
         <!-- <p class="text-2xl mb-8">{{ bestPlayModalData.history[0].text }}</p> -->
