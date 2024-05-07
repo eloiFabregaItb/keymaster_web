@@ -38,19 +38,22 @@
 <script setup>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import { userStore } from '../storages/userStore.js'
 import { api_ip } from '~/constants';
 import Modal from '~/components/Modal.vue';
 import EyeSearch from '~/assets/icons/actions/eyeSearch.svg';
 
 var isBestPlayModalOpen = ref(false)
-var bestPlayModalData = ref({}) // Cambiado a objeto vacío
+var bestPlayModalData = ref({});
 
+const store = userStore()
+var jwt = store.$state.jwt
 const history = ref([]);
 
 onMounted(() => {
     axios.get(`${api_ip}/play/history`, {
         headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3JfaWQiOjMxLCJpYXQiOjE3MTUwOTAzODYsImV4cCI6MTcxNjEyNzE4Nn0.38ME7c6C_3NGMTCmzpNLrkpt06HmggmFkkxDsRvT1kw`
+            Authorization: `Bearer ${jwt}`
         }
     })
     .then(response => {
