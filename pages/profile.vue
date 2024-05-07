@@ -86,17 +86,17 @@
                             </label>
                             <input id="file-input" type="file" style="display: none;" @change="upadteProfileImg">
                         </div>
-                        <div class="ml-10 flex flex-col justify-center">
-                            <div class="w-100 text-2xl flex items-center">
-                                <img width="30" src="../assets/icons/svg/hashtag-solid.svg" alt="">
+                        <div class="flex flex-col justify-center">
+                            <div class="w-100 text-xl flex items-center">
+                                <img width="20" src="../assets/icons/svg/hashtag-solid.svg" alt="">
                                 <span class="ml-2">Nickname: {{ userData.username }}</span>
                             </div>
-                            <div class="w-100 text-2xl flex items-center">
-                                <img width="30" src="../assets/icons/svg/at-solid.svg" alt="">
+                            <div class="w-100 text-xl flex items-center">
+                                <img width="20" src="../assets/icons/svg/at-solid.svg" alt="">
                                 <span class="ml-2">Email: {{ userData.email }}</span>
                             </div>
-                            <div class="w-100 text-2xl flex items-center">
-                                <img width="30" src="../assets/icons/svg/earth-europe-solid.svg" alt="">
+                            <div class="w-100 text-xl flex items-center">
+                                <img width="20" src="../assets/icons/svg/earth-europe-solid.svg" alt="">
                                 <span class="ml-2">Rank: 1230</span>
                             </div>
 
@@ -179,6 +179,7 @@ function upadteProfileImg(event) {
         .then(response => {
             console.log(response)
             store.$state.profileImg = response.data.data.url
+            userData = store.userInfo
         })
 }
 
