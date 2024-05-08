@@ -1,6 +1,6 @@
 <template>
     <Modal class="text-black" v-if="isAddUserOpen" @close="isAddUserOpen = false" :title="'Buscador de usuarios'">
-        <input v-model="userSearchInput" @change="searchUser" type="text"
+        <input v-model="userSearchInput" type="text"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Busca un usuario..." />
         <div v-if="userSearchResult.length > 0" class="user-modal-info" v-for="user in userSearchResult">
@@ -19,6 +19,12 @@
             <p>No se han encontrado resultados</p>
         </div>
     </Modal>
+    <Modal class="text-black" v-if="isPlayVersusModalOpen" @close="isPlayVersusModalOpen = false">
+        <h1 class="mb-10">La funcionalidad de jugar contra amigos estará disponible próximamente, de mientras puedes seguir jugando al modo contrarreloj o practicando con el modo zen.</h1>
+        <nuxt-link class="play-button" to="/">
+            JUGAR
+        </nuxt-link>
+    </Modal>
     <div class="flex justify-between">
         <button class="friend-icon">
             <img class="icon-button" src="../assets/icons/svg/FaSolidUserFriends.svg" alt="">
@@ -35,19 +41,24 @@
             <img class="online-state-icon" v-if="friend.online" src="../assets/icons/svg/OnlineCircle.svg" alt="">
             <img class="online-state-icon" v-else src="../assets/icons/svg/OfflineCircle.svg" alt="">
             <span>{{ friend.username }}</span>
-            <img class="play-icon mr-2.5" src="../assets/icons/svg/PlayIcon.svg" alt="">
+            <img class="play-icon mr-2.5" @click="isPlayVersusModalOpen = true" src="../assets/icons/svg/PlayIcon.svg" alt="">
         </div>
     </div>
 </template>
 
 <script setup>
+
 import axios from "axios"
 import Modal from './Modal.vue';
 import { userStore } from '../storages/userStore.js'
 import { api_ip } from "~/constants";
+import debounce from 'lodash.debounce'
+import { ref, watch } from 'vue'
+
 const store = userStore()
 var jwt = store.$state.jwt
 var isAddUserOpen = ref(false)
+var isPlayVersusModalOpen = ref(false)
 var userSearchInput = ref("")
 var userSearchResult = ref([])
 
@@ -85,9 +96,9 @@ function unfollowUser(username) {
         });
 }
 
-function searchUser() {
+function searchUser(searchInput) {
     axios.post(`${api_ip}/user/search`, {
-        search: userSearchInput.value
+        search: searchInput.value
     }, {
         headers: {
             Authorization: `Bearer ${jwt}`
@@ -101,6 +112,9 @@ function searchUser() {
             console.error(error);
         });
 }
+watch(userSearchInput, debounce(() => {
+    searchUser(userSearchInput)
+}, 100))
 
 </script>
 
@@ -144,5 +158,9 @@ function searchUser() {
     color: white;
     padding: 5px;
     border-radius: 5px;
+}
+
+.play-button {
+    color: #43219B;
 }
 </style>

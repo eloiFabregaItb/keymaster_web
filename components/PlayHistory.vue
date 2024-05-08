@@ -1,216 +1,99 @@
 <template>
+    <Modal class="text-black" v-if="isBestPlayModalOpen" @close="isBestPlayModalOpen = false"
+        :title="`Partida`">
+        <h1 class="text-5xl my-8">{{ bestPlayModalData.title }} de {{ bestPlayModalData.author }}</h1>
+        <span v-for="(letra, index) in bestPlayModalData.textArr" :key="index" :class="{ 'text-white bg-red-600': bestPlayModalData.errIndexes.includes(index) }">{{ letra }}</span>
+        <p class="mt-8">{{ formatTimeSeconds(bestPlayModalData.time) }} segundos</p>
+        <p class="">{{ bestPlayModalData.words }} palabras</p>
+        <p class="text-red-600">{{ bestPlayModalData.totalErrors }} errores</p>
+    </Modal>
     <div class="play-container">
         <table>
             <thead>
-                <th>Fecha de la partida</th>
-                <th>Tiempo utilizado</th>
-                <th>Palabras por minuto</th>
-                <th>Número de errores</th>
-                <th>% de errores</th>
+                <tr>
+                    <th><img class="table-icon" src="../assets/icons/actions/Calendar.svg" alt=""></th>
+                    <th><img class="table-icon" src="../assets/icons/actions/Time.svg" alt=""></th>
+                    <th><img class="table-icon" src="../assets/icons/actions/lightning2.svg" alt=""></th>
+                    <th><img class="table-icon" src="../assets/icons/actions/error2.svg" alt=""></th>
+                    <th>
+                        <img class="table-icon2" src="../assets/icons/actions/Percentage.svg" alt="">
+                        <span>errors</span>
+                    </th>
+                    <th><img class="table-icon" src="../assets/icons/actions/zenIco2.svg" alt=""></th>
+                </tr>
             </thead>
+            <tbody>
+                <tr v-for="(partida, index) in history" :key="index">
+                    <td>{{ formatDate(partida.createdAt) }}</td>
+                    <td>{{ formatTimeSeconds(partida.time) }}<small style="font-size: 11px;">{{ formatTimeMillis(partida.time) }}</small></td>
+                    <td>{{ partida.wpm }}</td>
+                    <td>{{ partida.totalErrors }}</td>
+                    <td>{{ calcularPorcentajeErrores(partida) }}</td>
+                    <td>
+                        <button @click="openBestPlayModal(partida)" class="view-best-play"><EyeSearch/></button>
+                    </td>                
+                </tr>
+            </tbody>
         </table>
-        <div class="table-wrapper">
-            <table>
-                <tbody class="table-wrapper">
-                    <!-- <tr v-if="games.length>0" v-for="game in games">
-                        <td>{{ game. }}</td>
-                        <td>{{ game. }}</td>
-                        <td>{{ game. }}</td>
-                        <td>{{ game. }}</td>
-                        <td>{{ game. }}</td>
-                    </tr>
-                    <tr v-else>
-                        Cuando juegues las estadísticas de tus partidas aparecerán aquí
-                    </tr> -->
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                    <tr>
-                        <td>30-04-2024 17:05</td>
-                        <td>50s</td>
-                        <td>77</td>
-                        <td>4</td>
-                        <td>2%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 </template>
 
 <script setup>
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
+import { userStore } from '../storages/userStore.js'
+import { api_ip } from '~/constants';
+import Modal from '~/components/Modal.vue';
+import EyeSearch from '~/assets/icons/actions/eyeSearch.svg';
+
+var isBestPlayModalOpen = ref(false)
+var bestPlayModalData = ref({});
+
+const store = userStore()
+var jwt = store.$state.jwt
+const history = ref([]);
+
+onMounted(() => {
+    axios.get(`${api_ip}/play/history`, {
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    })
+    .then(response => {
+        history.value = response.data.data.history;
+        console.log(response);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+});
+
+function openBestPlayModal(partida) {
+    bestPlayModalData.value = partida;
+    bestPlayModalData.value.textArr = partida.text.split("");
+    bestPlayModalData.value.errIndexes = Object.keys(partida.errors).map(Number);
+    isBestPlayModalOpen.value = true;
+}
+
+function formatDate(dateString) {
+    return new Date(dateString).toLocaleDateString();
+}
+
+function formatTimeSeconds(milliseconds) {
+    const seconds = milliseconds / 1000;
+    const formattedSeconds = Math.floor(seconds);
+    return formattedSeconds.toLocaleString('es-ES', { minimumFractionDigits: 0 });
+}
+
+function formatTimeMillis(milliseconds) {
+    const seconds = milliseconds / 1000;
+    const formattedSeconds = Math.floor((seconds - Math.floor(seconds))*1000);
+    return formattedSeconds.toLocaleString('es-ES', { minimumFractionDigits: 0 });
+}
+
+function calcularPorcentajeErrores(partida) {
+    return ((partida.totalErrors / partida.length) * 100).toFixed(2) + "%";
+}
 </script>
 
 <style scoped>
@@ -231,7 +114,9 @@ table {
 
 th,
 td {
-    border: 1px solid #dddddd;
+    border-left: 1px solid #dddddd33;
+    border-right: 1px solid #dddddd33;
+    border-bottom: 1px solid white;
     padding: 8px;
     text-align: center;
     width: 20%;
@@ -240,5 +125,23 @@ td {
 th {
     background-color: white;
     color: #43219B;
+}
+
+.view-best-play {
+    background-color: #43219B;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.table-icon {
+    height: 40px;
+    display: block;
+    margin: auto;
+}
+.table-icon2 {
+    height: 30px;
+    display: block;
+    margin: auto;
 }
 </style>

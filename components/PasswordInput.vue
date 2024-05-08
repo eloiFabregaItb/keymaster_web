@@ -1,12 +1,12 @@
 <template>
   <div class="PasswordWrapper">
     <input class="input" :type="isVisible ? 'text' : 'password'" placeholder="Contraseña" v-model="model">
-    <button @click="changeVis()">
+    <span @click="changeVis()">
 
       <IcoEye v-if="isVisible" />
       <IcoEyeClose v-else />
 
-    </button>
+    </span>
   </div>
 </template>
 
@@ -65,14 +65,17 @@ function changeVis() {
   background: none;
 }
 
-.PasswordWrapper button svg {
+.PasswordWrapper span svg {
   height: 15px;
   width: 15px;
 }
 
 
-.PasswordWrapper button {
+.PasswordWrapper span {
   padding: 0 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
   /* width: 20px; */
 }
 </style>

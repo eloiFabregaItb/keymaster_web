@@ -23,7 +23,7 @@
         </li>
         <li>
           <nuxt-link to="/guide" @click="hideNavbar">
-            <navbarBtn :srcIco="IcoGuide">Guide</navbarBtn>
+            <navbarBtn :srcIco="IcoGuide">Guia</navbarBtn>
           </nuxt-link>
         </li>
       </ul>
@@ -45,7 +45,8 @@
         <li v-if="isOnline">
           <nuxt-link to="/profile">
             <div class="userCard">
-              <img class="navbar-user-img" :src="userData.profileImg" alt="">
+              <ProfilePic :src="userData.profileImg" superSmall="true" />
+              <!-- <img class="navbar-user-img" :src="userData.profileImg" alt=""> -->
               ¡Hola, <b>{{ userData.username }}</b>!
             </div>
           </nuxt-link>
