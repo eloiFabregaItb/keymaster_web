@@ -40,7 +40,7 @@
             </div>
 
             <div>
-              <button type="submit" @click="login()"
+              <button type="submit"
                 class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
                 Inicia sesión
               </button>
@@ -63,6 +63,7 @@
       </div>
     </div>
   </section>
+
 </template>
 
 <script setup>
@@ -84,6 +85,7 @@ var showErrors = ref(false)
 var errMsg = ref("")
 
 async function login() {
+  return
   axios.post(`${api_ip}/auth/login`, {
     login: user.value,
     password: password.value
