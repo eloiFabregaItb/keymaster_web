@@ -1,8 +1,8 @@
 <template>
-    <Modal class="text-black" v-if="isBestPlayModalOpen" @close="isBestPlayModalOpen = false"
-        :title="`Partida`">
+    <Modal class="text-black" v-if="isBestPlayModalOpen" @close="isBestPlayModalOpen = false" :title="`Partida`">
         <h1 class="text-5xl my-8">{{ bestPlayModalData.title }} de {{ bestPlayModalData.author }}</h1>
-        <span v-for="(letra, index) in bestPlayModalData.textArr" :key="index" :class="{ 'text-white bg-red-600': bestPlayModalData.errIndexes.includes(index) }">{{ letra }}</span>
+        <span v-for="(letra, index) in bestPlayModalData.textArr" :key="index"
+            :class="{ 'text-white bg-red-600': bestPlayModalData.errIndexes.includes(index) }">{{ letra }}</span>
         <p class="mt-8">{{ formatTimeSeconds(bestPlayModalData.time) }} segundos</p>
         <p class="">{{ bestPlayModalData.words }} palabras</p>
         <p class="text-red-600">{{ bestPlayModalData.totalErrors }} errores</p>
@@ -20,15 +20,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(partida, index) in history" :key="index">
+                <tr v-if="history" v-for="(partida, index) in history" :key="index">
                     <td>{{ formatDate(partida.createdAt) }}</td>
-                    <td>{{ formatTimeSeconds(partida.time) }}<small style="font-size: 11px;">{{ formatTimeMillis(partida.time) }}</small></td>
+                    <td>{{ formatTimeSeconds(partida.time) }}<small style="font-size: 11px;">{{
+        formatTimeMillis(partida.time) }}</small></td>
                     <td>{{ partida.wpm }}</td>
                     <td>{{ partida.totalErrors }}</td>
                     <td>{{ calcularPorcentajeErrores(partida) }}</td>
                     <td>
-                        <button @click="openBestPlayModal(partida)" class="view-best-play"><EyeSearch/></button>
-                    </td>                
+                        <button @click="openBestPlayModal(partida)" class="view-best-play">
+                            <EyeSearch />
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -43,6 +46,8 @@ import { api_ip } from '~/constants';
 import Modal from '~/components/Modal.vue';
 import EyeSearch from '~/assets/icons/actions/eyeSearch.svg';
 
+const { historyData } = defineProps(['historyData'])
+
 var isBestPlayModalOpen = ref(false)
 var bestPlayModalData = ref({});
 
@@ -50,20 +55,9 @@ const store = userStore()
 var jwt = store.$state.jwt
 const history = ref([]);
 
-onMounted(() => {
-    axios.get(`${api_ip}/play/history`, {
-        headers: {
-            Authorization: `Bearer ${jwt}`
-        }
-    })
-    .then(response => {
-        history.value = response.data.data.history;
-        console.log(response);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-});
+watch(() => {
+    history.value = historyData
+}, historyData)
 
 function openBestPlayModal(partida) {
     bestPlayModalData.value = partida;
@@ -84,7 +78,7 @@ function formatTimeSeconds(milliseconds) {
 
 function formatTimeMillis(milliseconds) {
     const seconds = milliseconds / 1000;
-    const formattedSeconds = Math.floor((seconds - Math.floor(seconds))*1000);
+    const formattedSeconds = Math.floor((seconds - Math.floor(seconds)) * 1000);
     return formattedSeconds.toLocaleString('es-ES', { minimumFractionDigits: 0 });
 }
 
