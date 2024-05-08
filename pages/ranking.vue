@@ -154,6 +154,7 @@ th {
 
 .table-icon {
     height: 40px;
+    width: 40px;
     display: block;
     margin: auto;
 }

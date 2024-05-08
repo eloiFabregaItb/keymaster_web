@@ -24,7 +24,7 @@
                         <Icoerror2 class="table-icon" />
                     </th>
                     <th>
-                        <IcoPercentage class="table-icon2" />
+                        <IcoPercentage class="table-icon" />
                     </th>
                     <th>
                         <IcozenIco2 class="table-icon" />
@@ -146,13 +146,8 @@ th {
 }
 
 .table-icon {
-    height: 40px;
-    display: block;
-    margin: auto;
-}
-
-.table-icon2 {
     height: 30px;
+    width: 30px;
     display: block;
     margin: auto;
 }

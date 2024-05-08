@@ -406,7 +406,8 @@ watch(userSearch, debounce(() => {
 }
 
 .icon-button {
-    height: 25px;
+    height: 30px;
+    width: 30px;
     vertical-align: middle;
 }
 
