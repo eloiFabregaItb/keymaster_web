@@ -11,15 +11,24 @@
         <table>
             <thead>
                 <tr>
-                    <th><img class="table-icon" src="../assets/icons/actions/Calendar.svg" alt=""></th>
-                    <th><img class="table-icon" src="../assets/icons/actions/Time.svg" alt=""></th>
-                    <th><img class="table-icon" src="../assets/icons/actions/lightning2.svg" alt=""></th>
-                    <th><img class="table-icon" src="../assets/icons/actions/error2.svg" alt=""></th>
                     <th>
-                        <img class="table-icon2" src="../assets/icons/actions/Percentage.svg" alt="">
-                        <span>errors</span>
+                        <IcoCalendar class="table-icon" />
                     </th>
-                    <th><img class="table-icon" src="../assets/icons/actions/zenIco2.svg" alt=""></th>
+                    <th>
+                        <IcoTime class="table-icon" />
+                    </th>
+                    <th>
+                        <Icolightning2 class="table-icon" />
+                    </th>
+                    <th>
+                        <Icoerror2 class="table-icon" />
+                    </th>
+                    <th>
+                        <IcoPercentage class="table-icon2" />
+                    </th>
+                    <th>
+                        <IcozenIco2 class="table-icon" />
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +51,14 @@
 </template>
 
 <script setup>
+
+import IcoCalendar from "../assets/icons/actions/Calendar.svg"
+import IcoTime from "../assets/icons/actions/Time.svg"
+import Icolightning2 from "../assets/icons/actions/lightning2.svg"
+import Icoerror2 from "../assets/icons/actions/error2.svg"
+import IcoPercentage from "../assets/icons/actions/Percentage.svg"
+import IcozenIco2 from "../assets/icons/actions/zenIco2.svg"
+
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { userStore } from '../storages/userStore.js'
@@ -133,6 +150,7 @@ th {
     display: block;
     margin: auto;
 }
+
 .table-icon2 {
     height: 30px;
     display: block;

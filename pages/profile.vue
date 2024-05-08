@@ -54,25 +54,23 @@
 
 
     <div class="flex items-center justify-end">
-        <!-- <img width="20" class="text-white" src="../assets/icons/svg/circle-user-regular.svg" alt="">
-        <span class="text-white text-2xl mr-10" @click="page = 0" style="cursor: pointer;">Profile</span> -->
     </div>
     <section class="mx-24 mt-16" id="profile">
         <div>
             <button :class="{ 'img-opacity': page !== 0 }" class="px-5" @click="page = 0">
-                <img class="icon-button" src="../assets/icons/svg/user-solid.svg" alt="">
+                <Icouser class="icon-button" />
             </button>
 
             <button :class="{ 'img-opacity': page !== 1 }" class="px-5" @click="page = 1">
-                <img class="icon-button" src="../assets/icons/svg/History.svg" alt="">
+                <IcoHistory class="icon-button" />
             </button>
 
             <button :class="{ 'img-opacity': page !== 2 }" class="px-5" @click="page = 2">
-                <img class="icon-button" src="../assets/icons/svg/keyboard-solid.svg" alt="">
+                <Icokeyboard class="icon-button" />
             </button>
 
             <button :class="{ 'img-opacity': page !== 3 }" class="px-5" @click="page = 3">
-                <img class="icon-button" src="../assets/icons/svg/Settings.svg" alt="">
+                <IcoSettings class="icon-button" />
             </button>
             <hr style="width: 95%;">
             <div class="mt-10">
@@ -88,15 +86,15 @@
                         </div>
                         <div class="flex flex-col justify-center">
                             <div class="w-100 text-xl flex items-center">
-                                <img width="20" src="../assets/icons/svg/hashtag-solid.svg" alt="">
+                                <Icohashtag width="20" />
                                 <span class="ml-2">Nickname: {{ userData.username }}</span>
                             </div>
                             <div class="w-100 text-xl flex items-center">
-                                <img width="20" src="../assets/icons/svg/at-solid.svg" alt="">
+                                <Icoat width="20" />
                                 <span class="ml-2">Email: {{ userData.email }}</span>
                             </div>
                             <div class="w-100 text-xl flex items-center">
-                                <img width="20" src="../assets/icons/svg/earth-europe-solid.svg" alt="">
+                                <Icoearth width="20" />
                                 <span class="ml-2">Rank: {{ historyData?.rank || "" }}</span>
                             </div>
 
@@ -139,6 +137,15 @@
 </template>
 
 <script setup>
+
+import Icouser from "../assets/icons/svg/user-solid.svg"
+import IcoHistory from "../assets/icons/svg/History.svg"
+import Icokeyboard from "../assets/icons/svg/keyboard-solid.svg"
+import IcoSettings from "../assets/icons/svg/Settings.svg"
+import Icohashtag from "../assets/icons/svg/hashtag-solid.svg"
+import Icoat from "../assets/icons/svg/at-solid.svg"
+import Icoearth from "../assets/icons/svg/earth-europe-solid.svg"
+
 import axios from "axios"
 import Swal from 'sweetalert2'
 import ProfilePic from "~/components/ProfilePic.vue";

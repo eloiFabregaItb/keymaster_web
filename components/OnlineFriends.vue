@@ -20,33 +20,40 @@
         </div>
     </Modal>
     <Modal class="text-black" v-if="isPlayVersusModalOpen" @close="isPlayVersusModalOpen = false">
-        <h1 class="mb-10">La funcionalidad de jugar contra amigos estará disponible próximamente, de mientras puedes seguir jugando al modo contrarreloj o practicando con el modo zen.</h1>
+        <h1 class="mb-10">La funcionalidad de jugar contra amigos estará disponible próximamente, de mientras puedes
+            seguir jugando al modo contrarreloj o practicando con el modo zen.</h1>
         <nuxt-link class="play-button" to="/">
             JUGAR
         </nuxt-link>
     </Modal>
     <div class="flex justify-between">
         <button class="friend-icon">
-            <img class="icon-button" src="../assets/icons/svg/FaSolidUserFriends.svg" alt="">
+            <IcoFaSolidUserFriends class="icon-button" />
             <span class="ml-2.5 text-2xl">Friends</span>
         </button>
         <button @click="isAddUserOpen = true">
-            <img class="icon-button" src="../assets/icons/svg/FluentMdl2AddFriend.svg" alt="">
+            <IcoFluentMdl2AddFriend class="icon-button" />
         </button>
     </div>
     <hr>
 
     <div class="my-1.5 online-friends" v-for="friend in store.$state.friends">
         <div class="flex justify-between items-center">
-            <img class="online-state-icon" v-if="friend.online" src="../assets/icons/svg/OnlineCircle.svg" alt="">
-            <img class="online-state-icon" v-else src="../assets/icons/svg/OfflineCircle.svg" alt="">
+            <IcoOnlineCircle class="online-state-icon" v-if="friend.online" />
+            <IcoOfflineCircle class="online-state-icon" v-else />
             <span>{{ friend.username }}</span>
-            <img class="play-icon mr-2.5" @click="isPlayVersusModalOpen = true" src="../assets/icons/svg/PlayIcon.svg" alt="">
+            <IcoPlayIcon class="play-icon mr-2.5" @click="isPlayVersusModalOpen = true" />
         </div>
     </div>
 </template>
 
 <script setup>
+
+import IcoFaSolidUserFriends from "../assets/icons/svg/FaSolidUserFriends.svg"
+import IcoFluentMdl2AddFriend from "../assets/icons/svg/FluentMdl2AddFriend.svg"
+import IcoOnlineCircle from "../assets/icons/svg/OnlineCircle.svg"
+import IcoOfflineCircle from "../assets/icons/svg/OfflineCircle.svg"
+import IcoPlayIcon from "../assets/icons/svg/PlayIcon.svg"
 
 import axios from "axios"
 import Modal from './Modal.vue';
