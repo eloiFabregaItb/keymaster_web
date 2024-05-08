@@ -52,7 +52,7 @@
 
             <div class="text-sm ml-auto">
               <span class="text-gray-400">¿Has olvidado tu contraseña?
-                <nuxt-link to="/recover" class="color-primary py-2 px-3 text-white rounded"
+                <nuxt-link to="/recover" class="color-primary py-2 text-white rounded"
                   aria-current="page">Recupérala</nuxt-link>
               </span>
             </div>
