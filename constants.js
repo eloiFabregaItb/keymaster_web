@@ -1,6 +1,6 @@
 // export const api_ip = "http://172.30.5.61:3000"
-export const api_ip = "http://localhost:3000"
-// export const api_ip = "https://keymaster.fabrega.cat/api"
+// export const api_ip = "http://localhost:3000"
+export const api_ip = "https://keymaster.fabrega.cat/api"
 
 export const ERROR={
     MISSING_DATA:{
