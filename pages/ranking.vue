@@ -2,11 +2,14 @@
     <Modal class="text-black" v-if="isBestPlayModalOpen" @close="isBestPlayModalOpen = false"
         :title="`Mejor partida de ${bestPlayModalData.username}`">
         <!-- <pre>{{ bestPlayModalData }}</pre> -->
-        <h1 class="text-3xl my-8">{{ bestPlayModalData.history[0].title }} de {{ bestPlayModalData.history[0].author }}</h1>
+        <h1 class="text-3xl my-8">{{ bestPlayModalData.history[0].title }} de {{ bestPlayModalData.history[0].author }}
+        </h1>
 
 
         <!-- <p class="text-2xl mb-8">{{ bestPlayModalData.history[0].text }}</p> -->
-        <span v-for="(letra, index) in bestPlayModalData.history[0].textArr" :key="index" :class="{ 'text-white bg-red-600': bestPlayModalData.history[0].errIndexes.includes(index) }">{{ letra }}</span>
+        <span v-for="(letra, index) in bestPlayModalData.history[0].textArr" :key="index"
+            :class="{ 'text-white bg-red-600': bestPlayModalData.history[0].errIndexes.includes(index) }">{{ letra
+            }}</span>
 
 
         <p class="mt-8">{{ formatTime(bestPlayModalData.history[0].time) }} segundos</p>
@@ -19,19 +22,19 @@
             <table>
                 <thead>
                     <th>
-                        <img class="table-icon" src="../assets/icons/svg/Podium.svg" alt="">
+                        <IcoPodium class="table-icon" />
                     </th>
                     <th>
-                        <img class="table-icon" src="../assets/icons/svg/circle-user-regular.svg" alt="">
+                        <Icoregular class="table-icon" />
                     </th>
                     <th>
-                        <img class="table-icon" src="../assets/icons/actions/lightning2.svg" alt="">
+                        <Icolightning2 class="table-icon" />
                     </th>
                     <th>
-                        <img class="table-icon" src="../assets/icons/actions/error2.svg" alt="">
+                        <Icoerror2 class="table-icon" />
                     </th>
                     <th>
-                        <img fill="red" class="table-icon" src="../assets/icons/actions/ranking2.svg" alt="">
+                        <Icoranking2 fill="red" class="table-icon" />
                     </th>
                 </thead>
             </table>
@@ -43,7 +46,7 @@
                     <tbody class="table-wrapper">
                         <tr v-for="(user, index) in ranking">
                             <td>
-                                #{{ index+1 }}
+                                #{{ index + 1 }}
                             </td>
                             <td>
                                 <div class="flex items-center ">
@@ -58,7 +61,9 @@
                                 {{ user.history[0].totalErrors }}
                             </td>
                             <td>
-                                <button @click="isBestPlayModalOpen = true; loadBestPlay(user)" class="view-best-play"><EyeSearch/></button>
+                                <button @click="isBestPlayModalOpen = true; loadBestPlay(user)" class="view-best-play">
+                                    <EyeSearch />
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -69,6 +74,13 @@
 </template>
 
 <script setup>
+
+import IcoPodium from "../assets/icons/svg/Podium.svg"
+import Icoregular from "../assets/icons/svg/circle-user-regular.svg"
+import Icolightning2 from "../assets/icons/actions/lightning2.svg"
+import Icoerror2 from "../assets/icons/actions/error2.svg"
+import Icoranking2 from "../assets/icons/actions/ranking2.svg"
+
 import ProfilePic from '~/components/ProfilePic.vue';
 import axios from 'axios';
 import { api_ip } from '~/constants';
@@ -80,7 +92,7 @@ var bestPlayModalData = ref([])
 
 const ranking = ref([])
 
-function getRanking(){
+function getRanking() {
     axios.get(`${api_ip}/play/ranking`)
         .then(response => {
             console.log(response)
@@ -92,17 +104,17 @@ function getRanking(){
 }
 getRanking()
 
-function loadBestPlay(data){
+function loadBestPlay(data) {
     bestPlayModalData.value = data
-    bestPlayModalData.value.history = bestPlayModalData.value.history.map(h=>({...h,textArr:h.text.split(""),errIndexes:Object.keys(h.errors).map(Number)}))
+    bestPlayModalData.value.history = bestPlayModalData.value.history.map(h => ({ ...h, textArr: h.text.split(""), errIndexes: Object.keys(h.errors).map(Number) }))
     console.log(bestPlayModalData.value)
 
 }
 
-function formatTime(milisegundos){
+function formatTime(milisegundos) {
     const segundos = milisegundos / 1000
-    const segundosFormateados = segundos.toLocaleString('es-ES', {minimumFractionDigits: 3});
-    
+    const segundosFormateados = segundos.toLocaleString('es-ES', { minimumFractionDigits: 3 });
+
     return segundosFormateados;
 }
 
@@ -142,6 +154,7 @@ th {
 
 .table-icon {
     height: 40px;
+    width: 40px;
     display: block;
     margin: auto;
 }
