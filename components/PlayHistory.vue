@@ -11,12 +11,15 @@
         <table>
             <thead>
                 <tr>
-                    <th>Fecha de la partida</th>
-                    <th>Tiempo utilizado</th>
-                    <th>Palabras por minuto</th>
-                    <th>Número de errores</th>
-                    <th>% de errores</th>
-                    <th>Partida</th>
+                    <th><img class="table-icon" src="../assets/icons/actions/Calendar.svg" alt=""></th>
+                    <th><img class="table-icon" src="../assets/icons/actions/Time.svg" alt=""></th>
+                    <th><img class="table-icon" src="../assets/icons/actions/lightning2.svg" alt=""></th>
+                    <th><img class="table-icon" src="../assets/icons/actions/error2.svg" alt=""></th>
+                    <th>
+                        <img class="table-icon2" src="../assets/icons/actions/Percentage.svg" alt="">
+                        <span>errors</span>
+                    </th>
+                    <th><img class="table-icon" src="../assets/icons/actions/zenIco2.svg" alt=""></th>
                 </tr>
             </thead>
             <tbody>
@@ -129,5 +132,16 @@ th {
     color: white;
     padding: 5px;
     border-radius: 5px;
+}
+
+.table-icon {
+    height: 40px;
+    display: block;
+    margin: auto;
+}
+.table-icon2 {
+    height: 30px;
+    display: block;
+    margin: auto;
 }
 </style>

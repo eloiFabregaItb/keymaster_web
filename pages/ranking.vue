@@ -25,13 +25,13 @@
                         <img class="table-icon" src="../assets/icons/svg/circle-user-regular.svg" alt="">
                     </th>
                     <th>
-                        <img class="table-icon" src="../assets/icons/actions/lightning2.svg" alt=""> wpm
+                        <img class="table-icon" src="../assets/icons/actions/lightning2.svg" alt="">
                     </th>
                     <th>
-                        <img class="table-icon" src="../assets/icons/svg/BxsError.svg" alt=""> errores
+                        <img class="table-icon" src="../assets/icons/actions/error2.svg" alt="">
                     </th>
                     <th>
-                        Mejor partida
+                        <img fill="red" class="table-icon" src="../assets/icons/actions/ranking2.svg" alt="">
                     </th>
                 </thead>
             </table>
@@ -46,7 +46,7 @@
                                 #{{ index+1 }}
                             </td>
                             <td>
-                                <div class="flex justify-center items-center ">
+                                <div class="flex items-center ">
                                     <ProfilePic :src="user.profileImg" />
                                     <span class="ml-3">{{ user.username }}</span>
                                 </div>
