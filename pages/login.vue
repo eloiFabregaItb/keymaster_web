@@ -1,5 +1,5 @@
 <template>
-  <section id="login">
+  <section id="login" class="login">
     <div class="h-vh flex flex-col justify-center items-center text-style text-white">
       <nuxt-link to="/">
         <img width="450" class="mb-6" src="../assets/icons/logo/logo.png" alt="logo">
@@ -14,9 +14,8 @@
         <div class="mb-7 text-center">
           <h3 class="font-semibold text-3xl text-gray-800">Inicia sesión</h3>
           <span class="text-gray-400 text-center">¿No tienes cuenta?
-            <nuxt-link to="/register"
-              class="color-primary py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-              aria-current="page">Crea una</nuxt-link>
+            <nuxt-link to="/register" class="color-primary py-2 px-3 text-white rounded" aria-current="page">Crea
+              una</nuxt-link>
           </span>
         </div>
         <div class="space-y-6">
@@ -53,8 +52,7 @@
 
             <div class="text-sm ml-auto">
               <span class="text-gray-400">¿Has olvidado tu contraseña?
-                <nuxt-link to="/recover"
-                  class="color-primary py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                <nuxt-link to="/recover" class="color-primary py-2 px-3 text-white rounded"
                   aria-current="page">Recupérala</nuxt-link>
               </span>
             </div>
@@ -85,7 +83,6 @@ var showErrors = ref(false)
 var errMsg = ref("")
 
 async function login() {
-  return
   axios.post(`${api_ip}/auth/login`, {
     login: user.value,
     password: password.value

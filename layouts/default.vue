@@ -44,6 +44,8 @@ const store = userStore()
 
   max-width: 1500px;
 
+  width: 100%;
+
   margin: 0 auto;
 }
 
@@ -53,5 +55,19 @@ const store = userStore()
   display: flex;
   flex-direction: column;
   /* justify-content: space-around; */
+}
+</style>
+
+<style>
+.content>div {
+  height: 100%;
+}
+
+.content>div:has(.login),
+.content>div:has(.register),
+.content>div:has(.recover) {
+
+  display: flex;
+  justify-content: center;
 }
 </style>

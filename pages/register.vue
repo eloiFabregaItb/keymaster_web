@@ -12,7 +12,7 @@
 
 
         <div class="flex justify-center self-center z-10">
-            <div class="p-12 bg-white mx-auto rounded-3xl w-96 ">
+            <form class="p-12 bg-white mx-auto rounded-3xl w-96 " @submit.prevent="register()">
                 <div class="mb-7">
                     <h3 class="font-semibold text-3xl text-gray-800 text-center">Registro</h3>
                 </div>
@@ -36,17 +36,13 @@
 
                     <div>
                         <p class="text-lg font-semibold text-black">Contraseña</p>
-                        <input v-model="password"
-                            class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                            type="text" placeholder="Introduce tu contraseña">
+                        <PasswordInput v-model="password" />
                     </div>
                     <!-- {{ password }} -->
 
                     <div>
                         <p class="text-lg font-semibold text-black">Confirmar contraseña</p>
-                        <input v-model="confirmPassword"
-                            class="w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                            type="text" placeholder="Confirma tu contraseña">
+                        <PasswordInputRegister v-model="confirmPassword" />
                     </div>
                     <!-- {{ confirmPassword }} -->
 
@@ -67,13 +63,11 @@
                         </div>
                     </div>
                     <div>
-                        <button type="submit" @click="register()"
-                            class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
-                            Registrarse
-                        </button>
+                        <input type="submit" value="Registrarse"
+                            class="w-full flex justify-center bg-purple-800  hover:bg-purple-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500" />
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 </template>
@@ -207,7 +201,6 @@ section {
     overflow-x: hidden;
     overflow-y: hidden;
     /* Añadido overflow-y: hidden; */
-    color: white;
 }
 
 .register {
@@ -234,5 +227,6 @@ section {
     font-weight: normal;
     font-style: normal;
     font-size: 1.5rem;
+    color: white;
 }
 </style>
