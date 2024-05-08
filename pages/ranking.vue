@@ -58,7 +58,7 @@
                                 {{ user.history[0].totalErrors }}
                             </td>
                             <td>
-                                <button @click="isBestPlayModalOpen = true; loadBestPlay(user)" class="view-best-play">VER MEJOR PARTIDA</button>
+                                <button @click="isBestPlayModalOpen = true; loadBestPlay(user)" class="view-best-play"><EyeSearch/></button>
                             </td>
                         </tr>
                     </tbody>
@@ -73,6 +73,7 @@ import ProfilePic from '~/components/ProfilePic.vue';
 import axios from 'axios';
 import { api_ip } from '~/constants';
 import Modal from '~/components/Modal.vue';
+import EyeSearch from '~/assets/icons/actions/eyeSearch.svg';
 
 var isBestPlayModalOpen = ref(false)
 var bestPlayModalData = ref([])

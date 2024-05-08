@@ -7,7 +7,8 @@
 
     <div v-if="mostrarModalNotificaciones" class="desplegable-notificaciones">
       <div v-if="notifications.length > 0" class="notification" v-for="notification in notifications">
-        <div v-if="notification.type == 'FOLLOW'" class="flex justify-between">
+
+        <div v-if="notification.type == 'FOLLOW'" class="notificationContainer">
           <ProfilePic :src="notification.target.profileImg" small="true" />
           <div>
             <p>
@@ -24,6 +25,20 @@
             </button>
           </div>
         </div>
+
+        <div v-else-if="notification.type === 'EMAIL_NO_VERIFIED'" class="notificationContainer"
+          :class="{ 'warn': notification.warn }">
+          <IcoWarn filled />
+          {{ notification.msg }}
+          <div v-for="action in notification.actions">
+            <button @click="executeAction(action.requireToken, action.url)"
+              :class="{ 'action-button': !action.isRed, 'cancel-button': action.isRed }">
+              {{ action.name }}
+            </button>
+          </div>
+        </div>
+
+
       </div>
       <div v-else>
         <p>No hay notificaciones por leer</p>
@@ -33,6 +48,9 @@
 </template>
 
 <script setup>
+
+
+import IcoWarn from "~/assets/icons/actions/warn.svg"
 import IcoBell from "~/assets/icons/actions/bell.svg"
 import { userStore } from '~/storages/userStore.js'
 import { api_ip } from '~/constants';
@@ -116,6 +134,25 @@ function executeAction(requireToken, url) {
 </script>
 
 <style scoped>
+.notificationContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 5px;
+}
+
+.notificationContainer.warn {
+  background-color: #eeff0062;
+
+}
+
+.notificationContainer.warn svg {
+  width: 40px;
+  height: 40px;
+}
+
 .btnBell {
   height: 100%;
 
@@ -184,6 +221,11 @@ function executeAction(requireToken, url) {
   color: white;
   padding: 5px;
   border-radius: 5px;
+}
+
+.warn .action-button {
+  background-color: #d75e0d;
+  color: white;
 }
 
 .cancel-button {
